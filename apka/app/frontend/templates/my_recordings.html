@@ -18,7 +18,9 @@
         <ul class="recording-list">
             {% for recording in recordings %}
             <li>
-                <a href="javascript:void(0);" onclick="openVideoModal('{{ recording }}')">{{ recording }}</a>
+                <a href="javascript:void(0);" onclick="openVideoModal('{{ recording }}')">
+                    {{ recording.rsplit('.', 1)[0] }}
+                </a>
             </li>
             {% endfor %}
         </ul>
@@ -38,6 +40,7 @@
 
     <script>
 let recordings = [];
+
 
 // Funkcja do otwierania modala
 function openVideoModal(videoFilename, index) {

@@ -30,14 +30,6 @@ let stream; // Przechowujemy odniesienie do strumienia
 let recordingStartTime;
 let timerInterval;
 
-see_events.addEventListener("click", () => {
-    window.location.href = "/events"; // Przenosi użytkownika na podstronę /events
-});
-
-see_recordings.addEventListener("click", () => {
-    window.location.href = "/my_recordings"; // Przenosi użytkownika na podstronę /recordings
-});
-
 
 // Funkcja do pobrania okna
 async function selectWindow() {

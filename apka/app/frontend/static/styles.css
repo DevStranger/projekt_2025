@@ -64,9 +64,10 @@ button:disabled {
 #record-btn {
     background-color: #800080; 
     color: white;
+    margin-top: 10px;
     font-size: 20px;
     border-radius: 20px;
-    transition: transform 0.2s ease, background-color 0.2s ease;
+    transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 #record-btn:hover {
@@ -97,27 +98,9 @@ button:disabled {
     transform: scale(1.05); 
 }
 
-#events-btn  {
-    background-color: rgb(226, 178, 212);
-    margin-bottom: 10px;
-    color: black;
-    padding: 10px 20px;
-    font-size: 20px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s;
-}
-#recordings-btn {
+#events-btn, #recordings-btn, #notes-btn  {
     background-color: rgb(226, 178, 212);
     margin-top: 10px;
-    color: black;
-    padding: 10px 20px;
-    font-size: 20px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s;
-}
-#notes-btn  {
-    background-color: rgb(226, 178, 212);
-    margin-bottom: 10px;
     color: black;
     padding: 10px 20px;
     font-size: 20px;
