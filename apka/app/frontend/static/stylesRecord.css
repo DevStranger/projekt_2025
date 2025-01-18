@@ -1,0 +1,174 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: flex-start; /* Ustawienie zawartości po lewej stronie */
+    align-items: flex-start;
+    height: 100vh;
+    margin: 0;
+    background-image: url('tlo.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.container {
+    width: 55%; /* 2/3 szerokości */
+    height: 50vh; /* 1/2 wysokości */
+    padding: 20px;
+    text-align: center;
+    background-color: rgba(139, 98, 149, 0.6);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(167, 17, 201, 0.204);
+    overflow-y: auto; /* Dodanie przewijalności */
+    position: relative;
+    top: 15%; /* 15% od góry */
+    left: 7%; /* Pozycjonowanie od lewej krawędzi */
+    transform: translateY(0%); /* Usuń translateY(-50%) */
+}
+
+h1 {
+    text-align: center;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.selection {
+    margin-top: 20px;
+}
+
+.button-row {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+.button-row {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+
+button {
+    padding: 10px 25px;
+    font-size: 18px;
+    border: none;
+    border-radius: 30px; /* Zaokrąglenie przycisków */
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+    background-color: gray;
+}
+
+/* Przyciski w górnym rogu */
+.top-nav {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.back-to-home {
+    background-color: #572468;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 15px;
+    font-size: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.back-to-home:hover {
+    background-color: #7f4598;
+    transform: scale(1.2); 
+}
+
+#record-btn {
+    background-color: #800080; 
+    color: white;
+    margin-top: 10px;
+    font-size: 20px;
+    border-radius: 20px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+#record-btn:hover {
+    background-color: #6a006a; 
+    transform: scale(1.2); 
+}
+
+#record-btn:active {
+    background-color: #4c034c; 
+}
+
+.start-button {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.start-button:hover:not(:disabled) {
+    background-color: #45a049;
+    transform: scale(1.05); 
+}
+
+.stop-button {
+    background-color: rgb(255, 0, 0);
+    color: white;
+}
+
+.stop-button:hover:not(:disabled) {
+    transform: scale(1.05); 
+}
+
+input[type="text"] {
+    padding: 10px;
+    margin: 10px;
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+#recording-time {
+    font-size: 16px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 5px;
+    border-radius: 5px;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+}
+
+#save-recording {
+    background-color: rgb(255, 0, 149);
+    color: white;
+    font-size: 16px;
+    margin-top: 10px;
+    padding: 10px 20px;
+}
+
+.timer {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: rgba(0, 0, 0, 0.7); /* Tło półprzezroczyste */
+    color: white;
+    font-size: 24px;
+    font-family: 'Arial', sans-serif;
+    padding: 10px 20px; /* Dostosowanie rozmiaru */
+    border-radius: 10px; /* Zaokrąglenie rogów */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Cień, aby wyglądało na bardziej wyróżniające się */
+    width: auto;
+    height: 40px;
+    display: flex;
+    align-items: center; /* Wyrównanie tekstu w pionie */
+    justify-content: center; /* Wyrównanie tekstu w poziomie */
+    font-weight: bold; /* Pogrubienie tekstu */
+}
