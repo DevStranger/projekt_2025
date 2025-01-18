@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoteWriter</title>
+    <link rel="stylesheet" href="static/stylesRecord.css">
+    <link rel="icon" type="image/x-icon" href="static/logoo.png">
+</head>
+<body>
+    <div class="top-nav">
+        <a href="/" class="back-to-home">Powrót do strony głównej</a>
+    </div>
+    <div id="timer" class="timer" style="display: none;">00:00</div>
+    <div class="container">
+        <div id="window-selection" class="selection">
+            <h1>Nagraj wybrane okno</h1>
+            <button id="record-btn">Wybierz okno do nagrywania</button>
+            <div class="button-row">
+                <button id="startButton" class="start-button">Rozpocznij nagrywanie</button>
+                <button id="stopButton" class="stop-button" disabled>Zakończ nagrywanie</button>
+            </div>
+            <h2>Zapisz nagranie</h2>
+            <input type="text" id="recording-title" placeholder="Podaj tytuł nagrania (nie używaj polskich znaków!)">
+                <button id="save-recording" disabled>Zapisz</button>
+        </div>
+    </div>
+    <script src="static/record.js"></script>
+</body>

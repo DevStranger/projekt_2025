@@ -6,7 +6,7 @@ function showNotification(message, type = "info") {
 
     setTimeout(() => {
         notification.remove();
-    }, 5000);
+    }, 1000);
 }
 
 const recordBtn = document.getElementById("record-btn");
@@ -17,12 +17,7 @@ const titleInput = document.getElementById("recording-title");
 const see_events = document.getElementById("events-btn");
 const timerDisplay = document.getElementById("timer");
 const see_recordings = document.getElementById("recordings-btn");
-
-
 const windowSelection = document.getElementById("window-selection");
-const selectedWindow = document.getElementById("selected-window");
-const selectedWindowName = document.getElementById("selected-window-name");
-const changeWindowBtn = document.getElementById("change-window-btn");
 
 let mediaRecorder;
 let recordedChunks = [];
@@ -30,38 +25,19 @@ let stream; // Przechowujemy odniesienie do strumienia
 let recordingStartTime;
 let timerInterval;
 
-see_events.addEventListener("click", () => {
-    window.location.href = "/events"; // Przenosi użytkownika na podstronę /events
-});
-
-see_recordings.addEventListener("click", () => {
-    window.location.href = "/my_recordings"; // Przenosi użytkownika na podstronę /recordings
-});
-
 
 // Funkcja do pobrania okna
 async function selectWindow() {
     try {
-        const stream = await navigator.mediaDevices.getDisplayMedia({
+        stream = await navigator.mediaDevices.getDisplayMedia({
             video: true,
             audio: true
-        });
-        handleStream(stream);
-        document.getElementById("window-selection").querySelector("h2").style.display = "none";
-        windowSelection.style.display = "block";
-        recordBtn.style.display = "none";
-        selectedWindow.style.display = "block"; // Pokażemy wybrane okno
-        changeWindowBtn.style.display = "inline-block"; // Pokażemy przycisk do zmiany okna
+        })
+        handleStream(stream);   
     } catch (error) {
         console.error("Błąd podczas wybierania okna:", error);
         showNotification("Błąd podczas wybierania okna", "error");
     }
-}
-
-// Funkcja zmieniająca okno do nagrywania
-changeWindowBtn.onclick = () => {
-    selectedWindow.style.display = "none"; // Ukrywamy obecne okno
-    selectWindow(); // Ponownie wybieramy okno
 }
 
 // Obsługa strumienia
@@ -147,6 +123,7 @@ async function saveRecording(blob) {
             showNotification("Nagranie zapisane!", "success");
             if (stream) {
                 stream.getTracks().forEach(track => track.stop());
+                stream = null; // Wyczyszczenie strumienia
                 console.log("Strumień zatrzymany.");
                 showNotification("Strumień zatrzymany", "success");
 
@@ -161,15 +138,16 @@ async function saveRecording(blob) {
     }
     if (stream) {
                 stream.getTracks().forEach(track => track.stop());
+                stream = null; // Wyczyszczenie strumienia
                 console.log("Strumień zatrzymany.");
                 showNotification("Strumień zatrzymany.", "success");
             }
-
-timerDisplay.style.display = "none"; // Ukrycie zegara
-document.getElementById("window-selection").style.display = "none"; // Ukrycie sekcji wyboru okna
-recordBtn.style.display = "block"; // Pokazanie przycisku do wyboru okna
-titleInput.value = ""; // Czyszczenie tytułu nagrania
-saveButton.disabled = true; // Wyłączenie przycisku zapisz
+    
+    clearInterval(timerInterval);
+    timerDisplay.textContent = "00:00"; // Zresetowanie zegara
+    timerDisplay.style.display = "none"; // Ukrycie zegara
+    titleInput.value = ""; // Czyszczenie tytułu nagrania
+    saveButton.disabled = true; // Wyłączenie przycisku zapisz
 }
 
 // Inicjalizacja funkcji
