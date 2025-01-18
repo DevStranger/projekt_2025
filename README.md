@@ -11,7 +11,7 @@ Przed uruchomieniem aplikacji należy zainstalować wymagane zależności oraz s
 1. **Z katalogu projekt_2025/apka i projekt_2025/apka/app**, uruchom następujące polecenia w terminalu:
 
    ```bash
-   pip install -r requirements_TO.txt
+   pip install -r requirements.txt
    ```
 
 2. **Zainstaluj FFmpeg (Essentials Build):**
