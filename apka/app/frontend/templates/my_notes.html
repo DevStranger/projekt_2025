@@ -18,7 +18,7 @@
         <ul class="notes-list">
             {% for note in notes %}
             <li>
-                <a href="{{ url_for('main.get_note', filename=note) }}" download>{{ note }}</a>
+                <a href="{{ url_for('main.get_note', filename=note) }}" download>{{ note.rsplit('.', 1)[0] }}</a>
             </li>
             {% endfor %}
         </ul>

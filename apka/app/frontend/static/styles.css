@@ -61,23 +61,6 @@ button:disabled {
     background-color: gray;
 }
 
-#record-btn {
-    background-color: #800080; 
-    color: white;
-    font-size: 20px;
-    border-radius: 20px;
-    transition: transform 0.2s ease, background-color 0.2s ease;
-}
-
-#record-btn:hover {
-    background-color: #6a006a; 
-    transform: scale(1.2); 
-}
-
-#record-btn:active {
-    background-color: #4c034c; 
-}
-
 .start-button {
     background-color: #4CAF50;
     color: white;
@@ -85,7 +68,7 @@ button:disabled {
 
 .start-button:hover:not(:disabled) {
     background-color: #45a049;
-    transform: scale(1.05); 
+    transform: scale(1.2); 
 }
 
 .stop-button {
@@ -94,20 +77,11 @@ button:disabled {
 }
 
 .stop-button:hover:not(:disabled) {
-    transform: scale(1.05); 
+    transform: scale(1.2); 
 }
 
-#events-btn  {
-    background-color: rgb(226, 178, 212);
-    margin-bottom: 10px;
-    color: black;
-    padding: 10px 20px;
-    font-size: 20px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s;
-}
-#recordings-btn {
-    background-color: rgb(226, 178, 212);
+#events-btn, #recordings-btn, #notes-btn, #record-btn{
+    background-color: rgb(226, 199, 218);
     margin-top: 10px;
     color: black;
     padding: 10px 20px;
@@ -115,42 +89,17 @@ button:disabled {
     cursor: pointer;
     transition: background-color 0.3s, transform 0.3s;
 }
-#notes-btn  {
-    background-color: rgb(226, 178, 212);
-    margin-bottom: 10px;
-    color: black;
-    padding: 10px 20px;
-    font-size: 20px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s;
-}
 
-#events-btn:hover {
+#record-btn:hover, #events-btn:hover, #notes-btn:hover,#recordings-btn:hover {
     background-color: #ea72c8;
     transform: scale(1.2); 
 }
 
-#events-btn:active {
+
+#record-btn:active, #events-btn:active, #notes-btn:active, #recordings-btn:active {
     background-color: #9e4f8a; 
 }
 
-#notes-btn:hover {
-    background-color: #ea72c8;
-    transform: scale(1.2); 
-}
-
-#notes-btn:active {
-    background-color: #9e4f8a; 
-}
-
-#recordings-btn:hover {
-    background-color: #ea72c8;
-    transform: scale(1.2); 
-}
-
-#recordings-btn:active {
-    background-color: #9e4f8a; 
-}
 
 input[type="text"] {
     padding: 10px;

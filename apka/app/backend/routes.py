@@ -13,12 +13,15 @@ main = Blueprint('main', __name__, template_folder="../frontend/templates", stat
 def index():
     return render_template("index.html")
 
+@main.route("/record")
+def record():
+    return render_template("record.html")
 
 @main.route('/events')
 def events():
     try:
         events = get_calendar_events()
-        return jsonify(events)
+        return render_template('events.html', events=events)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
@@ -38,7 +41,7 @@ def ms_calendar():
         return {"error": str(e)}, 400
 
 
-@main.route("/list_windows", methods=["GET"])
+@main.route("/record/list_windows", methods=["GET"])
 def list_windows():
     """Zwróć listę okien."""
     windows = gw.getAllTitles()
@@ -49,7 +52,7 @@ def list_windows():
 UPLOAD_FOLDER = os.path.join(os.getcwd(), 'recordings')
 ALLOWED_EXTENSIONS = {'webm', 'mp4', 'avi'}
 
-@main.route("/record_window", methods=["POST"])
+@main.route("/record/record_window", methods=["POST"])
 def record_window_route():
     setup_upload_folder()
     data = request.get_json()
@@ -64,7 +67,7 @@ def record_window_route():
     return jsonify({"message": f"Rozpoczęto nagrywanie okna: {window_title}"})
 
 
-@main.route("/stop_recording", methods=["POST"])
+@main.route("/record/stop_recording", methods=["POST"])
 def stop_recording_route():
     try:
         stop_recording()
@@ -75,6 +78,7 @@ def stop_recording_route():
 
 @main.route('/save', methods=['POST'])
 def save_recording_route():
+    setup_upload_folder()
     """Zapisz nagranie i przekonwertuj na MP4."""
     try:
         file = request.files['file']
