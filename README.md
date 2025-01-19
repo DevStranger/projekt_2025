@@ -12,8 +12,6 @@ Przed uruchomieniem aplikacji należy zainstalować wymagane zależności oraz s
 
    ```bash
    pip install -r requirements.txt
-   pip install -r requirements2.txt
-   pip install -r requirements_TO.txt
    ```
 
 2. **Zainstaluj FFmpeg (Essentials Build):**
