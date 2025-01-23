@@ -21,22 +21,37 @@ const windowSelection = document.getElementById("window-selection");
 
 let mediaRecorder;
 let recordedChunks = [];
-let stream; // Przechowujemy odniesienie do strumienia
+let stream=null; // Przechowujemy odniesienie do strumienia
 let recordingStartTime;
 let timerInterval;
 
 
 // Funkcja do pobrania okna
 async function selectWindow() {
-    try {
-        stream = await navigator.mediaDevices.getDisplayMedia({
-            video: true,
-            audio: true
-        })
-        handleStream(stream);   
-    } catch (error) {
-        console.error("Błąd podczas wybierania okna:", error);
-        showNotification("Błąd podczas wybierania okna", "error");
+    if(stream==null){
+        try {
+            stream = await navigator.mediaDevices.getDisplayMedia({
+                video: true,
+                audio: true
+            })
+            handleStream(stream);   
+        } catch (error) {
+            console.error("Błąd podczas wybierania okna:", error);
+            showNotification("Błąd podczas wybierania okna", "error");
+        }}
+    else {
+        stream.getTracks().forEach(track => track.stop());
+        stream == null;
+        try {
+            stream = await navigator.mediaDevices.getDisplayMedia({
+                video: true,
+                audio: true
+            })
+            handleStream(stream);   
+        } catch (error) {
+            console.error("Błąd podczas wybierania okna:", error);
+            showNotification("Błąd podczas wybierania okna", "error");
+        }
     }
 }
 
@@ -70,6 +85,7 @@ function handleStream(stream) {
                 timerDisplay.style.display = "block"; // Pokazujemy zegar
                 startButton.disabled = true;
                 stopButton.disabled = false;
+                alert("Pozostaw tą stronę otwartą do zakończenia nagrywania (zapisz)");
            } else {
                 throw new Error("Nagrywanie już trwa.");
             }
