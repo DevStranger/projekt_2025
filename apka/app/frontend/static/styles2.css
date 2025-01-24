@@ -1,7 +1,7 @@
 body {
     font-family: Arial, sans-serif;
     display: flex;
-    justify-content: flex-start; /* Ustawienie zawartości po lewej stronie */
+    justify-content: flex-start; 
     align-items: flex-start;
     height: 100vh;
     margin: 0;
@@ -12,18 +12,18 @@ body {
 }
 
 .container {
-    width: 55%; /* 2/3 szerokości */
-    height: 50vh; /* 1/2 wysokości */
+    width: 55%; 
+    height: 50vh;
     padding: 20px;
     text-align: center;
     background-color: rgba(139, 98, 149, 0.6);
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(167, 17, 201, 0.204);
-    overflow-y: auto; /* Dodanie przewijalności */
+    overflow-y: auto; 
     position: relative;
-    top: 15%; /* 15% od góry */
-    left: 7%; /* Pozycjonowanie od lewej krawędzi */
-    transform: translateY(0%); /* Usuń translateY(-50%) */
+    top: 15%; 
+    left: 7%;
+    transform: translateY(0%); 
 }
 
 /* Przyciski w górnym rogu */
@@ -49,7 +49,6 @@ body {
     transform: scale(1.2); 
 }
 
-/* Lista nagrań */
 .recording-list {
     list-style: none;
     padding: 0;
@@ -147,8 +146,8 @@ body {
     position: absolute;
     top: 5px;
     right: 5px;
-    background-color: transparent; /* Tło przezroczyste, żeby przycisk wyglądał jak "X" */
-    color: red; /* Kolor "X" na czerwono */
+    background-color: transparent; 
+    color: red; 
     border: none;
     padding: 5px 5px;
     font-size: 16px;

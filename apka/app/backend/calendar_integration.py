@@ -10,10 +10,8 @@ from dateutil import parser
 SCOPES = ["https://www.googleapis.com/auth/calendar.readonly"]
 
 def get_calendar_events():
-    # Ścieżka do pliku token.json w folderze `app`
     token_path = os.path.join(os.path.dirname(__file__), "token.json")
 
-    # Usuń istniejący plik token.json, jeśli istnieje
     if os.path.exists(token_path):
         print(f"Removing existing token file at {token_path}...")
         os.remove(token_path)

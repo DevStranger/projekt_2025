@@ -8,7 +8,6 @@ from .note import process_audio_and_save_transcription
 
 main = Blueprint('main', __name__, template_folder="../frontend/templates", static_folder="../frontend/static")
 
-# Trasa do serwowania strony głównej
 @main.route("/")
 def index():
     return render_template("index.html")
@@ -96,7 +95,6 @@ def save_recording_route():
 @main.route('/my_recordings')
 def show_recordings():
     setup_upload_folder()
-    # Pobierz listę plików z folderu recordings
     recordings = os.listdir(UPLOAD_FOLDER)
     recordings = [f for f in recordings if f.endswith(('.mp4'))]  
     recordings = [os.path.splitext(file)[0] for file in recordings]
@@ -112,7 +110,6 @@ def get_recording(filename):
 
 @main.route('/my_notes')
 def show_notes():
-    # Ścieżka do katalogu z notatkami
     docx_folder = os.path.join(os.getcwd(), 'recordings', 'notes')  # Upewnij się, że folder istnieje w 'recordings/notes'
     if not os.path.exists(docx_folder):
         return render_template('my_notes.html', notes=[])
@@ -135,12 +132,10 @@ def generate_notes():
         if not title:
             return jsonify({'error': 'Brak nazwy pliku! Podaj tytuł pliku WAV.'}), 400
 
-        # Ścieżka do pliku WAV w katalogu 'recordings'
         wav_path = os.path.join(UPLOAD_FOLDER, f"{title}.wav")
         if not os.path.exists(wav_path):
             return jsonify({'error': f"Plik {title}.wav nie istnieje w katalogu recordings!"}), 404
 
-        # Ścieżka do folderu z notatkami
         notes_folder = os.path.join(os.getcwd(), 'notes')
         if not os.path.exists(notes_folder):
             os.makedirs(notes_folder)
@@ -159,7 +154,6 @@ def generate_notes():
 
 @main.route('/notes/<filename>')
 def get_note(filename):
-    # Ścieżka do katalogu z notatkami
     docx_folder = os.path.join(os.getcwd(), 'recordings', 'notes')
     try:
         return send_from_directory(docx_folder, filename + ".docx", as_attachment=True)  # Pobierz plik jako załącznik

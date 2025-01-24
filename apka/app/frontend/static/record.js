@@ -26,7 +26,6 @@ let recordingStartTime;
 let timerInterval;
 
 
-// Funkcja do pobrania okna
 async function selectWindow() {
     if(stream==null){
         try {
@@ -110,11 +109,10 @@ function handleStream(stream) {
             console.error("Błąd podczas zatrzymywania nagrywania:", error);
             showNotification("Nagrywanie nie zostało jeszcze rozpoczęte", "error");
         }
-        clearInterval(timerInterval); // Zatrzymanie timera
+        clearInterval(timerInterval); 
     };
 }
 
-// Funkcja do aktualizacji czasu nagrywania
 function updateTimer() {
     const elapsedTime = Math.floor((Date.now() - recordingStartTime) / 1000); // Czas w sekundach
     const minutes = String(Math.floor(elapsedTime / 60)).padStart(2, '0'); // Minuty
@@ -122,7 +120,6 @@ function updateTimer() {
     timerDisplay.textContent = `${minutes}:${seconds}`;
 }
 
-// Zapis nagrania
 async function saveRecording(blob) {
     const title = titleInput.value;
     const formData = new FormData();
@@ -139,7 +136,7 @@ async function saveRecording(blob) {
             showNotification("Nagranie zapisane!", "success");
             if (stream) {
                 stream.getTracks().forEach(track => track.stop());
-                stream = null; // Wyczyszczenie strumienia
+                stream = null; 
                 console.log("Strumień zatrzymany.");
                 showNotification("Strumień zatrzymany", "success");
 
@@ -154,16 +151,16 @@ async function saveRecording(blob) {
     }
     if (stream) {
                 stream.getTracks().forEach(track => track.stop());
-                stream = null; // Wyczyszczenie strumienia
+                stream = null; 
                 console.log("Strumień zatrzymany.");
                 showNotification("Strumień zatrzymany.", "success");
             }
     
     clearInterval(timerInterval);
-    timerDisplay.textContent = "00:00"; // Zresetowanie zegara
-    timerDisplay.style.display = "none"; // Ukrycie zegara
-    titleInput.value = ""; // Czyszczenie tytułu nagrania
-    saveButton.disabled = true; // Wyłączenie przycisku zapisz
+    timerDisplay.textContent = "00:00"; 
+    timerDisplay.style.display = "none";
+    titleInput.value = ""; 
+    saveButton.disabled = true;
 }
 
 // Inicjalizacja funkcji
