@@ -34,6 +34,7 @@ async function selectWindow() {
                 audio: true
             })
             handleStream(stream);   
+            startButton.disabled = false;
         } catch (error) {
             console.error("Błąd podczas wybierania okna:", error);
             showNotification("Błąd podczas wybierania okna", "error");
@@ -46,7 +47,8 @@ async function selectWindow() {
                 video: true,
                 audio: true
             })
-            handleStream(stream);   
+            handleStream(stream);  
+            startButton.disabled = false; 
         } catch (error) {
             console.error("Błąd podczas wybierania okna:", error);
             showNotification("Błąd podczas wybierania okna", "error");
@@ -81,7 +83,7 @@ function handleStream(stream) {
                 // Uruchomienie timera
                 recordingStartTime = Date.now();
                 timerInterval = setInterval(updateTimer, 1000); // Co sekundę aktualizuje czas
-                timerDisplay.style.display = "block"; // Pokazujemy zegar
+                timerDisplay.style.display = "block"; 
                 startButton.disabled = true;
                 stopButton.disabled = false;
                 alert("Pozostaw tą stronę otwartą do zakończenia nagrywania (zapisz)");
@@ -163,5 +165,4 @@ async function saveRecording(blob) {
     saveButton.disabled = true;
 }
 
-// Inicjalizacja funkcji
 recordBtn.addEventListener("click", selectWindow);
