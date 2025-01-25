@@ -234,6 +234,12 @@ Wysłanie zapytania HTTP do serwera, powoduje chwilowe wystąpienie błędów
 
 **Narzędzie:** OWASP ZAP (Zed Attack Proxy)
 
+![Zrzut ekranu 2025-01-25 155952](https://github.com/user-attachments/assets/50f677ac-89c8-4a62-9962-3579b528449c)
+![Zrzut ekranu 2025-01-25 160029](https://github.com/user-attachments/assets/4824bdb3-0b71-4ed5-beb7-92f7d1c972e5)
+![Zrzut ekranu 2025-01-25 160019](https://github.com/user-attachments/assets/d066203d-340a-46cc-877c-591ffc71f949)
+![Zrzut ekranu 2025-01-25 160056](https://github.com/user-attachments/assets/c5b7cbb9-7f24-4b2e-b5f1-baf029e061a9)
+![Zrzut ekranu 2025-01-25 160045](https://github.com/user-attachments/assets/3cb1b8c0-de64-4f60-8d92-cecf9f2575ec)
+![Zrzut ekranu 2025-01-25 160050](https://github.com/user-attachments/assets/bc67a621-7496-4092-8cfe-13baa7ec521a)
 
 ## Testy zgodności (dla różnych przeglądarek)
 
