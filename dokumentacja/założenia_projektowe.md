@@ -29,7 +29,7 @@
 
 ## Zapisane ustalenia ze spotkania 
 
-Funkcjonalności:
+### Funkcjonalności:
 1) Transkrypcja tekstu mówionego ☆
 2) Zapis zrzutów ekranów (prezentacji) - dowolny użytkownik
 3) OCR treści
@@ -49,6 +49,12 @@ Funkcjonalności:
 
 ## Sposób komunikacji i organizacja pracy
 
-Slack:
+### Slack:
 - kanał ogólny - informacje dotyczące deadline'ów oraz wymagań projektowych - kontakt z zleceniodawcą
 - kanał dedykowany (girls_group) - komunikacja wewnątrz zespołu, zdawanie sprawozdań z postępów (cotygodniowe sprinty)
+
+### Zespół w składzie:
+- Ola
+- Maja
+- Asia
+- Julka
