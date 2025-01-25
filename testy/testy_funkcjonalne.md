@@ -6,6 +6,19 @@
 
 ## Jednostkowe
 
+**Cel:** sprawdzenie poprawności działania trzech tras (routes) w naszej aplikacji webowej
+    - `/` strona główna
+    - `/google-calendar` wyświetlanie kalendarza Google
+    - `ms-calendar` kalendarz Microsoft
+
+Testy te weryfikują, czy aplikacja:
+
+- zwraca poprawny kod statusu HTTP 200 dla strony głównej
+- zwraca odpowiedź zawierającą błąd (w formacie JSON) dla dwóch pozostałych tras, tj. `/google-calendar` i `/ms-calendar`
+
+**Narzędzie:** framework `unittest` w języku Python
+
+Testy te zakończyły się powodzeniem ✔
 
 ## Integracyjne
 
