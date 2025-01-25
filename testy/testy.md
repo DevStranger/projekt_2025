@@ -201,7 +201,23 @@ CPU usage above 90%! This may constrain your throughput and may even give incons
 
 **Narzędzie:** curl
 
+### Bez dodatkowego obciążenia
 
+![Zrzut ekranu 2025-01-25 152744](https://github.com/user-attachments/assets/2f1da5c0-169f-4485-abf2-2122e0480128)
+![Zrzut ekranu 2025-01-25 152749](https://github.com/user-attachments/assets/0b9ce2e5-f76f-4f3b-8e94-26e632133c8b)
+
+Serwer odpowiada na żądania HTTP w czasie ~3-4 ms.
+
+### Obciążenie 50 użytkowników korzystających z aplikacji
+
+![Zrzut ekranu 2025-01-25 154128](https://github.com/user-attachments/assets/9100f1f5-842c-4edf-bdea-9eb59be0c9e8)
+![total_requests_per_second_1737816088 504](https://github.com/user-attachments/assets/f4480c23-ca72-4954-925a-52e5bf9484ef)
+![Zrzut ekranu 2025-01-25 154144](https://github.com/user-attachments/assets/991e33c7-910c-4109-8f2e-99bcbcab384d)
+![Zrzut ekranu 2025-01-25 154151](https://github.com/user-attachments/assets/f8b20869-f3e3-464c-b3ca-5224ed539b5f)
+![Zrzut ekranu 2025-01-25 154157](https://github.com/user-attachments/assets/bd1730af-ce19-49fa-8fb8-214fbda363c0)
+![Zrzut ekranu 2025-01-25 154204](https://github.com/user-attachments/assets/2611fb9a-33f9-45e8-bdd2-9a8a8396d616)
+
+Czas odpowiedzi serwera - bez większych zmian, w zakresie ~3-4 ms.
 
 ## Test wrażliwości na ataki (OWASP ZAP)
 
