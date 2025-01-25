@@ -46,8 +46,8 @@
 
 - biblioteki do przetwarzania dźwięku w Pythonie
 - PyDub oferuje prostą obsługę formatów audio oraz możliwość ich konwersji, podczas gdy torchaudio zapewnia zaawansowane narzędzia do obróbki sygnałów audio
-- _PyDub_ jest wykorzystywana do konwersji plików audio z formatu mp3 na wav o ustalonej częstotliwości próbkowania i mono
-- _torchaudio_ jest używane do załadowania pliku audio do formy tensorów, co jest niezbędne do przetwarzania przez model `Whisper`
+- **_PyDub_** jest wykorzystywana do konwersji plików audio z formatu mp3 na wav o ustalonej częstotliwości próbkowania i mono
+- **_torchaudio_** jest używane do załadowania pliku audio do formy tensorów, co jest niezbędne do przetwarzania przez model `Whisper`
 
 ### 7. PyGetWindow
 
@@ -58,6 +58,35 @@
 
 ## Struktura folderów i plików
 
+- **`__init__.py`**  
+  Inicjalizuje aplikację Flask, definiuje foldery dla statycznych plików i szablonów oraz rejestruje blueprinty - jest to główny plik, który uruchamia aplikację z backendu
+
+- **`calendar_integration.py`**  
+  Implementacja integracji z Google Calendar API - odpowiada za pobieranie nadchodzących wydarzeń z kalendarza użytkownika, umożliwiając ich wyświetlanie w aplikacji
+
+- **`config.py`**  
+  Pusty plik konfiguracyjny, który może zostać rozszerzony o ustawienia aplikacji, takie jak klucze API, konfiguracja bazy danych itd. 
+
+- **`credentials.json`, `credentials_2.json`, `credentialsstare.json`**  
+  Pliki z danymi uwierzytelniającymi dla Google API, umożliwiające dostęp do kalendarza użytkownika - każdy z tych plików może być używany w różnych konfiguracjach uwierzytelniania lub środowiskach
+
+- **`note.py`**  
+  Zawiera funkcje do transkrypcji plików audio na tekst za pomocą modelu Whisper - dodatkowo obsługuje zapisywanie transkrypcji do plików w formacie DOCX
+
+- **`recording.py`**  
+  Odpowiada za obsługę nagrywania okien systemowych, konwersję plików i przetwarzanie nagrań audio - używa narzędzi takich jak FFmpeg i PyDub do manipulacji plikami audio oraz wideo.
+
+- **`routes.py`**  
+  Definiuje trasy Flask, które odpowiadają za różne endpointy API, takie jak nagrywanie, generowanie notatek czy pobieranie plików z serwera
+
+- **`test_routes.py`**  
+  Plik zawierający testy jednostkowe do sprawdzania poprawności działania endpointów backendu - służy do zapewnienia jakości aplikacji, testując, czy odpowiedzi API są zgodne z oczekiwaniami
+
+- **`token.json`**  
+  Plik zawierający tokeny uwierzytelniające, które pozwalają na autoryzację aplikacji do uzyskania dostępu do Google Calendar API
+
+- **`/__pycache__`**  
+  Folder generowany automatycznie przez Pythona, zawierający skompilowane pliki `.pyc` - są one tworzone w celu przyspieszenia ładowania aplikacji w przyszłości
 
 ## Funkcjonalności
 
