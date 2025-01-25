@@ -1,7 +1,7 @@
 body {
     font-family: Arial, sans-serif;
     display: flex;
-    justify-content: flex-start; /* Ustawienie zawartości po lewej stronie */
+    justify-content: flex-start; 
     align-items: flex-start;
     height: 100vh;
     margin: 0;
@@ -12,12 +12,12 @@ body {
 }
 
 .container {
-    width: 60%; /* 2/3 szerokości */
-    height: 50vh; /* 1/2 wysokości */
-    overflow-y: auto; /* Dodanie przewijalności */
+    width: 60%; 
+    height: 50vh;
+    overflow-y: auto; 
     position: relative;
-    top: 15%; /* 15% od góry */
-    left: 7%; /* Pozycjonowanie od lewej krawędzi */
+    top: 15%;
+    left: 7%; 
     background-color: rgba(139, 98, 149, 0.6);
     box-shadow: 0 0 10px rgba(167, 17, 201, 0.204);
     padding: 20px;
@@ -57,7 +57,6 @@ h1 {
     color: #333;
 }
 
-/* Przyciski w górnym rogu */
 .top-nav {
     position: absolute;
     top: 20px;

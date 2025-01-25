@@ -21,22 +21,38 @@ const windowSelection = document.getElementById("window-selection");
 
 let mediaRecorder;
 let recordedChunks = [];
-let stream; // Przechowujemy odniesienie do strumienia
+let stream=null; // Przechowujemy odniesienie do strumienia
 let recordingStartTime;
 let timerInterval;
 
 
-// Funkcja do pobrania okna
 async function selectWindow() {
-    try {
-        stream = await navigator.mediaDevices.getDisplayMedia({
-            video: true,
-            audio: true
-        })
-        handleStream(stream);   
-    } catch (error) {
-        console.error("Błąd podczas wybierania okna:", error);
-        showNotification("Błąd podczas wybierania okna", "error");
+    if(stream==null){
+        try {
+            stream = await navigator.mediaDevices.getDisplayMedia({
+                video: true,
+                audio: true
+            })
+            handleStream(stream);   
+            startButton.disabled = false;
+        } catch (error) {
+            console.error("Błąd podczas wybierania okna:", error);
+            showNotification("Błąd podczas wybierania okna", "error");
+        }}
+    else {
+        stream.getTracks().forEach(track => track.stop());
+        stream == null;
+        try {
+            stream = await navigator.mediaDevices.getDisplayMedia({
+                video: true,
+                audio: true
+            })
+            handleStream(stream);  
+            startButton.disabled = false; 
+        } catch (error) {
+            console.error("Błąd podczas wybierania okna:", error);
+            showNotification("Błąd podczas wybierania okna", "error");
+        }
     }
 }
 
@@ -67,9 +83,10 @@ function handleStream(stream) {
                 // Uruchomienie timera
                 recordingStartTime = Date.now();
                 timerInterval = setInterval(updateTimer, 1000); // Co sekundę aktualizuje czas
-                timerDisplay.style.display = "block"; // Pokazujemy zegar
+                timerDisplay.style.display = "block"; 
                 startButton.disabled = true;
                 stopButton.disabled = false;
+                alert("Pozostaw tą stronę otwartą do zakończenia nagrywania (zapisz)");
            } else {
                 throw new Error("Nagrywanie już trwa.");
             }
@@ -94,11 +111,10 @@ function handleStream(stream) {
             console.error("Błąd podczas zatrzymywania nagrywania:", error);
             showNotification("Nagrywanie nie zostało jeszcze rozpoczęte", "error");
         }
-        clearInterval(timerInterval); // Zatrzymanie timera
+        clearInterval(timerInterval); 
     };
 }
 
-// Funkcja do aktualizacji czasu nagrywania
 function updateTimer() {
     const elapsedTime = Math.floor((Date.now() - recordingStartTime) / 1000); // Czas w sekundach
     const minutes = String(Math.floor(elapsedTime / 60)).padStart(2, '0'); // Minuty
@@ -106,7 +122,6 @@ function updateTimer() {
     timerDisplay.textContent = `${minutes}:${seconds}`;
 }
 
-// Zapis nagrania
 async function saveRecording(blob) {
     const title = titleInput.value;
     const formData = new FormData();
@@ -123,7 +138,7 @@ async function saveRecording(blob) {
             showNotification("Nagranie zapisane!", "success");
             if (stream) {
                 stream.getTracks().forEach(track => track.stop());
-                stream = null; // Wyczyszczenie strumienia
+                stream = null; 
                 console.log("Strumień zatrzymany.");
                 showNotification("Strumień zatrzymany", "success");
 
@@ -138,17 +153,16 @@ async function saveRecording(blob) {
     }
     if (stream) {
                 stream.getTracks().forEach(track => track.stop());
-                stream = null; // Wyczyszczenie strumienia
+                stream = null; 
                 console.log("Strumień zatrzymany.");
                 showNotification("Strumień zatrzymany.", "success");
             }
     
     clearInterval(timerInterval);
-    timerDisplay.textContent = "00:00"; // Zresetowanie zegara
-    timerDisplay.style.display = "none"; // Ukrycie zegara
-    titleInput.value = ""; // Czyszczenie tytułu nagrania
-    saveButton.disabled = true; // Wyłączenie przycisku zapisz
+    timerDisplay.textContent = "00:00"; 
+    timerDisplay.style.display = "none";
+    titleInput.value = ""; 
+    saveButton.disabled = true;
 }
 
-// Inicjalizacja funkcji
 recordBtn.addEventListener("click", selectWindow);
