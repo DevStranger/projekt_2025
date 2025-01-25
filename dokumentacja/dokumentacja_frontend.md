@@ -68,6 +68,51 @@ Folder zawierający pliki HTML, które są renderowane przez backend aplikacji:
 
 ## Strony
 
+### `index.html`
+Strona główna aplikacji, zawierająca przyciski umożliwiające przejście do innych sekcji aplikacji: wydarzeń, nagrywania, notatek oraz nagrań
+
+**Opis funkcji:**
+- przyciski prowadzące do poszczególnych sekcji aplikacji
+- ładowanie skryptu `notes.js`, który odpowiada za załadowanie listy notatek
+
+---
+
+### `events.html`
+Strona wyświetlająca nadchodzące wydarzenia, które są pobierane z backendu (w zmiennej `events`)
+
+**Opis funkcji:**
+- lista wydarzeń z datą i tytułem
+- jeśli brak jest wydarzeń, wyświetlana jest odpowiednia informacja
+
+---
+
+### `my_notes.html`
+Strona prezentująca listę notatek użytkownika (notatki są wyświetlane jako linki do pobrania)
+
+**Opis funkcji:**
+- dynamiczne ładowanie notatek użytkownika z backendu
+- notatki są wyświetlane w formie linków, umożliwiających ich pobranie
+- zastosowanie pętli Jinja (`{% for note in notes %}`) do generowania listy notatek na podstawie danych przesłanych z backendu.
+
+---
+
+### `my_recordings.html`
+Strona wyświetlająca listę nagrań użytkownika (nagrania są wyświetlane jako linki, a kliknięcie na nie powoduje otwarcie modala z odtwarzaczem wideo)
+
+**Opis funkcji:**
+- lista nagrań użytkownika, z możliwością odtwarzania nagrań bezpośrednio w przeglądarce
+- modal z odtwarzaczem wideo do wyświetlania wybranego nagrania
+
+---
+
+### `record.html`
+Strona umożliwiająca nagrywanie spotkań z wybranego okna - umożliwia użytkownikowi rozpoczęcie nagrywania, zatrzymanie nagrywania oraz zapisanie nagrania
+
+**Opis funkcji:**
+- wybór okna do nagrywania za pomocą przycisku „Wybierz okno do nagrywania” (może być też cały ekran)
+- możliwość rozpoczęcia i zatrzymania nagrywania przy pomocy przycisków
+- wprowadzenie tytułu nagrania przed jego zapisaniem
+- wyświetlanie timera nagrywania (czas trwania nagrania)
 
 ## JavaScript
 
