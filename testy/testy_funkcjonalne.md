@@ -9,6 +9,30 @@
 
 ## Integracyjne
 
+### 1. Test integracji przycisków z przekierowaniami ✔
+
+**Cel:** sprawdzenie czy przyciski nawigacyjne poprawnie przekierowują użytkownika do odpowiednich stron i czy dane są poprawnie ładowane z backendu
+
+**Narzędzie:** - (manualnie)
+
+Kliknięcie przycisku „Moje notatki” przekierowuje użytkownika do strony z listą notatek. Podobnie dla „Moje nagrania”. 
+
+### 2. Test integracji frontendu z backendem (ładowanie danych)
+
+**Cel:** sprawdzenie czy frontend poprawnie otrzymuje dane z backendu i je wyświetla
+
+**Narzędzie:** - (manualnie)
+
+Na stronie "Moje notatki" frontend wysyła zapytanie do backendu o listę dostępnych notatek, a backend zwraca odpowiednią listę. Na stronie "Moje nagrania" frontend wysyła zapytanie o nagrania, a backend zwraca odpowiednie dane.
+
+### 3. Test integracji z systemem plików
+
+**Cel:** sprawdzenie czy pliki notatek i nagrań są poprawnie przechowywane i dostępne na serwerze
+**Narzędzie:** - (manualnie)
+
+Plik jest poprawnie zapisany na serwerze w odpowiednim katalogu i odpowiednio konwertowany. Po załadowaniu strony z notatkami użytkownik ma możliwość pobrania tych plików z serwera.
+
+***Wszystkie powyższ testy zostały także przeprowadzone automatycznie z użyciem narzędzia TestCafe (patrz: testy akceptacyjne)***
 
 ## Akceptacyjne
 
