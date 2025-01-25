@@ -162,3 +162,9 @@ Obsłużono średnio **123,3** żądań na sekundę.
 **Cel:** sprawdzić czy aplikacja jest dostępna w różnych przeglądarkach
 
 **Narzędzie:** przeglądarka Chrome, przeglądarka Microsoft Edge
+
+# Testy wymagań funkcjonalnych
+
+- jednostkowe
+- integracyjne
+- akceptacyjne
