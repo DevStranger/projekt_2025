@@ -44,6 +44,28 @@
 
 Aplikacja jest zorganizowana w sposób umożliwiający łatwe zarządzanie plikami i ich podział na kategorie. Poniżej przedstawiamy szczegółowy opis folderów i plików:
 
+### `/static`
+Folder zawierający zasoby statyczne, takie jak obrazy, pliki CSS i JavaScript, które są wykorzystywane przez strony HTML:
+
+- `logo.ico` – Ikona strony (favicon).
+- `logoo.png` – Logo aplikacji.
+- `notes.js` – Skrypt odpowiedzialny za ładowanie i wyświetlanie listy notatek użytkownika.
+- `record.js` – Skrypt odpowiedzialny za obsługę funkcji nagrywania spotkań.
+- `styles.css` – Główny plik stylów CSS używany w aplikacji.
+- `styles2.css` – Dodatkowy plik CSS dla niektórych stron, takich jak „My Notes” i „My Recordings”.
+- `stylesEvents.css` – Skrypt stylów dedykowany do strony „Events”.
+- `stylesRecord.css` – Skrypt stylów dedykowany do strony „Record”.
+- `tlo.png` – Tło dla aplikacji.
+
+### `/templates`
+Folder zawierający pliki HTML, które są renderowane przez backend aplikacji:
+
+- `events.html` – Strona z listą nadchodzących wydarzeń.
+- `index.html` – Strona główna aplikacji.
+- `my_notes.html` – Strona z listą notatek użytkownika.
+- `my_recordings.html` – Strona z listą nagrań użytkownika.
+- `record.html` – Strona umożliwiająca nagrywanie spotkania.
+
 ## Strony
 
 
