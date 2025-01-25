@@ -90,12 +90,45 @@
 
 ## Funkcjonalności
 
+### Proces rejestrowania i przetwarzania nagrania
 
-## Proces rejestrowania i przetwarzania nagrania
+#### Nagrywanie okna aplikacji
 
+1. **Użycie biblioteki pygetwindow**  
+   Aplikacja wykorzystuje bibliotekę `pygetwindow`, która umożliwia pobranie tytułów dostępnych okien na komputerze. Po podaniu tytułu okna, aplikacja uruchamia wątek odpowiedzialny za rejestrowanie aktywności w tym oknie.
 
-## Proces generowania notatek
+2. **Format zapisanego nagrania**  
+   Nagranie okna aplikacji jest zapisywane jako plik wideo w formacie `.webm`
 
+#### Konwersja pliku
+
+Po zapisaniu pliku wideo, aplikacja automatycznie konwertuje go na następujące formaty:
+- **Audio** – format `.wav`
+- **Wideo** – format `.mp4`
+
+Do konwersji wykorzystywane jest narzędzie `FFmpeg`.
+
+#### Przechowywanie plików
+
+Wszystkie pliki (audio, wideo) oraz transkrypcje są przechowywane w folderze `recordings`
+
+### Proces generowania notatek
+
+#### Transkrypcja mowy na tekst
+
+1. **Przekazywanie plików audio**  
+   Pliki audio w formatach `.mp4` są przekazywane do funkcji `transcribe_audio`, która wykorzystuje model `Whisper` do przetwarzania mowy na tekst
+
+2. **Zapis transkrypcji**  
+   Transkrypcja mowy na tekst jest zapisywana w formacie `.docx` przy użyciu biblioteki `python-docx`
+
+#### Automatyczne przetwarzanie wszystkich nagrań
+
+Funkcja `process_audio_and_save_transcription` przetwarza wszystkie pliki audio znajdujące się w folderze `recordings`, generując odpowiednie notatki dla każdego pliku
+
+#### Przechowywanie plików z notatkami
+
+Po wykonaniu transkrypcji mowy na tekst, wygenerowane pliki notatek w formacie .docx są przechowywane w folderzez `\recordings\notes`
 
 ## Interfejs użytkownika (UI)
 
