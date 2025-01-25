@@ -247,8 +247,3 @@ Wysłanie zapytania HTTP do serwera, powoduje chwilowe wystąpienie błędów
 
 **Narzędzie:** przeglądarka Chrome, przeglądarka Microsoft Edge
 
-# Testy wymagań funkcjonalnych
-
-- jednostkowe
-- integracyjne
-- akceptacyjne
