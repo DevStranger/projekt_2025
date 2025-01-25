@@ -14,13 +14,15 @@ recording_active = False
 UPLOAD_FOLDER = os.path.join(os.getcwd(), 'recordings')
 ALLOWED_EXTENSIONS = {'webm', 'mp4', 'avi'}
 
+
 def setup_upload_folder():
     if not os.path.exists(UPLOAD_FOLDER):
         os.makedirs(UPLOAD_FOLDER)
-        
+
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 
 def record_window(window_title):
     """Rozpoczyna nagrywanie okna."""
@@ -28,7 +30,7 @@ def record_window(window_title):
     recording_active = True
     while recording_active:
         logging.debug(f"Nagrywam okno: {window_title}")
-        time.sleep(1)  
+        time.sleep(1)
 
 
 def start_recording_thread(window_title):
@@ -40,7 +42,7 @@ def start_recording_thread(window_title):
 def stop_recording():
     global recording_active
     recording_active = False
-    
+
 
 def save_recording(file, title=None):
     if not file or file.filename == '':
@@ -72,12 +74,11 @@ def save_recording(file, title=None):
     except subprocess.CalledProcessError as e:
         logging.error(f'Błąd podczas konwersji do WAV: {str(e)}')
         raise RuntimeError('Konwersja do WAV nie powiodła się.') from e
-    
 
     # Konwersja wav, webm -> mp4
     try:
         subprocess.run(
-            ['ffmpeg', '-i', wav_path, '-i', webm_path,  '-vf', 'scale=trunc(iw/2)*2:trunc(ih/2)*2', 
+            ['ffmpeg', '-i', wav_path, '-i', webm_path, '-vf', 'scale=trunc(iw/2)*2:trunc(ih/2)*2',
              '-c:v', 'libx264', '-c:a', 'aac', mp4_path],
             check=True
         )
@@ -91,7 +92,6 @@ def save_recording(file, title=None):
     if not os.path.exists(mp4_path):
         logging.error('Plik MP4 nie został utworzony.')
         raise RuntimeError('Nie udało się utworzyć pliku MP4.')
-    
 
     # Generowanie notatek (wywołanie funkcji z notes.py)
     try:
@@ -103,6 +103,5 @@ def save_recording(file, title=None):
         logging.debug(f"Notatki dla pliku {wav_path} wygenerowane pomyślnie.")
     except Exception as e:
         logging.error(f"Błąd podczas generowania notatek: {e}")
-
 
     return mp4_path, wav_path
