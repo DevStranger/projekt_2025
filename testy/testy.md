@@ -37,7 +37,7 @@ Obsłużono średnio **132,7** żądań na sekundę.
 
 ![aaaaaa](https://github.com/user-attachments/assets/216a5141-087d-4a03-9ea6-904a24f02635)
 
-#### Users=500 Ramp=5 Testing time=300
+#### Users=500 Ramp=5 Run time=300
 
 ![Zrzut ekranu 2025-01-25 135148](https://github.com/user-attachments/assets/f71c6226-11bf-4bdc-8419-355161d08c73)
 
@@ -51,7 +51,7 @@ Obsłużono średnio **327,6** żądań na sekundę.
 
 ### 2. Dla strony wyświetlającej nagrania
 
-#### Users=50 Ramp=1 Testing time=60
+#### Users=50 Ramp=1 Run time=60
 
 ![Zrzut ekranu 2025-01-25 135726](https://github.com/user-attachments/assets/91e083c3-2cc5-4c64-afd0-7101e5c4e5cd)
 
@@ -63,7 +63,7 @@ Obsłużono średnio **32,3** żądań na sekundę.
 
 ![total_requests_per_second_1737809858 173](https://github.com/user-attachments/assets/ef6a8117-6e8d-4e52-b04e-e7521ac8ad00)
 
-#### Users=200 Ramp=2 Testing time=100
+#### Users=200 Ramp=2 Run time=100
 
 ![Zrzut ekranu 2025-01-25 135959](https://github.com/user-attachments/assets/6813e97b-7f0e-4572-80eb-de6e74cc5318)
 
@@ -75,7 +75,7 @@ Obsłużono średnio **124** żądania na sekundę.
 
 ![total_requests_per_second_1737810000 283](https://github.com/user-attachments/assets/d1361c35-5e11-4d75-8dc2-2b8257d0a44c)
 
-#### Users=500 Ramp=5 Testing time=300
+#### Users=500 Ramp=5 Run time=300
 
 ![Zrzut ekranu 2025-01-25 140549](https://github.com/user-attachments/assets/aa08db34-873c-450a-8c42-4032d32a1e24)
 
@@ -87,7 +87,7 @@ Obsłużono średnio **329,5** żądania na sekundę.
 
 ![total_requests_per_second_1737810350 541](https://github.com/user-attachments/assets/dc163113-5f65-4253-a748-ce4773572e40)
 
-#### Users=500 Ramp=1 Testing time=300
+#### Users=500 Ramp=1 Run time=300
 
 ![Zrzut ekranu 2025-01-25 141152](https://github.com/user-attachments/assets/9e0e4690-4f1e-4091-9518-9b2cec9a8f82)
 
@@ -101,7 +101,7 @@ Obsłużono średnio **193,3** żądania na sekundę.
 
 ### 3. Dla strony wyświetlającej notatki
 
-#### Users=50 Ramp=1 Testing time=60
+#### Users=50 Ramp=1 Run time=60
 
 ![Zrzut ekranu 2025-01-25 141559](https://github.com/user-attachments/assets/8fe6246b-dd2f-42d4-82b7-d018b6c8061f)
 
@@ -113,7 +113,7 @@ Obsłużono średnio **7,1** żądań na sekundę.
 
 ![total_requests_per_second_1737810960 496](https://github.com/user-attachments/assets/ae846aae-3225-4d6e-817a-2e2c4dd52913)
 
-#### Users=200 Ramp=2 Testing time=100
+#### Users=200 Ramp=2 Run time=100
 
 ![Zrzut ekranu 2025-01-25 141830](https://github.com/user-attachments/assets/c4e00633-9f1b-4b11-bf3b-cb000e9455d9)
 
@@ -125,9 +125,31 @@ Obsłużono średnio **123,3** żądań na sekundę.
 
 ![total_requests_per_second_1737811111 113](https://github.com/user-attachments/assets/012ba31c-d3ff-4c28-b5f0-55a3facfcb41)
 
-#### Users=500 Ramp=1 Testing time=300
+#### Users=500 Ramp=3 Run time=300
 
+![Zrzut ekranu 2025-01-25 142521](https://github.com/user-attachments/assets/8733855a-024e-4e57-b5e3-b92795acec4c)
 
+W ramach testu do aplikacji wysłano **6070** żądań HTTP i **żadne** z nich nie zakończyło się niepowodzeniem.
+
+**95%** żądań zostało wykonanych w czasie poniżej **43 ms**, a średni czas odpowiedzi dla wszystkich żądań wynosił ok. **16,94 ms**.
+
+Obsłużono średnio **138,3** żądań na sekundę.
+
+![total_requests_per_second_1737811451 971](https://github.com/user-attachments/assets/ed6e465f-a9ec-4925-bf52-49ce20ba0f64)
+
+#### Users=700 Ramp=4 Run time=300
+
+![Zrzut ekranu 2025-01-25 142809](https://github.com/user-attachments/assets/7f8975f4-2a9e-421c-a6b8-40bfcdba4383)
+
+W ramach testu do aplikacji wysłano **27 317** żądań HTTP i **10 433** z nich zakończyło się niepowodzeniem (~**38%**).
+
+**95%** żądań zostało wykonanych w czasie poniżej **150 ms**, a średni czas odpowiedzi dla wszystkich żądań wynosił ok. **36,18 ms**.
+
+Obsłużono średnio **350,6** żądań na sekundę.
+
+![Zrzut ekranu 2025-01-25 142821](https://github.com/user-attachments/assets/b1830819-3000-448f-9aca-e7b4c46eefb4)
+
+![total_requests_per_second_1737811690 064](https://github.com/user-attachments/assets/3edc57aa-3a30-4556-81cb-1a5ec8ff4f1e)
 
 ### 4. Dla strony do nagrywania spotkań
 
