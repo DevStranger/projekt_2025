@@ -46,7 +46,6 @@ def save_recording(file, title=None):
     if not file or file.filename == '':
         raise ValueError('Nie przekazano żadnego pliku!')
 
-    # Ustal tytuł pliku, jeśli nie podano
     if not title:
         tz = pytz.timezone('Europe/Warsaw')
         now = datetime.now(tz)
@@ -60,9 +59,7 @@ def save_recording(file, title=None):
     webm_path = os.path.join(UPLOAD_FOLDER, f"{title}.webm")
     file.save(webm_path)
 
-    # Ścieżka do pliku wav (audio)
     wav_path = os.path.join(UPLOAD_FOLDER, f"{title}.wav")
-    # Ścieżka do pliku końcowego (mp4)
     mp4_path = os.path.join(UPLOAD_FOLDER, f"{title}.mp4")
 
     # Konwersja webm -> wav
@@ -77,7 +74,7 @@ def save_recording(file, title=None):
         raise RuntimeError('Konwersja do WAV nie powiodła się.') from e
     
 
-    # Konwersja wav -> mp4
+    # Konwersja wav, webm -> mp4
     try:
         subprocess.run(
             ['ffmpeg', '-i', wav_path, '-i', webm_path,  '-vf', 'scale=trunc(iw/2)*2:trunc(ih/2)*2', 
@@ -89,7 +86,6 @@ def save_recording(file, title=None):
         logging.error(f'Błąd podczas konwersji do MP4: {str(e)}')
         raise RuntimeError('Konwersja do MP4 nie powiodła się.') from e
 
-    # Usunięcie pliku .webm po konwersji
     os.remove(webm_path)
 
     if not os.path.exists(mp4_path):
@@ -109,5 +105,4 @@ def save_recording(file, title=None):
         logging.error(f"Błąd podczas generowania notatek: {e}")
 
 
-    # Zwrócenie ścieżek do plików
     return mp4_path, wav_path

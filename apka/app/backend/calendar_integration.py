@@ -5,14 +5,13 @@ from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
+from dateutil import parser
 
 SCOPES = ["https://www.googleapis.com/auth/calendar.readonly"]
 
 def get_calendar_events():
-    # Ścieżka do pliku token.json w folderze `app`
     token_path = os.path.join(os.path.dirname(__file__), "token.json")
 
-    # Usuń istniejący plik token.json, jeśli istnieje
     if os.path.exists(token_path):
         print(f"Removing existing token file at {token_path}...")
         os.remove(token_path)
@@ -51,10 +50,20 @@ def get_calendar_events():
             print("No upcoming events found.")
             return
 
+        formatted_events = []
         for event in events:
             start = event["start"].get("dateTime", event["start"].get("date"))
-            print(start, event["summary"])
+            summary = event.get("summary", "Brak nazwy wydarzenia")
+            
+            # Konwertuj datę i godzinę na czytelny format
+            if "T" in start:  # Jeśli jest pełna data i godzina
+                start_time = parser.parse(start).strftime("%Y-%m-%d %H:%M")
+            else:  # Jeśli tylko data
+                start_time = start
 
-        return events
+            formatted_events.append({"start": start_time, "summary": summary})
+
+        return formatted_events
     except HttpError as error:
         print(f"An error occurred: {error}")
+        return []

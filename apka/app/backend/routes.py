@@ -8,17 +8,19 @@ from .note import process_audio_and_save_transcription
 
 main = Blueprint('main', __name__, template_folder="../frontend/templates", static_folder="../frontend/static")
 
-# Trasa do serwowania strony głównej
 @main.route("/")
 def index():
     return render_template("index.html")
 
+@main.route("/record")
+def record():
+    return render_template("record.html")
 
 @main.route('/events')
 def events():
     try:
         events = get_calendar_events()
-        return jsonify(events)
+        return render_template('events.html', events=events)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
@@ -49,7 +51,7 @@ def list_windows():
 UPLOAD_FOLDER = os.path.join(os.getcwd(), 'recordings')
 ALLOWED_EXTENSIONS = {'webm', 'mp4', 'avi'}
 
-@main.route("/record_window", methods=["POST"])
+@main.route("/record/record_window", methods=["POST"])
 def record_window_route():
     setup_upload_folder()
     data = request.get_json()
@@ -64,7 +66,7 @@ def record_window_route():
     return jsonify({"message": f"Rozpoczęto nagrywanie okna: {window_title}"})
 
 
-@main.route("/stop_recording", methods=["POST"])
+@main.route("/record/stop_recording", methods=["POST"])
 def stop_recording_route():
     try:
         stop_recording()
@@ -75,6 +77,7 @@ def stop_recording_route():
 
 @main.route('/save', methods=['POST'])
 def save_recording_route():
+    setup_upload_folder()
     """Zapisz nagranie i przekonwertuj na MP4."""
     try:
         file = request.files['file']
@@ -92,28 +95,28 @@ def save_recording_route():
 @main.route('/my_recordings')
 def show_recordings():
     setup_upload_folder()
-    # Pobierz listę plików z folderu recordings
     recordings = os.listdir(UPLOAD_FOLDER)
     recordings = [f for f in recordings if f.endswith(('.mp4'))]  
+    recordings = [os.path.splitext(file)[0] for file in recordings]
     return render_template('my_recordings.html', recordings=recordings)
 
 
 @main.route('/recordings/<filename>')
 def get_recording(filename):
     try:
-        return send_from_directory(UPLOAD_FOLDER, filename)
+        return send_from_directory(UPLOAD_FOLDER, filename+".mp4")
     except FileNotFoundError:
         return "File not found", 404
 
 @main.route('/my_notes')
 def show_notes():
-    # Ścieżka do katalogu z notatkami
     docx_folder = os.path.join(os.getcwd(), 'recordings', 'notes')  # Upewnij się, że folder istnieje w 'recordings/notes'
     if not os.path.exists(docx_folder):
         return render_template('my_notes.html', notes=[])
 
     # Pobierz pliki `.docx` z folderu
     notes = [f for f in os.listdir(docx_folder) if f.endswith('.docx')]
+    notes = [os.path.splitext(file)[0] for file in notes]
     return render_template('my_notes.html', notes=notes)
 
 @main.route('/debug/recordings')
@@ -129,12 +132,10 @@ def generate_notes():
         if not title:
             return jsonify({'error': 'Brak nazwy pliku! Podaj tytuł pliku WAV.'}), 400
 
-        # Ścieżka do pliku WAV w katalogu 'recordings'
         wav_path = os.path.join(UPLOAD_FOLDER, f"{title}.wav")
         if not os.path.exists(wav_path):
             return jsonify({'error': f"Plik {title}.wav nie istnieje w katalogu recordings!"}), 404
 
-        # Ścieżka do folderu z notatkami
         notes_folder = os.path.join(os.getcwd(), 'notes')
         if not os.path.exists(notes_folder):
             os.makedirs(notes_folder)
@@ -153,10 +154,9 @@ def generate_notes():
 
 @main.route('/notes/<filename>')
 def get_note(filename):
-    # Ścieżka do katalogu z notatkami
     docx_folder = os.path.join(os.getcwd(), 'recordings', 'notes')
     try:
-        return send_from_directory(docx_folder, filename, as_attachment=True)  # Pobierz plik jako załącznik
+        return send_from_directory(docx_folder, filename + ".docx", as_attachment=True)  # Pobierz plik jako załącznik
     except FileNotFoundError:
         return "File not found", 404
 

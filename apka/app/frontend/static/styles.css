@@ -12,8 +12,8 @@ body {
 }
 
 .container {
-    width: 55%; /* 2/3 szerokości */
-    height: 50vh; /* 1/2 wysokości */
+    width: 55%; 
+    height: 50vh;
     padding: 20px;
     text-align: center;
     background-color: rgba(139, 98, 149, 0.6);
@@ -21,9 +21,9 @@ body {
     box-shadow: 0 0 10px rgba(167, 17, 201, 0.204);
     overflow-y: auto; /* Dodanie przewijalności */
     position: relative;
-    top: 15%; /* 15% od góry */
-    left: 7%; /* Pozycjonowanie od lewej krawędzi */
-    transform: translateY(0%); /* Usuń translateY(-50%) */
+    top: 15%; 
+    left: 7%; 
+    transform: translateY(0%); 
 }
 
 h1 {
@@ -61,53 +61,8 @@ button:disabled {
     background-color: gray;
 }
 
-#record-btn {
-    background-color: #800080; 
-    color: white;
-    font-size: 20px;
-    border-radius: 20px;
-    transition: transform 0.2s ease, background-color 0.2s ease;
-}
-
-#record-btn:hover {
-    background-color: #6a006a; 
-    transform: scale(1.2); 
-}
-
-#record-btn:active {
-    background-color: #4c034c; 
-}
-
-.start-button {
-    background-color: #4CAF50;
-    color: white;
-}
-
-.start-button:hover:not(:disabled) {
-    background-color: #45a049;
-    transform: scale(1.05); 
-}
-
-.stop-button {
-    background-color: rgb(255, 0, 0);
-    color: white;
-}
-
-.stop-button:hover:not(:disabled) {
-    transform: scale(1.05); 
-}
-
-#events-btn  {
-    background-color: rgb(226, 178, 212);
-    margin-bottom: 10px;
-    color: black;
-    padding: 10px 20px;
-    font-size: 20px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s;
-}
-#recordings-btn {
-    background-color: rgb(226, 178, 212);
+#events-btn, #recordings-btn, #notes-btn, #record-btn{
+    background-color: rgb(226, 199, 218);
     margin-top: 10px;
     color: black;
     padding: 10px 20px;
@@ -115,86 +70,13 @@ button:disabled {
     cursor: pointer;
     transition: background-color 0.3s, transform 0.3s;
 }
-#notes-btn  {
-    background-color: rgb(226, 178, 212);
-    margin-bottom: 10px;
-    color: black;
-    padding: 10px 20px;
-    font-size: 20px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s;
-}
 
-#events-btn:hover {
+#record-btn:hover, #events-btn:hover, #notes-btn:hover,#recordings-btn:hover {
     background-color: #ea72c8;
     transform: scale(1.2); 
 }
 
-#events-btn:active {
+
+#record-btn:active, #events-btn:active, #notes-btn:active, #recordings-btn:active {
     background-color: #9e4f8a; 
 }
-
-#notes-btn:hover {
-    background-color: #ea72c8;
-    transform: scale(1.2); 
-}
-
-#notes-btn:active {
-    background-color: #9e4f8a; 
-}
-
-#recordings-btn:hover {
-    background-color: #ea72c8;
-    transform: scale(1.2); 
-}
-
-#recordings-btn:active {
-    background-color: #9e4f8a; 
-}
-
-input[type="text"] {
-    padding: 10px;
-    margin: 10px;
-    width: 300px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-
-#recording-time {
-    font-size: 16px;
-    color: white;
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 5px;
-    border-radius: 5px;
-    position: fixed;
-    top: 10px;
-    right: 10px;
-}
-
-#save-recording {
-    background-color: rgb(255, 0, 149);
-    color: white;
-    font-size: 16px;
-    margin-top: 10px;
-    padding: 10px 20px;
-}
-
-.timer {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background-color: rgba(0, 0, 0, 0.7); /* Tło półprzezroczyste */
-    color: white;
-    font-size: 24px;
-    font-family: 'Arial', sans-serif;
-    padding: 10px 20px; /* Dostosowanie rozmiaru */
-    border-radius: 10px; /* Zaokrąglenie rogów */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Cień, aby wyglądało na bardziej wyróżniające się */
-    width: auto;
-    height: 40px;
-    display: flex;
-    align-items: center; /* Wyrównanie tekstu w pionie */
-    justify-content: center; /* Wyrównanie tekstu w poziomie */
-    font-weight: bold; /* Pogrubienie tekstu */
-}
-

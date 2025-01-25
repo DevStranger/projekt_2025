@@ -8,32 +8,22 @@
     <link rel="icon" type="image/x-icon" href="static/logoo.png">
 </head>
 <body>
-    <div id="timer" class="timer" style="display: none;">Nagrywanie</div>
     <div class="container">
         <h1>Witaj w aplikacji!</h1>
-        <button id="events-btn">Zobacz swoje wydarzenia!</button>
-        <button id="record-btn">Wybierz okno do nagrywania</button>
-        <button id="recordings-btn">Zobacz swoje nagrania</button>
+        <a href="/events">
+            <button id="events-btn">Zobacz swoje wydarzenia</button>
+        </a> 
+        <a href="/record">
+            <button id="record-btn">Nagraj spotkanie</button>
+        </a>
+        <a href="/my_recordings">
+            <button id="recordings-btn">Zobacz swoje nagrania</button>
+        </a> 
         <a href="/my_notes">
             <button id="notes-btn">Zobacz swoje notatki</button>
-        </a>        
-        <div id="window-selection" class="selection" style="display: none;">
-            <h2>Wybierz okno:</h2>
-            <select id="window-list" style="display: none;"></select>
-            <div id="selected-window" style="display: none;">
-                <button id="change-window-btn">Zmień okno</button>
-            </div>
-            <div class="button-row">
-                <button id="startButton" class="start-button">Rozpocznij nagrywanie</button>
-                <button id="stopButton" class="stop-button" disabled>Zakończ nagrywanie</button>
-            </div>
-            <h2>Zapisz nagranie</h2>
-            <input type="text" id="recording-title" placeholder="Podaj tytuł nagrania (nie używaj polskich znaków!)">
-            <button id="save-recording" disabled>Zapisz</button>
-        </div>
+        </a>    
     </div>
 
-    <script src="static/record.js"></script>
     <script src="static/notes.js"></script>
 </body>
 </html>
