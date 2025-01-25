@@ -245,12 +245,16 @@ Wysłanie zapytania HTTP do serwera, powoduje chwilowe wystąpienie błędów
 
 **Cel:** sprawdzić czy aplikacja jest dostępna w różnych przeglądarkach
 
-**Narzędzie:** przeglądarka Chrome, przeglądarka Microsoft Edge
+**Narzędzie:** przeglądarka Chrome, przeglądarka Microsoft Edge, przeglądarka Opera
 
-### Microsoft Edge
+### Microsoft Edge ✔
 
 ![Zrzut ekranu 2025-01-25 160603](https://github.com/user-attachments/assets/04c017ca-ac5b-4171-b71e-38023980438b)
 
-### Chrome
+### Chrome ✔
 
 ![Zrzut ekranu 2025-01-25 160622](https://github.com/user-attachments/assets/2d67d714-5031-421d-8a16-218b3eb9a9f7)
+
+### Opera ✔
+
+![Zrzut ekranu 2025-01-25 160928](https://github.com/user-attachments/assets/f861874c-9f3d-4e7e-a378-0be38a8ce400)
