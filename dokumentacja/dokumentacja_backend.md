@@ -132,11 +132,53 @@ Po wykonaniu transkrypcji mowy na tekst, wygenerowane pliki notatek w formacie .
 
 ## Interfejs użytkownika (UI)
 
+### Strona główna (index.html)
+Strona główna jest wejściem do aplikacji, na której użytkownik może:
+- wejść na podstronę i rozpocząć nagrywanie
+- wejść na pdostronę 'Moje notatki' lub 'Moje nagrania'
+- wyświetlać wydarzenia z kalendarza
+
+W przypadku przycisków do rozpoczęcia nagrywania lub wyświetlania kalendarza, frontend wysyła zapytania HTTP (np. za pomocą formularzy lub AJAX) do backendu, który obsługuje te operacje. Flask dostarcza dane do strony za pomocą odpowiednich tras, np.:
+- `/start_recording`
+- `/get_events`
+
+Backend zwraca dane w formacie JSON lub renderuje odpowiednie strony HTML.
+
+### Nagrywanie (record.html)
+Na tej stronie użytkownik ma możliwość:
+- rozpoczęcia nagrywania
+- zakończenia nagrywania okna aplikacji
+
+Kiedy użytkownik naciśnie przycisk do rozpoczęcia nagrywania, frontend wysyła zapytanie do backendu (Flask), który uruchamia odpowiednią funkcję do nagrywania. Funkcje te są zawarte w pliku `recording.py`. Nagrania są następnie przesyłane do backendu w celu zapisania w folderze `recordings`.
+
+Frontend (HTML) używa JavaScript do interakcji z backendem w sposób asynchroniczny, aby uzyskać odpowiedzi o stanie nagrywania bez przeładowania strony.
+
+### Wydarzenia kalendarza (events.html)
+Strona ta wyświetla nadchodzące wydarzenia z Google Calendar. Backend aplikacji, używając `calendar_integration.py`, integruje się z Google Calendar API, pobierając dane o wydarzeniach z konta użytkownika.
+
+Strona `events.html` w frontendzie wyświetla te wydarzenia, a zapytania do backendu są realizowane przez Flask w trasie:
+- `/get_calendar_events`
+
+Po załadowaniu strony frontend wykonuje zapytanie GET do backendu, który zwraca dane o wydarzeniach w formacie JSON. JavaScript renderuje te dane w odpowiednim formacie na stronie.
+
+### Notatki (my_notes.html)
+Użytkownicy mogą przeglądać swoje wygenerowane transkrypcje notatek w formacie `.docx`. Backend aplikacji przechowuje te pliki w odpowiednim katalogu (`/recordings/notes`), a Flask udostępnia je użytkownikom za pomocą odpowiednich tras:
+- `/get_note/<note_id>`
+
+Strona `my_notes.html` w frontendzie prezentuje listę dostępnych notatek, a użytkownik może pobrać je, klikając na odpowiedni link. Backend obsługuje żądanie i zwraca odpowiedni plik `.docx`.
+
+### Nagrania (my_recordings.html)
+Użytkownicy mogą przeglądać swoje zapisane nagrania wideo i pobierać je. Pliki nagrań są przechowywane na serwerze w folderze `./recordings/` i mogą być dostępne z poziomu aplikacji webowej za pośrednictwem odpowiednich tras Flask:
+- `/get_recording/<recording_id>`
+
+Frontend (strona `my_recordings.html`) prezentuje listę dostępnych nagrań, które są powiązane z użytkownikiem. Kliknięcie na nazwę pliku powoduje uruchmienie odtwarzacza nagrania.
 
 ## Integracje
 
 
+
 ## Logowanie i alerty
+
 
 
 ## Bezpieczeństwo
