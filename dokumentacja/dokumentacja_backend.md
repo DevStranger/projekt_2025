@@ -138,7 +138,7 @@ Strona główna jest wejściem do aplikacji, na której użytkownik może:
 - wejść na pdostronę 'Moje notatki' lub 'Moje nagrania'
 - wyświetlać wydarzenia z kalendarza
 
-W przypadku przycisków do rozpoczęcia nagrywania lub wyświetlania kalendarza, frontend wysyła zapytania HTTP (np. za pomocą formularzy lub AJAX) do backendu, który obsługuje te operacje. Flask dostarcza dane do strony za pomocą odpowiednich tras, np.:
+W przypadku przycisków do rozpoczęcia nagrywania lub wyświetlania kalendarza, frontend wysyła zapytania HTTP do backendu, który obsługuje te operacje. Flask dostarcza dane do strony za pomocą odpowiednich tras, np.:
 - `/start_recording`
 - `/get_events`
 
