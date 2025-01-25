@@ -1,5 +1,23 @@
 # API endpoints
 
+## `/`
+
+### Opis
+Renderuje stronę główną
+
+### Metoda
+
+`**GET**`
+
+## `/record`
+
+### Opis
+Renderuje podstronę do nagrywania
+
+### Metoda
+
+`**GET**`
+
 ## `/record/record_window`
 
 ### Opis
@@ -42,3 +60,27 @@ Jeśli nie podano `window_title`:
   "message": "Nie podano tytułu okna."
 }
 ```
+
+## `/record/stop_recording`
+
+### Opis
+Zatrzymuje aktualnie trwające nagrywanie
+
+### Metoda
+`**POST**`
+
+### Nagłówki
+- brak wymaganych nagłówków
+
+#### Przykład zapytania
+- brak danych w treści zapytania
+
+#### Odpowiedzi
+
+**_Sukces (200 OK)_**
+
+```json
+{
+  "message": "Nagrywanie zakończone pomyślnie."
+}
+
