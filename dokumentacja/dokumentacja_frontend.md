@@ -135,3 +135,21 @@ Skrypt odpowiedzialny za obsługę nagrywania spotkań
 4. po zakończeniu nagrywania, użytkownik ma możliwość zapisania nagrania poprzez wysłanie pliku na serwer (`/save`)
 
 ## Style i formatowanie CSS
+
+### `styles.css`
+Główne style aplikacji, zawierające ogólne zasady dotyczące układu, kolorów, fontów oraz responsywności
+
+---
+
+### `styles2.css`
+Dodatkowy plik stylów, który jest używany na stronach „My Notes” i „My Recordings” i zawiera specyficzne style dla tych widoków
+
+---
+
+### `stylesEvents.css`
+Plik stylów dla strony „Events”, odpowiadający za wygląd listy nadchodzących wydarzeń
+
+---
+
+### `stylesRecord.css`
+Plik stylów dla strony „Record”, dostosowujący wygląd interfejsu użytkownika do funkcji nagrywania
