@@ -241,6 +241,34 @@ Wysłanie zapytania HTTP do serwera, powoduje chwilowe wystąpienie błędów
 ![Zrzut ekranu 2025-01-25 160045](https://github.com/user-attachments/assets/3cb1b8c0-de64-4f60-8d92-cecf9f2575ec)
 ![Zrzut ekranu 2025-01-25 160050](https://github.com/user-attachments/assets/bc67a621-7496-4092-8cfe-13baa7ec521a)
 
+**200 OK:** większość żądań zakończyła się poprawnym zwróceniem zawartości, co wskazuje na sprawne działanie serwera.
+
+### Wykryte zagrożenia
+
+#### Content Security Policy (CSP) Header Not Set
+
+- **Opis:** brak nagłówka `CSP` uniemożliwia ograniczenie dozwolonych źródeł zawartości na stronie; może to prowadzić do zagrożeń typu XSS (Cross-Site Scripting) i innych ataków
+- **Ryzyko:** średnie
+- **Zalecenie:** włączyć politykę CSP, definiując dozwolone źródła zasobów takich jak JavaScript, CSS, obrazy, itd.
+
+#### Missing Anti-clickjacking Header
+
+- **Opis:** brak nagłówka `X-Frame-Options` naraża stronę na ataki typu clickjacking, które mogą przechwycić interakcje użytkownika
+- **Ryzyko:** średnie
+- **Zalecenie:** dodać nagłówek `X-Frame-Options` z wartościami `DENY` lub `SAMEORIGIN`
+
+#### Server Leaks Version Information via "Server" HTTP Response Header
+
+- **Opis:** nagłówek `Server` ujawnia informacje o wersji serwera, co może ułatwić atakującym znalezienie odpowiednich exploitów
+- **Ryzyko:** niskie
+- **Zalecenie:** ukryć lub zanonimizować ten nagłówek w konfiguracji serwera
+  
+#### X-Content-Type-Options Header Missing
+
+- **Opis:** brak nagłówka `X-Content-Type-Options` pozwala na tzw. MIME-sniffing, co może prowadzić do interpretacji zasobów w niebezpieczny sposób
+- **Ryzyko:** niskie
+- **Zalecenie:** dodać nagłówek `X-Content-Type-Options` z wartością `nosniff`
+
 ## Testy zgodności (dla różnych przeglądarek)
 
 **Cel:** sprawdzić czy aplikacja jest dostępna w różnych przeglądarkach
