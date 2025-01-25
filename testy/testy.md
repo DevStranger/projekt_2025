@@ -121,12 +121,20 @@ Obsłużono średnio **329,5** żądania na sekundę.
 
 ## Test szybkości odpowiedzi
 
+**Cel:** zmierzyć czas odpowiedzi aplikacji na zapytania HTTP
+
+**Narzędzie:** curl
 
 
 ## Test wrażliwości na ataki (OWASP ZAP)
 
+**Cel:** sprawdzić, czy aplikacja ma luki bezpieczeństwa
+
+**Narzędzie:** OWASP ZAP (Zed Attack Proxy)
 
 
 ## Testy zgodności (dla różnych przeglądarek)
 
+**Cel:** sprawdzić czy aplikacja jest dostępna w różnych przeglądarkach
 
+**Narzędzie:** przeglądarka Chrome, przeglądarka Microsoft Edge
