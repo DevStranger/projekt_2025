@@ -30,7 +30,7 @@
 ## Zapisane ustalenia ze spotkania 
 
 Funkcjonalności:
-1) Transkrypcja tekstu mówionego *
+1) Transkrypcja tekstu mówionego ☆
 2) Zapis zrzutów ekranów (prezentacji) - dowolny użytkownik
 3) OCR treści
 4) Notatka ze spotkania (PDF, HTML, TXT, MD)
@@ -44,7 +44,7 @@ Funkcjonalności:
 - Identyfikacja mówców (nice to have)
 - Podsumowanie notatek
 - Wysuzkiwanie w notatkach
-* Statystyka ile, kto powiedział i jak szybko mówi (nice to have)
+☆ Statystyka ile, kto powiedział i jak szybko mówi (nice to have)
 
 
 
