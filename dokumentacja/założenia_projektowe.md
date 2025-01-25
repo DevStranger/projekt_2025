@@ -47,5 +47,8 @@ Funkcjonalności:
   
 ☆ Statystyka ile, kto powiedział i jak szybko mówi (nice to have)
 
+## Sposób komunikacji i organizacja pracy
 
-
+Slack:
+- kanał ogólny - informacje dotyczące deadline'ów oraz wymagań projektowych - kontakt z zleceniodawcą
+- kanał dedykowany (girls_group) - komunikacja wewnątrz zespołu, zdawanie sprawozdań z postępów (cotygodniowe sprinty)
