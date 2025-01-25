@@ -173,14 +173,6 @@ Użytkownicy mogą przeglądać swoje zapisane nagrania wideo i pobierać je. Pl
 
 Frontend (strona `my_recordings.html`) prezentuje listę dostępnych nagrań, które są powiązane z użytkownikiem. Kliknięcie na nazwę pliku powoduje uruchmienie odtwarzacza nagrania.
 
-## Integracje
-
-
-
-## Logowanie i alerty
-
-
-
 ## Bezpieczeństwo
 
 ### Dane uwierzytelniające (Google API)
