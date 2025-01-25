@@ -1,7 +1,7 @@
 body {
     font-family: Arial, sans-serif;
     display: flex;
-    justify-content: flex-start; /* Ustawienie zawartości po lewej stronie */
+    justify-content: flex-start; 
     align-items: flex-start;
     height: 100vh;
     margin: 0;
@@ -12,18 +12,18 @@ body {
 }
 
 .container {
-    width: 55%; /* 2/3 szerokości */
-    height: 50vh; /* 1/2 wysokości */
+    width: 55%; 
+    height: 50vh; 
     padding: 20px;
     text-align: center;
     background-color: rgba(139, 98, 149, 0.6);
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(167, 17, 201, 0.204);
-    overflow-y: auto; /* Dodanie przewijalności */
+    overflow-y: auto; 
     position: relative;
-    top: 15%; /* 15% od góry */
-    left: 7%; /* Pozycjonowanie od lewej krawędzi */
-    transform: translateY(0%); /* Usuń translateY(-50%) */
+    top: 15%; 
+    left: 7%; 
+    transform: translateY(0%); 
 }
 
 h1 {
@@ -54,7 +54,7 @@ button {
     padding: 10px 25px;
     font-size: 18px;
     border: none;
-    border-radius: 30px; /* Zaokrąglenie przycisków */
+    border-radius: 30px; 
     cursor: pointer;
     transition: transform 0.2s ease, background-color 0.2s ease;
     color: white;
@@ -67,7 +67,6 @@ button:disabled {
     background-color: gray;
 }
 
-/* Przyciski w górnym rogu */
 .top-nav {
     position: absolute;
     top: 20px;
@@ -162,13 +161,13 @@ input[type="text"] {
     color: white;
     font-size: 24px;
     font-family: 'Arial', sans-serif;
-    padding: 10px 20px; /* Dostosowanie rozmiaru */
-    border-radius: 10px; /* Zaokrąglenie rogów */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Cień, aby wyglądało na bardziej wyróżniające się */
+    padding: 10px 20px;
+    border-radius: 10px; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); 
     width: auto;
     height: 40px;
     display: flex;
-    align-items: center; /* Wyrównanie tekstu w pionie */
-    justify-content: center; /* Wyrównanie tekstu w poziomie */
-    font-weight: bold; /* Pogrubienie tekstu */
+    align-items: center; 
+    justify-content: center; 
+    font-weight: bold; 
 }
