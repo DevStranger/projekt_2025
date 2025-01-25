@@ -143,3 +143,136 @@ W przypadku błędu konwersji:
 }
 ```
 
+## `/my_recordings`
+
+### Opis
+
+Zwraca listę zapisanych nagrań `mp4`
+
+### Metoda
+
+`GET`
+
+### Nagłówki
+
+- brak wymaganych nagłówków
+
+#### Przykład zapytania
+
+- brak danych w treści zapytania
+
+#### Odpowiedzi
+
+**_Sukces (200 OK)_**
+
+```
+Strona HTML z listą nagrań wideo.
+```
+
+## `/events`
+
+### Opis
+
+Pobiera wydarzenia z Google Calendar
+
+### Metoda
+
+`GET`
+
+#### Odpowiedzi
+
+**_Sukces (200 OK)_**
+
+```
+Lista wydarzeń
+```
+
+**_500 Internal Server Error_**
+
+-  jeśli wystąpi błąd podczas pobierania wydarzeń
+
+## `/list_windows`
+
+### Opis
+
+Zwraca listę nazw wszystkich otwartych okien
+
+### Metoda
+
+`GET`
+
+#### Odpowiedzi
+
+**_Sukces (200 OK)_**
+
+```
+Lista tytułów okien
+```
+
+## `/generate_notes`
+
+### Opis
+
+Generuje transkrypcję tekstową z istniejącego pliku `.wav`
+
+### Metoda
+
+`POST`
+
+### Nagłówki
+
+- `Content-Type: application/x-www-form-urlencoded`
+
+### Body (JSON)
+
+| Pole           | Typ     | Wymagane | Opis                                                      |
+|----------------|---------|----------|-----------------------------------------------------------|
+| `title`        | string  | Tak      | Nazwa pliku `.wav` (bez rozszerzenia) do przetworzenia    |
+
+#### Odpowiedzi
+
+**_Sukces (200 OK)_**
+
+```json
+{
+  "message": "Transkrypcja wygenerowana pomyślnie."
+}
+```
+
+**_Błąd (400 Bad Request)_**
+
+Jeśli brak nazwy pliku:
+
+```json
+{
+  "error": "Brak nazwy pliku! Podaj tytuł pliku WAV."
+}
+```
+
+**_Błąd (404 Not Found)_**
+
+Jeśli plik `.wav` nie istnieje:
+
+```json
+{
+  "error": "Plik moje_nagranie.wav nie istnieje w katalogu recordings!"
+}
+```
+
+## `/my_notes`
+
+### Opis
+
+Wyświetla listę wygenerowanych notatek `.docx`
+
+### Metoda
+
+`GEt`
+
+#### Odpowiedzi
+
+**_Sukces (200 OK)_**
+
+```
+Lista notatek w formie HTML
+```
