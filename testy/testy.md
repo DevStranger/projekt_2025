@@ -37,17 +37,33 @@ Obsłużono średnio **132,7** żądań na sekundę.
 
 ![aaaaaa](https://github.com/user-attachments/assets/216a5141-087d-4a03-9ea6-904a24f02635)
 
-#### Users=500 Ramp=15
+#### Users=500 Ramp=5 Testing time=300
 
+![Zrzut ekranu 2025-01-25 135148](https://github.com/user-attachments/assets/f71c6226-11bf-4bdc-8419-355161d08c73)
 
+W ramach testu do aplikacji wysłano **22 504** żądania HTTP i **7024** z nich zakończyło się niepowodzeniem (**~31%**). 
+
+**95%** żądań zostało wykonanych w czasie poniżej **51 ms**, a średni czas odpowiedzi dla wszystkich żądań wynosił ok. **17,18 ms**.
+
+Obsłużono średnio **327,6** żądań na sekundę.
+
+![total_requests_per_second_1737809508 924](https://github.com/user-attachments/assets/28715d5e-95f4-4ff2-987a-b0b2ff735fa3)
 
 ### 2. Dla strony wyświetlającej nagrania
 
-#### Users=50 Ramp=1
+#### Users=50 Ramp=1 Testing time=60
 
+![Zrzut ekranu 2025-01-25 135726](https://github.com/user-attachments/assets/91e083c3-2cc5-4c64-afd0-7101e5c4e5cd)
 
+W ramach testu do aplikacji wysłano **1189** żądania HTTP i **żadne** z nich nie zakończyło się niepowodzeniem. 
 
-#### Users=200 Ramp=5
+**95%** żądań zostało wykonanych w czasie poniżej **14 ms**, a średni czas odpowiedzi dla wszystkich żądań wynosił ok. **6,7 ms**.
+
+Obsłużono średnio **32,3** żądań na sekundę.
+
+![total_requests_per_second_1737809858 173](https://github.com/user-attachments/assets/ef6a8117-6e8d-4e52-b04e-e7521ac8ad00)
+
+#### Users=200 Ramp=5 Testing time=100
 
 
 
@@ -82,5 +98,15 @@ Obsłużono średnio **132,7** żądań na sekundę.
 #### Users=500 Ramp=15
 
 
+
+## Test szybkości odpowiedzi
+
+
+
+## Test wrażliwości na ataki (OWASP ZAP)
+
+
+
+## Testy zgodności (dla różnych przeglądarek)
 
 
