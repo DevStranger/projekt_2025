@@ -12,7 +12,7 @@
 
 ## Akceptacyjne
 
-**Cel:**
+**Cel:** weryfikacja poprawności działania funkcji aplikacji poprzez sprawdzenie jej zachowania w różnych scenariuszach użytkowych
 
 **Narzędzie:** testcafe
 
