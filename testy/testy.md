@@ -153,23 +153,54 @@ Obsłużono średnio **350,6** żądań na sekundę.
 
 ### 4. Dla strony do nagrywania spotkań
 
-#### Users=50 Ramp=1 Testing time=60
+#### Users=50 Ramp=15 Testing time=30
 
+![Zrzut ekranu 2025-01-25 151527](https://github.com/user-attachments/assets/0c7a63d8-474a-4959-b007-58dd2ad06f8a)
 
+W ramach testu do aplikacji wysłano **973** żądania HTTP i **żadne** z nich nie zakończyło się niepowodzeniem.
 
-#### Users=200 Ramp=2 Testing time=100
+**95%** żądań zostało wykonanych w czasie poniżej **19 ms**, a średni czas odpowiedzi dla wszystkich żądań wynosił ok. **7,94 ms**.
 
+Obsłużono średnio **32,7** żądań na sekundę.
 
+![total_requests_per_second_1737814528 248](https://github.com/user-attachments/assets/4aa0481b-7b02-47ea-9c61-3c593ff2874a)
+
+#### Users=200 Ramp=10 Testing time=100
+
+![Zrzut ekranu 2025-01-25 151730](https://github.com/user-attachments/assets/c327d5cb-c1ca-4688-aeb5-72ca731ac226)
+
+W ramach testu do aplikacji wysłano **12 041** żądań HTTP i **żadne** z nich nie zakończyło się niepowodzeniem.
+
+**95%** żądań zostało wykonanych w czasie poniżej **18 ms**, a średni czas odpowiedzi dla wszystkich żądań wynosił ok. **8,78 ms**.
+
+Obsłużono średnio **132,7** żądań na sekundę.
+
+![total_requests_per_second_1737814651 645](https://github.com/user-attachments/assets/a3d0cfdf-2268-4484-bd6d-929bc9798c15)
 
 #### Users=500 Ramp=3 Testing time=300
 
+![Zrzut ekranu 2025-01-25 151223](https://github.com/user-attachments/assets/99006622-20fc-40a8-8fc7-369cf0ce3020)
 
+W ramach testu do aplikacji wysłano **69 691** żądań HTTP i **31 469** z nich zakończyło się niepowodzeniem.
+
+**95%** żądań zostało wykonanych w czasie poniżej **290 ms**, a średni czas odpowiedzi dla wszystkich żądań wynosił ok. **56,34 ms**.
+
+Obsłużono średnio **327,9** żądań na sekundę.
+
+![Zrzut ekranu 2025-01-25 151236](https://github.com/user-attachments/assets/6a9aa4c8-6289-4b88-bd67-1427d9ad471e)
+
+```
+CPU usage above 90%! This may constrain your throughput and may even give inconsistent response time measurements!
+```
+
+![total_requests_per_second_1737814344 521](https://github.com/user-attachments/assets/11399c64-57f9-40e3-bec6-761048b9f847)
 
 ## Test szybkości odpowiedzi
 
 **Cel:** zmierzyć czas odpowiedzi aplikacji na zapytania HTTP
 
 **Narzędzie:** curl
+
 
 
 ## Test wrażliwości na ataki (OWASP ZAP)
