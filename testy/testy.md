@@ -125,7 +125,7 @@ Obsłużono średnio **123,3** żądań na sekundę.
 
 ![total_requests_per_second_1737811111 113](https://github.com/user-attachments/assets/012ba31c-d3ff-4c28-b5f0-55a3facfcb41)
 
-#### Users=500 Ramp=15 Testing time=300
+#### Users=500 Ramp=1 Testing time=300
 
 
 
@@ -139,7 +139,7 @@ Obsłużono średnio **123,3** żądań na sekundę.
 
 
 
-#### Users=500 Ramp=5 Testing time=300
+#### Users=500 Ramp=3 Testing time=300
 
 
 
