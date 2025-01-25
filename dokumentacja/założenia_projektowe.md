@@ -58,3 +58,7 @@
 - Maja
 - Asia
 - Julka
+
+## Etapy pracy
+
+Planowanie --> Implementacja --> Testy --> Wdrożenie
