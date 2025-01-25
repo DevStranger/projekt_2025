@@ -2,6 +2,7 @@ import os
 import subprocess
 import logging
 import hashlib
+import cv2
 from PIL import Image
 import imagehash
 from PIL import Image
@@ -30,6 +31,30 @@ def is_duplicate_image(new_image_path, last_image_path):
         return False  # Domyślnie uznaj, że obrazy są różne w przypadku błędu
 
 
+def detect_presentation_area(image_path):
+    """
+    Wykrywa obszar prezentacji w zrzucie ekranu i przycina go.
+    """
+    try:
+        image = cv2.imread(image_path)
+        gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+        # Progowanie w celu wykrycia jasnego obszaru (często prezentacje są na białym tle)
+        _, thresh = cv2.threshold(gray, 240, 255, cv2.THRESH_BINARY)
+
+        contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+        # Wybierz największy kontur 
+        if contours:
+            largest_contour = max(contours, key=cv2.contourArea)
+            x, y, w, h = cv2.boundingRect(largest_contour)
+
+            # Przytnij obraz do wykrytego obszaru
+            cropped_image = image[y:y+h, x:x+w]
+            cv2.imwrite(image_path, cropped_image)  # Nadpisz plik
+    except Exception as e:
+        print(f"Błąd podczas wykrywania obszaru prezentacji: {e}")
+
 
 def extract_screenshots_from_video(video_path, output_folder, fps=1):
     """
@@ -54,6 +79,8 @@ def extract_screenshots_from_video(video_path, output_folder, fps=1):
         last_image_path = None
         for screenshot in sorted(os.listdir(output_folder)):
             screenshot_path = os.path.join(output_folder, screenshot)
+
+            detect_presentation_area(screenshot_path)
 
             # Sprawdź, czy obraz jest duplikatem
             if last_image_path and is_duplicate_image(screenshot_path, last_image_path):
