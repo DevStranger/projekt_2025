@@ -183,3 +183,15 @@ Frontend (strona `my_recordings.html`) prezentuje listę dostępnych nagrań, kt
 
 ## Bezpieczeństwo
 
+### Dane uwierzytelniające (Google API)
+Dane uwierzytelniające do Google API są przechowywane w plikach `credentials.json` oraz `token.json`. Te pliki umożliwiają aplikacji dostęp do konta Google użytkownika, jednak są chronione przed publicznym dostępem. 
+
+### Walidacja przesyłanych plików  
+Aplikacja zapewnia walidację plików przesyłanych przez użytkownika. Akceptowane są tylko określone rozszerzenia plików, takie jak:
+   - `.webm`
+   - `.mp4`
+   - `.avi`
+
+### Ochrona danych wrażliwych
+W celu ochrony danych wrażliwych, aplikacja stosuje odpowiednie mechanizmy autoryzacji oraz kontroluje dostęp do zasobów. Na przykład:
+   - Generowanie notatek jest możliwe tylko na podstawie przesłanych plików audio, zapewniając, że dostęp do transkrypcji i danych mają tylko uprawnieni użytkownicy
