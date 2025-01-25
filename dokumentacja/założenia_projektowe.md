@@ -44,6 +44,7 @@ Funkcjonalności:
 - Identyfikacja mówców (nice to have)
 - Podsumowanie notatek
 - Wysuzkiwanie w notatkach
+  
 ☆ Statystyka ile, kto powiedział i jak szybko mówi (nice to have)
 
 
