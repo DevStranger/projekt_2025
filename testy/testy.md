@@ -219,6 +219,15 @@ Serwer odpowiada na żądania HTTP w czasie ~3-4 ms.
 
 Czas odpowiedzi serwera - bez większych zmian, w zakresie ~3-4 ms.
 
+### Obciążenie 300 użytkowników korzystających z aplikacji
+
+![Zrzut ekranu 2025-01-25 155126](https://github.com/user-attachments/assets/85e485c5-71bb-4a95-b47e-d5cc42573343)
+
+Wysłanie zapytania HTTP do serwera, powoduje chwilowe wystąpienie błędów
+
+![total_requests_per_second_1737816725 092](https://github.com/user-attachments/assets/65e7303d-f5f6-4b98-b9be-6af4c70e667d)
+![Zrzut ekranu 2025-01-25 155334](https://github.com/user-attachments/assets/7ea8f136-faa2-4607-bfb8-a309ae61f0af)
+
 ## Test wrażliwości na ataki (OWASP ZAP)
 
 **Cel:** sprawdzić, czy aplikacja ma luki bezpieczeństwa
