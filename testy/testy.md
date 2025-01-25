@@ -89,13 +89,29 @@ Obsłużono średnio **329,5** żądania na sekundę.
 
 #### Users=500 Ramp=1 Testing time=300
 
+![Zrzut ekranu 2025-01-25 141152](https://github.com/user-attachments/assets/9e0e4690-4f1e-4091-9518-9b2cec9a8f82)
 
+W ramach testu do aplikacji wysłano **29 767** żądań HTTP i **3557** z nich zakończyło się niepowodzeniem.
+
+**95%** żądań zostało wykonanych w czasie poniżej **23 ms**, a średni czas odpowiedzi dla wszystkich żądań wynosił ok. **10,5 ms**.
+
+Obsłużono średnio **193,3** żądania na sekundę.
+
+![total_requests_per_second_1737810354 548](https://github.com/user-attachments/assets/a0074984-e81f-4673-b83f-27af4aa4af75)
 
 ### 3. Dla strony wyświetlającej notatki
 
 #### Users=50 Ramp=1 Testing time=60
 
+![Zrzut ekranu 2025-01-25 141559](https://github.com/user-attachments/assets/8fe6246b-dd2f-42d4-82b7-d018b6c8061f)
 
+W ramach testu do aplikacji wysłano **113** żądań HTTP i **żadne** z nich nie zakończyło się niepowodzeniem.
+
+**95%** żądań zostało wykonanych w czasie poniżej **7 ms**, a średni czas odpowiedzi dla wszystkich żądań wynosił ok. **5,1 ms**.
+
+Obsłużono średnio **7,1** żądań na sekundę.
+
+![total_requests_per_second_1737810960 496](https://github.com/user-attachments/assets/ae846aae-3225-4d6e-817a-2e2c4dd52913)
 
 #### Users=200 Ramp=2 Testing time=100
 
