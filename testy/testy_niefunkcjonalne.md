@@ -247,3 +247,10 @@ Wysłanie zapytania HTTP do serwera, powoduje chwilowe wystąpienie błędów
 
 **Narzędzie:** przeglądarka Chrome, przeglądarka Microsoft Edge
 
+### Microsoft Edge
+
+![Zrzut ekranu 2025-01-25 160603](https://github.com/user-attachments/assets/04c017ca-ac5b-4171-b71e-38023980438b)
+
+### Chrome
+
+![Zrzut ekranu 2025-01-25 160622](https://github.com/user-attachments/assets/2d67d714-5031-421d-8a16-218b3eb9a9f7)
