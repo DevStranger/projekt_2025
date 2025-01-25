@@ -55,7 +55,7 @@ Obsłużono średnio **327,6** żądań na sekundę.
 
 ![Zrzut ekranu 2025-01-25 135726](https://github.com/user-attachments/assets/91e083c3-2cc5-4c64-afd0-7101e5c4e5cd)
 
-W ramach testu do aplikacji wysłano **1189** żądania HTTP i **żadne** z nich nie zakończyło się niepowodzeniem. 
+W ramach testu do aplikacji wysłano **1189** żądań HTTP i **żadne** z nich nie zakończyło się niepowodzeniem. 
 
 **95%** żądań zostało wykonanych w czasie poniżej **14 ms**, a średni czas odpowiedzi dla wszystkich żądań wynosił ok. **6,7 ms**.
 
@@ -63,39 +63,47 @@ Obsłużono średnio **32,3** żądań na sekundę.
 
 ![total_requests_per_second_1737809858 173](https://github.com/user-attachments/assets/ef6a8117-6e8d-4e52-b04e-e7521ac8ad00)
 
-#### Users=200 Ramp=5 Testing time=100
+#### Users=200 Ramp=2 Testing time=100
 
+![Zrzut ekranu 2025-01-25 135959](https://github.com/user-attachments/assets/6813e97b-7f0e-4572-80eb-de6e74cc5318)
 
+W ramach testu do aplikacji wysłano **6763** żądania HTTP i **żadne** z nich nie zakończyło się niepowodzeniem. 
 
-#### Users=500 Ramp=15
+**95%** żądań zostało wykonanych w czasie poniżej **15 ms**, a średni czas odpowiedzi dla wszystkich żądań wynosił ok. **7,57 ms**.
+
+Obsłużono średnio **124** żądania na sekundę.
+
+![total_requests_per_second_1737810000 283](https://github.com/user-attachments/assets/d1361c35-5e11-4d75-8dc2-2b8257d0a44c)
+
+#### Users=500 Ramp=5 Testing time=300
 
 
 
 ### 3. Dla strony wyświetlającej notatki
 
-#### Users=50 Ramp=1
+#### Users=50 Ramp=1 Testing time=60
 
 
 
-#### Users=200 Ramp=5
+#### Users=200 Ramp=2 Testing time=100
 
 
 
-#### Users=500 Ramp=15
+#### Users=500 Ramp=15 Testing time=300
 
 
 
 ### 4. Dla strony do nagrywania spotkań
 
-#### Users=50 Ramp=1
+#### Users=50 Ramp=1 Testing time=60
 
 
 
-#### Users=200 Ramp=5
+#### Users=200 Ramp=2 Testing time=100
 
 
 
-#### Users=500 Ramp=15
+#### Users=500 Ramp=5 Testing time=300
 
 
 
