@@ -77,6 +77,18 @@ Obsłużono średnio **124** żądania na sekundę.
 
 #### Users=500 Ramp=5 Testing time=300
 
+![Zrzut ekranu 2025-01-25 140549](https://github.com/user-attachments/assets/aa08db34-873c-450a-8c42-4032d32a1e24)
+
+W ramach testu do aplikacji wysłano **81 501** żądań HTTP i **42 366** z nich zakończyło się niepowodzeniem. 
+
+**95%** żądań zostało wykonanych w czasie poniżej **99 ms**, a średni czas odpowiedzi dla wszystkich żądań wynosił ok. **37,08 ms**.
+
+Obsłużono średnio **329,5** żądania na sekundę.
+
+![total_requests_per_second_1737810350 541](https://github.com/user-attachments/assets/dc163113-5f65-4253-a748-ce4773572e40)
+
+#### Users=500 Ramp=1 Testing time=300
+
 
 
 ### 3. Dla strony wyświetlającej notatki
