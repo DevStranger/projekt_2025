@@ -47,24 +47,24 @@ Aplikacja jest zorganizowana w sposób umożliwiający łatwe zarządzanie plika
 ### `/static`
 Folder zawierający zasoby statyczne, takie jak obrazy, pliki CSS i JavaScript, które są wykorzystywane przez strony HTML:
 
-- `logo.ico` – Ikona strony (favicon).
-- `logoo.png` – Logo aplikacji.
-- `notes.js` – Skrypt odpowiedzialny za ładowanie i wyświetlanie listy notatek użytkownika.
-- `record.js` – Skrypt odpowiedzialny za obsługę funkcji nagrywania spotkań.
-- `styles.css` – Główny plik stylów CSS używany w aplikacji.
-- `styles2.css` – Dodatkowy plik CSS dla niektórych stron, takich jak „My Notes” i „My Recordings”.
-- `stylesEvents.css` – Skrypt stylów dedykowany do strony „Events”.
-- `stylesRecord.css` – Skrypt stylów dedykowany do strony „Record”.
-- `tlo.png` – Tło dla aplikacji.
+- `logo.ico` – ikona strony (favicon)
+- `logoo.png` – logo aplikacji
+- `notes.js` – skrypt odpowiedzialny za ładowanie i wyświetlanie listy notatek użytkownika
+- `record.js` – skrypt odpowiedzialny za obsługę funkcji nagrywania spotkań
+- `styles.css` – główny plik stylów CSS używany w aplikacji
+- `styles2.css` – dodatkowy plik CSS dla niektórych stron, takich jak „My Notes” i „My Recordings”
+- `stylesEvents.css` – skrypt stylów dedykowany do strony „Events”
+- `stylesRecord.css` – skrypt stylów dedykowany do strony „Record”
+- `tlo.png` – tło dla aplikacji
 
 ### `/templates`
 Folder zawierający pliki HTML, które są renderowane przez backend aplikacji:
 
-- `events.html` – Strona z listą nadchodzących wydarzeń.
-- `index.html` – Strona główna aplikacji.
-- `my_notes.html` – Strona z listą notatek użytkownika.
-- `my_recordings.html` – Strona z listą nagrań użytkownika.
-- `record.html` – Strona umożliwiająca nagrywanie spotkania.
+- `events.html` – strona z listą nadchodzących wydarzeń
+- `index.html` – strona główna aplikacji
+- `my_notes.html` – strona z listą notatek użytkownika
+- `my_recordings.html` – strona z listą nagrań użytkownika
+- `record.html` – strona umożliwiająca nagrywanie spotkania
 
 ## Strony
 
