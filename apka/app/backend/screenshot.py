@@ -1,7 +1,6 @@
 import os
 import subprocess
 import logging
-import hashlib
 import cv2
 from PIL import Image
 import imagehash
