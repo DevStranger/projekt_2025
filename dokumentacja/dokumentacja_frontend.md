@@ -116,5 +116,22 @@ Strona umożliwiająca nagrywanie spotkań z wybranego okna - umożliwia użytko
 
 ## JavaScript
 
+### `notes.js`
+Skrypt odpowiedzialny za załadowanie i wyświetlanie listy notatek użytkownika
+
+**Opis działania:**
+1. po załadowaniu strony (`DOMContentLoaded`) skrypt wykonuje zapytanie do backendu (`/my_notes`), aby pobrać listę dostępnych notatek w formacie JSON
+2. notatki są dynamicznie tworzone jako elementy listy HTML, a każdy element jest linkiem umożliwiającym pobranie pliku
+
+---
+
+### `record.js`
+Skrypt odpowiedzialny za obsługę nagrywania spotkań
+
+**Opis działania:**
+1. umożliwia użytkownikowi wybranie okna do nagrywania za pomocą `navigator.mediaDevices.getDisplayMedia`
+2. nagrywanie jest obsługiwane za pomocą `MediaRecorder`, który zapisuje wideo jako plik `.webm`
+3. w trakcie nagrywania wyświetlany jest timer pokazujący upływający czas
+4. po zakończeniu nagrywania, użytkownik ma możliwość zapisania nagrania poprzez wysłanie pliku na serwer (`/save`)
 
 ## Style i formatowanie CSS
