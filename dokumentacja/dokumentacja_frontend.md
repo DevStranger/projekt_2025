@@ -1,6 +1,7 @@
 # Dokumentacja Frontendu
 
 **Wersja:** 1.0
+
 **Data utworzenia:** 25.I.2025
 
 ## Zastosowane technologie
