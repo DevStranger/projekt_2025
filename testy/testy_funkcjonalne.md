@@ -18,6 +18,10 @@ Testy te weryfikują, czy aplikacja:
 
 **Narzędzie:** framework `unittest` w języku Python
 
+`\testy\test_routes.py`
+
+https://github.com/DevStranger/projekt_2025/blob/cebadf649cadffb94e4f25582b5b6d69349d9bbf/testy/test_routes.py
+
 Testy te zakończyły się powodzeniem ✔
 
 ## Integracyjne
