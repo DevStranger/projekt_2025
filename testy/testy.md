@@ -115,7 +115,15 @@ Obsłużono średnio **7,1** żądań na sekundę.
 
 #### Users=200 Ramp=2 Testing time=100
 
+![Zrzut ekranu 2025-01-25 141830](https://github.com/user-attachments/assets/c4e00633-9f1b-4b11-bf3b-cb000e9455d9)
 
+W ramach testu do aplikacji wysłano **6719** żądań HTTP i **żadne** z nich nie zakończyło się niepowodzeniem.
+
+**95%** żądań zostało wykonanych w czasie poniżej **16 ms**, a średni czas odpowiedzi dla wszystkich żądań wynosił ok. **7,79 ms**.
+
+Obsłużono średnio **123,3** żądań na sekundę.
+
+![total_requests_per_second_1737811111 113](https://github.com/user-attachments/assets/012ba31c-d3ff-4c28-b5f0-55a3facfcb41)
 
 #### Users=500 Ramp=15 Testing time=300
 
