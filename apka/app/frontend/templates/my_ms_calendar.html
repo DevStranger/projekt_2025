@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Moje Wydarzenia - MS Calendar</title>
+</head>
+<body>
+  <h1>Wydarzenia w MS Calendar</h1>
+  <button id="loginMsBtn">Zaloguj się do MS Calendar</button>
+  <button id="loadEventsBtn">Załaduj wydarzenia</button>
+  <ul id="eventsList"></ul>
+
+  <script>
+    const loginMsBtn = document.getElementById("loginMsBtn");
+    const loadEventsBtn = document.getElementById("loadEventsBtn");
+    const eventsList = document.getElementById("eventsList");
+
+    // 1) Przekierowanie do /ms-calendar/login
+    loginMsBtn.addEventListener("click", () => {
+      window.location.href = "/ms-calendar/login";
+    });
+
+    // 2) Po zalogowaniu (callback) user wraca do /ms-calendar/callback, token jest w session
+    // 3) Klikamy "Załaduj wydarzenia"
+    loadEventsBtn.addEventListener("click", () => {
+      fetch("/ms-calendar/events")
+        .then(res => res.json())
+        .then(data => {
+          if (data.error) {
+            alert("Błąd: " + data.error);
+            return;
+          }
+          eventsList.innerHTML = "";
+          data.forEach(evt => {
+            // Każdy evt to obiekt np. { id, subject, start: {...}, end: {...}, attendees: [...], ...}
+            const li = document.createElement("li");
+            li.textContent = `ID: ${evt.id} | Tytuł: ${evt.subject}`;
+
+            // Guzik: Pokaż szczegóły
+            const detailsBtn = document.createElement("button");
+            detailsBtn.textContent = "Pokaż szczegóły";
+            detailsBtn.addEventListener("click", () => {
+              loadEventDetails(evt.id);
+            });
+
+            li.appendChild(detailsBtn);
+            eventsList.appendChild(li);
+          });
+        })
+        .catch(err => {
+          console.error(err);
+          alert("Błąd przy pobieraniu wydarzeń.");
+        });
+    });
+
+    // 4) Pokaż szczegóły konkretnego eventu
+    function loadEventDetails(eventId) {
+      fetch(`/ms-calendar/event-details?eventId=${eventId}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.error) {
+            alert("Błąd: " + data.error);
+            return;
+          }
+          // data m.in. { subject, start, end, attendees, ... }
+          const attendees = data.attendees || [];
+          if (attendees.length === 0) {
+            alert("Brak uczestników");
+          } else {
+            const emails = attendees.map(a => a.emailAddress.address);
+            alert("Uczestnicy: " + emails.join(", "));
+
+            // Możesz dodać przycisk "Wyślij e-mail do wszystkich" itd.
+          }
+        })
+        .catch(err => {
+          console.error(err);
+          alert("Błąd przy pobieraniu szczegółów eventu.");
+        });
+    }
+  </script>
+</body>
+</html>

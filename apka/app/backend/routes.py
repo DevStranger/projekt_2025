@@ -1,10 +1,139 @@
-from flask import Blueprint, Flask, jsonify, render_template, current_app, request, send_from_directory
+from flask import Blueprint, Flask, jsonify, render_template, current_app, request, send_from_directory, session, redirect
+import requests
 from .calendar_integration import get_calendar_events
 import pygetwindow as gw
 from .recording import record_window, start_recording_thread, stop_recording, save_recording, setup_upload_folder
 import os
 from werkzeug.utils import secure_filename
 from .note import process_audio_and_save_transcription
+import base64
+from .teams_integration import get_teams_events
+
+
+from .zoom_integration import (
+    get_zoom_authorize_url,
+    exchange_code_for_token,
+    get_zoom_meetings,
+    get_personal_meeting_details,
+    get_zoom_participants
+)
+from .teams_integration import (
+    exchange_code_for_token,
+    get_teams_events,
+    get_teams_event_details
+)
+from .ms_calendar_integration import (
+    get_ms_calendar_authorize_url_ms,
+    exchange_code_for_token_ms,
+    get_ms_calendar_events_ms,
+    get_ms_calendar_event_details_ms
+)
+
+from .google_calendar_integration import (
+    get_google_authorize_url,
+    exchange_code_for_token2,
+    get_google_events,
+    get_google_event_details
+)
+
+from google.oauth2.credentials import Credentials
+import smtplib
+from email.mime.text import MIMEText
+from dotenv import load_dotenv
+
+load_dotenv()
+
+ZOOM_CLIENT_ID = os.getenv("ZOOM_CLIENT_ID")
+ZOOM_CLIENT_SECRET = os.getenv("ZOOM_CLIENT_SECRET")
+ZOOM_REDIRECT_URI = os.getenv("ZOOM_REDIRECT_URI")
+
+ZOOM_CLIENT_ID="FA1BsrIaTHyB5zmz2hukmg"
+ZOOM_CLIENT_SECRET="dpQeeLxZBAqFFaEpevt2WmAv1J81jtmJ"
+ZOOM_REDIRECT_URI="http://localhost:5000/zoom/callback"
+
+TEAMS_TENANT_ID="f8cdef31-a31e-4b4a-93e4-5f571e91255a"
+TEAMS_CLIENT_ID="3afebc81-6ecc-4b0c-921f-010ffcd0a5d4"
+TEAMS_CLIENT_SECRET="v4p8Q~mBxM93merPgRvkXzHp.7Vr~X.OkWNtQcm7"
+TEAMS_REDIRECT_URI="https://login.microsoftonline.com/common/oauth2/nativeclient"
+
+def send_batch_email(recipients, subject):
+    #do uzupelnienia
+    SMTP_SERVER = os.getenv("SMTP_SERVER")
+    SMTP_PORT = int(os.getenv("SMTP_PORT", "587"))
+    EMAIL_USERNAME = os.getenv("EMAIL_USERNAME")
+    EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")
+
+    body = "Treść wiadomości..."
+    msg = MIMEText(body, "plain", "utf-8")
+    msg["Subject"] = subject
+    msg["From"] = EMAIL_USERNAME
+    msg["To"] = ", ".join(recipients)
+
+    with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
+        server.starttls()
+        server.login(EMAIL_USERNAME, EMAIL_PASSWORD)
+        server.sendmail(EMAIL_USERNAME, recipients, msg.as_string())
+    server.connect(SMTP_SERVER, SMTP_PORT)
+    server.starttls()
+    server.login(EMAIL_USERNAME, EMAIL_PASSWORD)
+
+def get_zoom_authorize_url():
+    base_url = "https://zoom.us/oauth/authorize"
+    # Debug: sprawdź, co zostało wczytane
+    print("ZOOM_CLIENT_ID =", ZOOM_CLIENT_ID)
+    print("ZOOM_REDIRECT_URI =", ZOOM_REDIRECT_URI)
+    
+    return (
+        f"{base_url}"
+        f"?response_type=code"
+        f"&client_id={ZOOM_CLIENT_ID}"
+        f"&redirect_uri={ZOOM_REDIRECT_URI}"
+    )
+
+def exchange_code_for_token(code):
+    url_token = "https://zoom.us/oauth/token"
+    params = {
+        "grant_type": "authorization_code",
+        "code": code,
+        "redirect_uri": ZOOM_REDIRECT_URI,
+    }
+    creds = f"{ZOOM_CLIENT_ID}:{ZOOM_CLIENT_SECRET}"
+    b64_creds = base64.b64encode(creds.encode()).decode()
+    headers = {
+        "Authorization": f"Basic {b64_creds}"
+    }
+
+    print("DEBUG: Wysyłamy request do Zoom z parametrami:", params)
+    print("DEBUG: Authorization:", headers["Authorization"])
+
+    resp = requests.post(url_token, headers=headers, params=params)
+    data = resp.json()
+    print("DEBUG: Odpowiedź Zoom:", data['access_token'])
+
+    if "access_token" not in data:
+        raise Exception(f"Błąd wymiany code na token: {data['access_token']}")
+
+    return data['access_token']
+
+def get_teams_authorize_url():
+    """
+    Zwraca URL, na który przekierowujesz użytkownika,
+    by uzyskać authorization code. W Microsoft v2 endpoint:
+    https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize
+    """
+    base_url = f"https://login.microsoftonline.com/{TEAMS_TENANT_ID}/oauth2/v2.0/authorize"
+    scope = "Calendars.Read offline_access User.Read"  # minimalny zestaw do przykładu
+    # scope = "Calendars.ReadWrite offline_access User.Read" jeśli potrzebujesz więcej
+
+    return (
+        f"{base_url}"
+        f"?client_id={TEAMS_CLIENT_ID}"
+        f"&response_type=code"
+        f"&redirect_uri={TEAMS_REDIRECT_URI}"
+        f"&response_mode=query"
+        f"&scope={scope}"
+    )
+
 
 main = Blueprint('main', __name__, template_folder="../frontend/templates", static_folder="../frontend/static")
 
@@ -16,37 +145,12 @@ def index():
 def record():
     return render_template("record.html")
 
-@main.route('/events')
-def events():
-    try:
-        events = get_calendar_events()
-        return render_template('events.html', events=events)
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-
-
-@main.route("/ms-calendar")
-def ms_calendar():
-    try:
-        # Zastąp odpowiednimi wartościami
-        client_id = "your_client_id"
-        tenant_id = "your_tenant_id"
-        client_secret = "your_client_secret"
-        token = "access_token"
-
-        events = get_ms_calendar_events(client_id, tenant_id, client_secret, token)
-        return {"events": events}
-    except Exception as e:
-        return {"error": str(e)}, 400
-
-
 @main.route("/list_windows", methods=["GET"])
 def list_windows():
     """Zwróć listę okien."""
     windows = gw.getAllTitles()
     windows = [w for w in windows if w]
     return jsonify(windows)
-
 
 UPLOAD_FOLDER = os.path.join(os.getcwd(), 'recordings')
 ALLOWED_EXTENSIONS = {'webm', 'mp4', 'avi'}
@@ -159,6 +263,279 @@ def get_note(filename):
         return send_from_directory(docx_folder, filename + ".docx", as_attachment=True)  # Pobierz plik jako załącznik
     except FileNotFoundError:
         return "File not found", 404
+
+if __name__ == "__main__":
+    main.run(debug=True)
+
+
+@main.route("/my_events")
+def events_page():
+    return render_template("my_events.html")
+
+@main.route("/my_events2")
+def events_page2():
+    return render_template("my_events2.html")
+
+@main.route("/zoom-meetings")
+def zoom_meetings():
+    try:
+        access_token = session.get("zoom_access_token")
+        meetings = get_zoom_meetings(access_token)
+        return jsonify(meetings)  # np. [{topic, start_time, join_url}, ...]
+    except Exception as e:
+        print("Błąd w /zoom-events:", e)
+        return jsonify({"error": str(e)}), 400
+    
+@main.route("/zoom/login")
+def zoom_login():
+    # 1. Generujemy URL autoryzacji
+    auth_url = get_zoom_authorize_url()
+    # 2. Przekierowujemy usera do Zoom
+    return redirect(auth_url)
+
+@main.route("/zoom/callback")
+def zoom_callback():
+    # Zoom przekazuje "code" i "state" do tego endpointu
+    code = request.args.get("code")
+    print(code)
+    if not code:
+        return "Brak parametru 'code' w callbacku", 400
+
+    try:
+        token_data = exchange_code_for_token(code)
+
+        # token_data m.in. "access_token" i "refresh_token"
+        session["zoom_access_token"] = token_data
+        #zoom_token = token_data
+        # W realnej aplikacji lepiej trzymać refresh_token i odświeżać, gdy wygaśnie
+        return render_template("my_events.html")
+    except Exception as e:
+        return f"Błąd podczas wymiany code na token: {e}", 400
+
+@main.route("/zoom-events")
+def zoom_events():
+    # Tu pobieramy spotkania z Zoom dla zalogowanego usera
+    access_token = session.get("zoom_access_token")
+    if not access_token:
+        return jsonify({"error": "Brak access_token – zaloguj się przez /zoom/login"}), 401
+
+    try:
+        access_token = session.get("zoom_access_token")
+        meetings = get_zoom_meetings(access_token)
+        return jsonify(meetings)  # np. [{topic, start_time, join_url}, ...]
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
+@main.route("/zoom-personal-meeting")
+def zoom_personal_meeting():
+    access_token = session.get("zoom_access_token")
+    if not access_token:
+        return jsonify({"error": "Brak access_token – zaloguj się przez /zoom/login"}), 401
+
+    personal_meeting_id = request.args.get("pmid")
+    if not personal_meeting_id:
+        return jsonify({"error": "Podaj ?pmid=... w URL"}), 400
+
+    try:
+        meeting_data = get_personal_meeting_details(access_token, personal_meeting_id)
+        return jsonify(meeting_data)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
+@main.route("/send_invitations", methods=["POST"])
+def send_invitations():
+    data = request.json
+    recipients = data.get("recipients", [])
+    subject = data.get("subject", "Temat wiadomości")
+
+    if not recipients:
+        return jsonify({"error": "Brak odbiorców"}), 400
+
+    try:
+        send_batch_email(recipients, subject)  # Twoja funkcja SMTP
+        return jsonify({"message": "Wiadomości wysłane pomyślnie"})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@main.route("/zoom-meeting-participants")
+def zoom_meeting_participants():
+    access_token = session.get("zoom_access_token")
+    if not access_token:
+        return jsonify({"error": "Nie jesteś zalogowany w Zoom."}), 401
+
+    meeting_id = request.args.get("meetingId")
+    if not meeting_id:
+        return jsonify({"error": "Brak parametru meetingId"}), 400
+
+    try:
+        # Tu musisz mieć funkcję get_zoom_participants, np.
+        participants = get_zoom_participants(meeting_id, access_token)
+        return jsonify(participants)  # np. [{ "user_email": "...", "name": "..." }, ...]
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
+@main.route("/teams/login")
+def teams_login():
+    auth_url = get_teams_authorize_url()
+    return redirect(auth_url)
+
+@main.route("/teams/callback")
+def teams_callback():
+    code = request.args.get("code")
+    if not code:
+        return "Brak parametru 'code'", 400
+
+    try:
+        token_json = exchange_code_for_token(code)
+        # zapisz access_token do session
+        session["teams_access_token"] = token_json["access_token"]
+        return "Autoryzacja z Teams zakończona! Możesz pobrać swoje eventy."
+    except Exception as e:
+        return f"Błąd: {e}", 400
+
+@main.route("/teams-events")
+def teams_events():
+    access_token = session.get("teams_access_token")
+    if not access_token:
+        return jsonify({"error": "Niezalogowany w Teams"}), 401
+    try:
+        events = get_teams_events(access_token)
+        return jsonify(events)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
+@main.route("/teams-event-details")
+def teams_event_details_route():
+    access_token = session.get("teams_access_token")
+    if not access_token:
+        return jsonify({"error": "Niezalogowany w Teams"}), 401
+
+    event_id = request.args.get("eventId")
+    if not event_id:
+        return jsonify({"error": "Brak parametru eventId"}), 400
+
+    try:
+        event_details = get_teams_event_details(access_token, event_id)
+        return jsonify(event_details)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
+@main.route("/ms-calendar/login")
+def ms_calendar_login():
+    # Wygeneruj link do logowania
+    auth_url = get_ms_calendar_authorize_url_ms()
+    return redirect(auth_url)
+
+@main.route("/ms-calendar/callback")
+def ms_calendar_callback():
+    code = request.args.get("code")
+    if not code:
+        return "Brak parametru code w callbacku", 400
+    try:
+        token_json = exchange_code_for_token(code)
+        # zapisz access_token w sesji
+        session["ms_calendar_access_token"] = token_json["access_token"]
+        return "Zalogowano do MS Calendar! Teraz możesz pobrać wydarzenia."
+    except Exception as e:
+        return f"Błąd: {e}", 400
+
+@main.route("/ms-calendar/events")
+def ms_calendar_events():
+    # Pobiera listę wydarzeń
+    access_token = session.get("ms_calendar_access_token")
+    if not access_token:
+        return jsonify({"error": "Brak zalogowania do MS Calendar"}), 401
+    try:
+        events_list = get_ms_calendar_events_ms(access_token)
+        return jsonify(events_list)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
+@main.route("/ms-calendar/event-details")
+def ms_calendar_event_details_route():
+    # Pobiera szczegóły jednego wydarzenia
+    access_token = session.get("ms_calendar_access_token")
+    if not access_token:
+        return jsonify({"error": "Brak zalogowania do MS Calendar"}), 401
+
+    event_id = request.args.get("eventId")
+    if not event_id:
+        return jsonify({"error": "Brak parametru eventId"}), 400
+
+    try:
+        event_data = get_ms_calendar_event_details_ms(access_token, event_id)
+        return jsonify(event_data)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+    
+@main.route("/my_ms_calendar")
+def ms_calendar_page():
+    return render_template("my_ms_calendar.html")
+
+@main.route("/google-calendar/login")
+def google_calendar_login():
+    auth_url = get_google_authorize_url()
+    print("przystanek")
+    return redirect(auth_url)
+
+@main.route("/google-calendar/callback")
+def google_calendar_callback():
+    code = request.args.get("code")
+    print(code)
+    if not code:
+        return "Brak parametru 'code'", 400
+    try:
+        creds = exchange_code_for_token2(code)
+        # Zapisz w session. credentials można serializować do dict:
+        session["google_creds"] = {
+            "token": creds.token,
+            "refresh_token": creds.refresh_token,
+            "token_uri": creds.token_uri,
+            "client_id": creds.client_id,
+            "client_secret": creds.client_secret,
+            "scopes": creds.scopes
+        }
+        return render_template("my_google_calendar.html")
+    except Exception as e:
+        return f"Błąd: {e}", 400
+
+@main.route("/google-calendar/events")
+def google_calendar_events():
+    if "google_creds" not in session:
+        return jsonify({"error": "Niezalogowany w Google Calendar"}), 401
+    
+    # Odtworzenie obiektu Credentials:
+    creds_info = session["google_creds"]
+    creds = Credentials(**creds_info)
+
+    try:
+        events = get_google_events(creds)
+        return jsonify(events)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
+@main.route("/google-calendar/event-details")
+def google_calendar_event_details():
+    if "google_creds" not in session:
+        return jsonify({"error": "Niezalogowany w Google Calendar"}), 401
+
+    event_id = request.args.get("eventId")
+    if not event_id:
+        return jsonify({"error": "Brak parametru eventId"}), 400
+
+    # Odtworzenie obiektu Credentials
+    creds_info = session["google_creds"]
+    creds = Credentials(**creds_info)
+
+    try:
+        event = get_google_event_details(creds, event_id)
+        return jsonify(event)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+    
+@main.route("/my_google_calendar")
+def google_calendar_page():
+    return render_template("my_google_calendar.html")
 
 if __name__ == "__main__":
     main.run(debug=True)
