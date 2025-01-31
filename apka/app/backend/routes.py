@@ -51,9 +51,9 @@ ZOOM_CLIENT_ID="FA1BsrIaTHyB5zmz2hukmg"
 ZOOM_CLIENT_SECRET="dpQeeLxZBAqFFaEpevt2WmAv1J81jtmJ"
 ZOOM_REDIRECT_URI="http://localhost:5000/zoom/callback"
 
-TEAMS_TENANT_ID="f8cdef31-a31e-4b4a-93e4-5f571e91255a"
-TEAMS_CLIENT_ID="3afebc81-6ecc-4b0c-921f-010ffcd0a5d4"
-TEAMS_CLIENT_SECRET="v4p8Q~mBxM93merPgRvkXzHp.7Vr~X.OkWNtQcm7"
+TEAMS_TENANT_ID="40ad34a2-4df4-499f-a628-c865a29a7782"
+TEAMS_CLIENT_ID="4aa51599-98de-4a0a-8006-6939d24a18f4"
+TEAMS_CLIENT_SECRET="T5l8Q~_mmVp_.qHDlRkUKenBCELcceLYPFnDUcGF"
 TEAMS_REDIRECT_URI="https://login.microsoftonline.com/common/oauth2/nativeclient"
 
 def send_batch_email(recipients, subject):

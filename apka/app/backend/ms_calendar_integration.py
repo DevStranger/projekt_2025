@@ -11,9 +11,9 @@ CLIENT_ID = os.getenv("MS_CALENDAR_CLIENT_ID")
 CLIENT_SECRET = os.getenv("MS_CALENDAR_CLIENT_SECRET")
 REDIRECT_URI = os.getenv("MS_CALENDAR_REDIRECT_URI", "http://localhost:5000/ms-calendar/callback")
 
-TENANT_ID="f8cdef31-a31e-4b4a-93e4-5f571e91255a"
-CLIENT_ID="3afebc81-6ecc-4b0c-921f-010ffcd0a5d4"
-CLIENT_SECRET="v4p8Q~mBxM93merPgRvkXzHp.7Vr~X.OkWNtQcm7"
+TENANT_ID="40ad34a2-4df4-499f-a628-c865a29a7782"
+CLIENT_ID="4aa51599-98de-4a0a-8006-6939d24a18f4"
+CLIENT_SECRET="T5l8Q~_mmVp_.qHDlRkUKenBCELcceLYPFnDUcGF"
 REDIRECT_URI="https://login.microsoftonline.com/common/oauth2/nativeclient"
 
 def get_ms_calendar_authorize_url_ms():
