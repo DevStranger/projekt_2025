@@ -1,0 +1,111 @@
+<body>
+    <h1>Moje Wydarzenia</h1>
+    <button id="zoomLoginBtn">Zaloguj się przez Zoom</button>
+
+    <script>
+    document.getElementById("zoomLoginBtn").addEventListener("click", () => {
+    // Przekierowanie do /zoom/login
+    window.location.href = "/zoom/login";
+    });
+
+    document.getElementById("zoomEventsBtn").addEventListener("click", () => {
+    fetch("/zoom-events")
+        .then(res => res.json())
+        .then(data => {
+        console.log("Zoom meetings:", data);
+        // Możesz wyświetlić je w HTML
+        })
+        .catch(err => console.error(err));
+    });
+    </script>
+    <ul id="eventsList"></ul>
+  
+    <script src="{{ url_for('static', filename='events.js') }}"></script>
+
+    <button id="loadZoomMeetingsBtn">Załaduj spotkania</button>
+  <ul id="meetingsList"></ul>
+
+  <script>
+    const loadZoomMeetingsBtn = document.getElementById("loadZoomMeetingsBtn");
+    const meetingsList = document.getElementById("meetingsList");
+
+    // 1) Kliknięcie przycisku → pobiera listę spotkań z backendu
+    loadZoomMeetingsBtn.addEventListener("click", () => {
+      fetch("/zoom-meetings")
+        .then(res => res.json())
+        .then(data => {
+          meetingsList.innerHTML = "";
+          data.forEach(meeting => {
+            // Tworzymy li z opisem spotkania
+            const li = document.createElement("li");
+            li.textContent = `ID: ${meeting.id}, Temat: ${meeting.topic} `;
+
+            // Guzik: Pokaż uczestników
+            const showParticipantsBtn = document.createElement("button");
+            showParticipantsBtn.textContent = "Pokaż uczestników";
+            showParticipantsBtn.addEventListener("click", () => {
+              loadZoomParticipants(meeting.id);
+            });
+
+            li.appendChild(showParticipantsBtn);
+            meetingsList.appendChild(li);
+          });
+        })
+        .catch(err => console.error(err));
+    });
+
+    // 2) Funkcja do pobierania uczestników danego spotkania
+    function loadZoomParticipants(meetingId) {
+      fetch(`/zoom-meeting-participants?meetingId=${meetingId}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.error) {
+            alert("Błąd: " + data.error);
+            return;
+          }
+          // Jeśli brak uczestników
+          if (data.length === 0) {
+            alert("Brak zaproszonych uczestnikow");
+            return;
+          }
+
+          // Mamy uczestników (tablica np. [{ user_email: "...", ...}])
+          // Wyciągamy same adresy
+          const participantEmails = data.map(p => p.user_email);
+          alert("Uczestnicy: " + participantEmails.join(", "));
+
+          // Dodaj guzik wysyłania e-maili
+          const sendEmailBtn = document.createElement("button");
+          sendEmailBtn.textContent = "Wyślij e-mail do wszystkich";
+          sendEmailBtn.addEventListener("click", () => {
+            // Wywołaj endpoint z listą emaili i tematem
+            fetch("/send_invitations", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                recipients: participantEmails,
+                subject: "Temat wiadomosci"
+              })
+            })
+            .then(resp => resp.json())
+            .then(respData => {
+              if (respData.error) {
+                alert("Wystąpił błąd: " + respData.error);
+              } else {
+                alert("Wiadomości zostały wysłane!");
+              }
+            })
+            .catch(err => {
+              console.error(err);
+              alert("Błąd podczas wysyłania maili.");
+            });
+          });
+
+          // Dodaj guzik do strony (np. na dole body)
+          document.body.appendChild(sendEmailBtn);
+        })
+        .catch(err => console.error(err));
+    }
+  </script>
+</body>
+  

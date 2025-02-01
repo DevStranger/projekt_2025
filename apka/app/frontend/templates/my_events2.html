@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Wydarzenia Teams</title>
+</head>
+<body>
+  <h1>Moje Wydarzenia Teams</h1>
+  <button id="loginTeamsBtn">Zaloguj się w Teams</button>
+  <button id="loadTeamsEventsBtn">Załaduj wydarzenia</button>
+  <ul id="teamsList"></ul>
+
+  <script>
+    const loginTeamsBtn = document.getElementById("loginTeamsBtn");
+    const loadTeamsEventsBtn = document.getElementById("loadTeamsEventsBtn");
+    const teamsList = document.getElementById("teamsList");
+
+    // A) Przekieruj do /teams/login
+    loginTeamsBtn.addEventListener("click", () => {
+      window.location.href = "/teams/login";
+    });
+
+    // B) Po zalogowaniu w callbacku - user wróci na /teams/callback -> app zapisuje access_token do session
+    // C) Później klikamy "Załaduj wydarzenia"
+    loadTeamsEventsBtn.addEventListener("click", () => {
+      fetch("/teams-events")
+        .then(res => res.json())
+        .then(data => {
+          if (data.error) {
+            alert("Błąd: " + data.error);
+            return;
+          }
+          teamsList.innerHTML = "";
+          data.forEach(evt => {
+            // Każdy event to obiekt np. { id, subject, start, attendees, ... }
+            const li = document.createElement("li");
+            li.textContent = `ID: ${evt.id}, Temat: ${evt.subject}`;
+
+            // Guzik "Pokaż uczestników"
+            const showAttendeesBtn = document.createElement("button");
+            showAttendeesBtn.textContent = "Pokaż uczestników";
+            showAttendeesBtn.addEventListener("click", () => {
+              loadTeamsEventAttendees(evt.id);
+            });
+
+            li.appendChild(showAttendeesBtn);
+            teamsList.appendChild(li);
+          });
+        })
+        .catch(err => console.error(err));
+    });
+
+    // D) Pokaż uczestników (czyli pobierz szczegół eventu: /teams-event-details?eventId=xxx)
+    function loadTeamsEventAttendees(eventId) {
+      fetch(`/teams-event-details?eventId=${eventId}`)
+        .then(res => res.json())
+        .then(evtData => {
+          if (evtData.error) {
+            alert("Błąd: " + evtData.error);
+            return;
+          }
+          // evtData np. { subject: "...", attendees: [{ emailAddress: { address: "..." }}], ... }
+          const attendees = evtData.attendees || [];
+          if (attendees.length === 0) {
+            alert("Brak");
+            return;
+          }
+          // Wyciągamy listę emaili
+          const emails = attendees.map(a => a.emailAddress.address);
+          alert("Uczestnicy: " + emails.join(", "));
+
+          // Dodaj guzik do wysyłania maili
+          const sendEmailBtn = document.createElement("button");
+          sendEmailBtn.textContent = "Wyślij e-mail do wszystkich";
+          sendEmailBtn.addEventListener("click", () => {
+            fetch("/send_invitations", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                recipients: emails,
+                subject: "Temat wiadomosci"
+              })
+            })
+            .then(resp => resp.json())
+            .then(respData => {
+              if (respData.error) {
+                alert("Błąd: " + respData.error);
+              } else {
+                alert("Wiadomości wysłane!");
+              }
+            })
+            .catch(err => {
+              console.error(err);
+              alert("Błąd podczas wysyłania");
+            });
+          });
+
+          document.body.appendChild(sendEmailBtn);
+        })
+        .catch(err => console.error(err));
+    }
+  </script>
+</body>
+</html>

@@ -25,7 +25,6 @@ def save_transcription_to_docx(transcription, docx_path, screenshots_folder):
         for screenshot in sorted(os.listdir(screenshots_folder)):
             screenshot_path = os.path.join(screenshots_folder, screenshot)
             doc.add_picture(screenshot_path, width=Inches(5))
-            doc.add_paragraph(f"Zrzut ekranu: {os.path.basename(screenshot)}")
     else:
         doc.add_paragraph("Brak zrzutów ekranu.")
 
