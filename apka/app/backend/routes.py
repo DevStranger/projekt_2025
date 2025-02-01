@@ -2,19 +2,23 @@ from flask import Blueprint, Flask, jsonify, render_template, current_app, reque
 from .calendar_integration import get_calendar_events
 import pygetwindow as gw
 from .recording import record_window, start_recording_thread, stop_recording, save_recording, setup_upload_folder
+from .screenshot import extract_screenshots_from_video
 import os
 from werkzeug.utils import secure_filename
 from .note import process_audio_and_save_transcription
 
 main = Blueprint('main', __name__, template_folder="../frontend/templates", static_folder="../frontend/static")
 
+
 @main.route("/")
 def index():
     return render_template("index.html")
 
+
 @main.route("/record")
 def record():
     return render_template("record.html")
+
 
 @main.route('/events')
 def events():
@@ -49,7 +53,9 @@ def list_windows():
 
 
 UPLOAD_FOLDER = os.path.join(os.getcwd(), 'recordings')
+SCREENSHOT_FOLDER = os.path.join(UPLOAD_FOLDER, 'screenshots')
 ALLOWED_EXTENSIONS = {'webm', 'mp4', 'avi'}
+
 
 @main.route("/record/record_window", methods=["POST"])
 def record_window_route():
@@ -82,7 +88,17 @@ def save_recording_route():
     try:
         file = request.files['file']
         title = request.form.get('title', 'recording')
-        mp4_path = save_recording(file, title)
+        mp4_path, wav_path = save_recording(file, title)
+
+        screenshots_folder = os.path.join(SCREENSHOT_FOLDER, title)
+        os.makedirs(screenshots_folder, exist_ok=True)
+
+        extract_screenshots_from_video(mp4_path, screenshots_folder, fps=1 / 10)  # Jedna klatka co 10 sekund
+
+        docx_folder = os.path.join(UPLOAD_FOLDER, 'notes')
+        os.makedirs(docx_folder, exist_ok=True)
+        process_audio_and_save_transcription(UPLOAD_FOLDER, docx_folder, screenshots_folder)
+
         return render_template('index.html', message="Nagranie zapisane!", path=mp4_path)
     except ValueError as e:
         return jsonify({'error': str(e)}), 400
@@ -96,7 +112,7 @@ def save_recording_route():
 def show_recordings():
     setup_upload_folder()
     recordings = os.listdir(UPLOAD_FOLDER)
-    recordings = [f for f in recordings if f.endswith(('.mp4'))]  
+    recordings = [f for f in recordings if f.endswith(('.mp4'))]
     recordings = [os.path.splitext(file)[0] for file in recordings]
     return render_template('my_recordings.html', recordings=recordings)
 
@@ -104,13 +120,15 @@ def show_recordings():
 @main.route('/recordings/<filename>')
 def get_recording(filename):
     try:
-        return send_from_directory(UPLOAD_FOLDER, filename+".mp4")
+        return send_from_directory(UPLOAD_FOLDER, filename + ".mp4")
     except FileNotFoundError:
         return "File not found", 404
 
+
 @main.route('/my_notes')
 def show_notes():
-    docx_folder = os.path.join(os.getcwd(), 'recordings', 'notes')  # Upewnij się, że folder istnieje w 'recordings/notes'
+    docx_folder = os.path.join(os.getcwd(), 'recordings',
+                               'notes')  # Upewnij się, że folder istnieje w 'recordings/notes'
     if not os.path.exists(docx_folder):
         return render_template('my_notes.html', notes=[])
 
@@ -118,6 +136,7 @@ def show_notes():
     notes = [f for f in os.listdir(docx_folder) if f.endswith('.docx')]
     notes = [os.path.splitext(file)[0] for file in notes]
     return render_template('my_notes.html', notes=notes)
+
 
 @main.route('/debug/recordings')
 def debug_recordings():
@@ -143,14 +162,15 @@ def generate_notes():
         # Generowanie transkrypcji
         process_audio_and_save_transcription(wav_path, notes_folder)
 
-        return jsonify({'message': f"Transkrypcja wygenerowana dla {title}.wav!", 'path': os.path.join(notes_folder, f"{title}.docx")})
+        return jsonify({'message': f"Transkrypcja wygenerowana dla {title}.wav!",
+                        'path': os.path.join(notes_folder, f"{title}.docx")})
     except ValueError as e:
         return jsonify({'error': str(e)}), 400
     except RuntimeError as e:
         return jsonify({'error': str(e)}), 500
     except Exception as e:
         return jsonify({'error': 'Nieoczekiwany błąd.', 'details': str(e)}), 500
-    
+
 
 @main.route('/notes/<filename>')
 def get_note(filename):
@@ -159,6 +179,7 @@ def get_note(filename):
         return send_from_directory(docx_folder, filename + ".docx", as_attachment=True)  # Pobierz plik jako załącznik
     except FileNotFoundError:
         return "File not found", 404
+
 
 if __name__ == "__main__":
     main.run(debug=True)
