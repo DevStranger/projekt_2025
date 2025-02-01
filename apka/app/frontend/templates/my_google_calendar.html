@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Google Calendar Integration</title>
+</head>
+<body>
+  <h1>Wydarzenia z Google Calendar</h1>
+  <button id="loginGoogleBtn">Zaloguj się w Google</button>
+  <button id="loadEventsBtn">Załaduj wydarzenia</button>
+  <ul id="eventsList"></ul>
+
+  <script>
+    const loginGoogleBtn = document.getElementById("loginGoogleBtn");
+    const loadEventsBtn = document.getElementById("loadEventsBtn");
+    const eventsList = document.getElementById("eventsList");
+
+    // 1) Logowanie
+    loginGoogleBtn.addEventListener("click", () => {
+      window.location.href = "/google-calendar/login";
+    });
+
+    // 2) Załaduj wydarzenia
+    loadEventsBtn.addEventListener("click", () => {
+      fetch("/google-calendar/events")
+        .then(res => res.json())
+        .then(data => {
+          if (data.error) {
+            alert("Błąd: " + data.error);
+            return;
+          }
+          // data => tablica eventów
+          eventsList.innerHTML = "";
+          data.forEach(evt => {
+            // np. { id, summary, start, end, attendees, ... }
+            const li = document.createElement("li");
+            li.textContent = `ID: ${evt.id}, Tytuł: ${evt.summary}`;
+
+            // Guzik: szczegóły
+            const detailsBtn = document.createElement("button");
+            detailsBtn.textContent = "Pokaż szczegóły";
+            detailsBtn.addEventListener("click", () => {
+              loadEventDetails(evt.id);
+            });
+
+            li.appendChild(detailsBtn);
+            eventsList.appendChild(li);
+          });
+        })
+        .catch(err => console.error(err));
+    });
+
+    // 3) Szczegóły eventu (attendees, itp.)
+    function loadEventDetails(eventId) {
+      fetch(`/google-calendar/event-details?eventId=${eventId}`)
+        .then(res => res.json())
+        .then(evt => {
+          if (evt.error) {
+            alert("Błąd: " + evt.error);
+            return;
+          }
+          // evt może mieć .summary, .attendees, .start, .end, ...
+          const attendees = evt.attendees || [];
+          if (attendees.length === 0) {
+            alert("Brak zaproszonych uczestników");
+          } else {
+            // Wyciągamy adresy e-mail
+            const emails = attendees.map(a => a.email);
+            alert("Uczestnicy: " + emails.join(", "));
+
+            // --- DODAJEMY TU KOD DO WYSYŁANIA WIADOMOŚCI ---
+            // Tworzymy przycisk "Wyślij e-mail do wszystkich"
+            const sendEmailBtn = document.createElement("button");
+            sendEmailBtn.textContent = "Wyślij e-mail do wszystkich";
+
+            sendEmailBtn.addEventListener("click", () => {
+              // Wywołanie endpointu "/send_invitations"
+              fetch("/send_invitations", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  recipients: emails,       // lista e-maili z attendees
+                  subject: "Temat wiadomości" // stały temat, ewentualnie pobierany z inputa
+                })
+              })
+              .then(resp => resp.json())
+              .then(respData => {
+                if (respData.error) {
+                  alert("Błąd: " + respData.error);
+                } else {
+                  alert("Wiadomości wysłane pomyślnie!");
+                }
+              })
+              .catch(err => {
+                console.error("Błąd podczas wysyłania maili:", err);
+                alert("Błąd podczas wysyłania maili.");
+              });
+            });
+            
+            // Dodajemy przycisk do strony (np. na dole body albo w jakimś kontenerze)
+            document.body.appendChild(sendEmailBtn);
+          }
+        })
+        .catch(err => console.error(err));
+    }
+  </script>
+</body>
+</html>
