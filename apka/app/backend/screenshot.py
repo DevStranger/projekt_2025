@@ -53,7 +53,7 @@ def detect_presentation_area(image_path):
         print(f"Błąd podczas wykrywania obszaru prezentacji: {e}")
 
 
-def extract_screenshots_from_video(video_path, output_folder, fps=1):
+def extract_screenshots_from_video(video_path, output_folder, fps=10):
     """
     Generuje unikalne zrzuty ekranu z wideo w regularnych odstępach czasu.
     """
