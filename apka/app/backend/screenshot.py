@@ -14,8 +14,6 @@ def calculate_image_hash(image_path):
     return str(imagehash.average_hash(image))
 
 
-
-
 def is_duplicate_image(new_image_path, last_image_path):
     """
     Sprawdza, czy nowy obraz jest duplikatem ostatniego obrazu na podstawie hashy.

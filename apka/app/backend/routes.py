@@ -6,6 +6,7 @@ from .screenshot import extract_screenshots_from_video
 import os
 from werkzeug.utils import secure_filename
 from .note import process_audio_and_save_transcription
+from .summary import generate_summary
 
 main = Blueprint('main', __name__, template_folder="../frontend/templates", static_folder="../frontend/static")
 
@@ -171,6 +172,22 @@ def generate_notes():
     except Exception as e:
         return jsonify({'error': 'Nieoczekiwany błąd.', 'details': str(e)}), 500
 
+
+@main.route("/generate_summary", methods=["POST"])
+def generate_summary_route():
+    data = request.json
+    docx_path = data.get("docx_path")
+    summary_folder = os.path.join(os.getcwd(), 'summary')
+
+    if not docx_path or not os.path.exists(docx_path):
+        return jsonify({"error": "Brak pliku lub plik nie istnieje"}), 400
+
+    try:
+        generate_summary(docx_path, summary_folder)
+        return jsonify({"message": f"Podsumowanie zapisane w {summary_folder}"}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    
 
 @main.route('/notes/<filename>')
 def get_note(filename):
