@@ -22,8 +22,8 @@ body {
     box-shadow: 0 0 10px rgba(167, 17, 201, 0.204);
     overflow-y: auto; 
     position: relative;
-    top: 15%; 
-    right: 15%;
+    top: 20%; 
+    right: 14%;
     transform: translateY(-50%); 
 }
 
