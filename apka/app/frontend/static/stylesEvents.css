@@ -13,12 +13,18 @@ body {
 }
 
 .container {
-    background-color: rgba(139, 98, 149, 0.6);
+    width: 55%; 
+    height: 50vh;
     padding: 20px;
+    text-align: center;
+    background-color: rgba(139, 98, 149, 0.6);
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(167, 17, 201, 0.204);
-    width: 60%;
-    text-align: center;
+    overflow-y: auto; 
+    position: relative;
+    top: 15%; 
+    right: 15%;
+    transform: translateY(-50%); 
 }
 
 h1 {
