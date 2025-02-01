@@ -6,6 +6,7 @@ from .screenshot import extract_screenshots_from_video
 import os
 from werkzeug.utils import secure_filename
 from .note import process_audio_and_save_transcription
+from docx import Document
 
 main = Blueprint('main', __name__, template_folder="../frontend/templates", static_folder="../frontend/static")
 
@@ -179,6 +180,32 @@ def get_note(filename):
         return send_from_directory(docx_folder, filename + ".docx", as_attachment=True)  # Pobierz plik jako załącznik
     except FileNotFoundError:
         return "File not found", 404
+
+
+def search_in_docx(file_path, query):
+    try:
+        doc = Document(file_path)
+        for para in doc.paragraphs:
+            if query in para.text.lower():
+                return True
+    except Exception as e:
+        print(f"Error reading {file_path}: {e}")
+    return False
+
+@main.route('/search_docx')
+def search_docx():
+    query = request.args.get('query', '').lower()
+    matching_files = []
+
+    NOTES_DIR = os.path.join(os.getcwd(), 'recordings', 'notes')
+
+    for filename in os.listdir(NOTES_DIR):
+        if filename.endswith('.docx'):
+            file_path = os.path.join(NOTES_DIR, filename)
+            if search_in_docx(file_path, query):
+                print(f"Searching for match: match found in file: {filename}")
+                matching_files.append(filename)
+    return jsonify(matching_files)
 
 
 if __name__ == "__main__":

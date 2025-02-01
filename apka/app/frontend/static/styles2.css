@@ -160,3 +160,35 @@ body {
     background-color: darkred; 
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.8); 
 }
+
+#searchBox {
+       width: 80%;
+       padding: 10px;
+       margin: 10px 0;
+       border: 2px solid #ddd;
+       border-radius: 8px;
+       font-size: 16px;
+       outline: none;
+       transition: all 0.3s ease-in-out;
+}
+
+#searchBox:focus {
+       border-color: #007bff;
+       box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+}
+
+.search-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 15px;
+}
+
+#searchInside {
+        margin-top: 5px;
+}
+
+label {
+        font-size: 14px;
+        cursor: pointer;
+}
