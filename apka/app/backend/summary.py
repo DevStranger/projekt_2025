@@ -3,6 +3,7 @@ from docx import Document
 import os
 
 
+
 # Inicjalizacja modelu do podsumowywania
 summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
 
@@ -35,6 +36,15 @@ def generate_summary(docx_path, summary_docx_path):
 
         doc = Document(docx_path)
         full_text = "\n".join([para.text for para in doc.paragraphs])
+
+        start_marker = "Transkrypcja wykładu:"
+        end_marker = "Zrzuty ekranu:"
+
+        if start_marker in full_text:
+            full_text = full_text.split(start_marker, 1)[-1]  # Pobiera wszystko po "Transkrypcja wykładu:"
+
+        if end_marker in full_text:
+            full_text = full_text.split(end_marker, 1)[0]  # Usuwa wszystko po "Zrzuty ekranu:"
 
         if len(full_text.strip()) < 50:
             print(f"Plik {docx_path} zawiera za mało treści do podsumowania.")
@@ -84,9 +94,4 @@ def generate_summary(docx_path, summary_docx_path):
     except Exception as e:
         print(f"Błąd podczas generowania podsumowania dla {docx_path}: {e}")
 
-if __name__ == "__main__":
-    # Testowanie na jednym pliku
-    test_file = "C:\\Users\\ola_a\\Documents\\GitHub\\projekt_2025_once again\\apka\\app\\recordings\\notes\\2025-02-01_14-05-17.docx"
-    summary_output = "C:\\Users\\ola_a\\Documents\\GitHub\\projekt_2025_once again\\apka\\app\\recordings\\summary_2025-02-01_14-05-17.docx"
 
-    generate_summary(test_file, summary_output)

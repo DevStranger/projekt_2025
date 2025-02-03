@@ -4,7 +4,7 @@ from whisper import load_model
 import torchaudio
 from pydub import AudioSegment
 from docx.shared import Inches
-
+from .summary import generate_summary
 
 # Inicjalizacja modelu Whisper
 model = load_model("base") #ew "small"
@@ -65,6 +65,8 @@ def process_audio_and_save_transcription(audio_folder, docx_folder, screenshots_
             audio_file_path = os.path.join(audio_folder, filename)
 
             docx_filename = os.path.join(docx_folder, f"{os.path.splitext(filename)[0]}.docx")
+            summary_filename = os.path.join(docx_folder, f"summary_{os.path.splitext(filename)[0]}.docx")
+
             if os.path.exists(docx_filename):
                 print(f"Pominięto {filename}, transkrypcja już istnieje.")
                 continue  # Pomijamy przetwarzanie, jeśli plik istnieje
@@ -79,6 +81,7 @@ def process_audio_and_save_transcription(audio_folder, docx_folder, screenshots_
                 save_transcription_to_docx(transcription, docx_filename, screenshots_folder)
                 print(f"Zapisano transkrypcję do: {docx_filename}")
 
+                generate_summary(docx_filename, summary_filename)
             except Exception as e:
                 print(f"Błąd przy przetwarzaniu {filename}: {e}")
 
