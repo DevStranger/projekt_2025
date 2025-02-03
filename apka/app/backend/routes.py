@@ -490,7 +490,7 @@ def save_recording_route():
         screenshots_folder = os.path.join(SCREENSHOT_FOLDER, title)
         os.makedirs(screenshots_folder, exist_ok=True)
 
-        extract_screenshots_from_video(mp4_path, screenshots_folder, fps=1 / 10)  # Jedna klatka co 10 sekund
+        extract_screenshots_from_video(mp4_path, screenshots_folder, fps=1)
 
         docx_folder = os.path.join(UPLOAD_FOLDER, 'notes')
         os.makedirs(docx_folder, exist_ok=True)
@@ -578,11 +578,7 @@ def get_note(filename):
         return "File not found", 404
 
 
-@main.route("/my_events")
-def events_page():
-    return render_template("my_events.html")
-
-
+@main.route('/search_docx')
 def search_in_docx(file_path, query):
     try:
         doc = Document(file_path)
@@ -603,7 +599,7 @@ def search_in_docx(file_path, query):
         print(f"Error reading {file_path}: {e}")
     return False
 
-@main.route('/search_docx')
+
 def search_docx():
     query = request.args.get('query', '').lower()
     matching_files = []
@@ -619,6 +615,10 @@ def search_docx():
     return jsonify(matching_files)
 
 
+@main.route("/my_events")
+def events_page():
+    return render_template("my_events.html")
+
+
 if __name__ == "__main__":
     main.run(debug=True)
-
