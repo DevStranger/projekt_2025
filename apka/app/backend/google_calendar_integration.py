@@ -5,6 +5,9 @@ from dotenv import load_dotenv
 from google_auth_oauthlib.flow import Flow
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
+from datetime import datetime, timezone
+import pytz
+
 
 load_dotenv()
 
@@ -64,18 +67,28 @@ def exchange_code_for_token2(code):
 def get_google_events(credentials):
     """
     Pobiera listę wydarzeń z kalendarza.
-    Zwraca tablicę obiektów np. [ {summary, start, end, attendees, ...}, ... ]
+    Zwraca tablicę obiektów  [ {summary, start, end, attendees, ...}, ... ]
     """
     service = build("calendar", "v3", credentials=credentials)
+    now = datetime.now(timezone.utc).isoformat()
+
     # Wydarzenia z 'primary' kalendarza
     events_result = service.events().list(
         calendarId="primary",
         maxResults=10,
         singleEvents=True,
         orderBy="startTime",
-        timeMin="2025-01-01T00:00:00Z"   # example, usun lub param
+        timeMin=now   # example, usun lub param
     ).execute()
     events = events_result.get("items", [])
+    
+    for event in events:
+        start = event.get("start", {})
+        end = event.get("end", {})
+
+        event["start"] = format_event_datetime(start.get("dateTime") or start.get("date"))
+        event["end"] = format_event_datetime(end.get("dateTime") or end.get("date"))
+
     return events
 
 def get_google_event_details(credentials, event_id):
@@ -85,3 +98,17 @@ def get_google_event_details(credentials, event_id):
     service = build("calendar", "v3", credentials=credentials)
     event = service.events().get(calendarId="primary", eventId=event_id).execute()
     return event
+
+
+def format_event_datetime(dt_str):
+    """ Konwertuje datę z ISO 8601 na czytelny format DD.MM.YYYY, HH:MM """
+    if not dt_str:
+        return "Brak daty"
+    
+    try:
+        dt = datetime.fromisoformat(dt_str.replace("Z", "+00:00"))  # Obsługa UTC
+        dt = dt.astimezone(pytz.timezone("Europe/Warsaw"))  # Konwersja do PL
+        return dt.strftime("%d.%m.%Y, %H:%M")  # Format DD.MM.YYYY, HH:MM
+    except Exception as e:
+        print("Błąd konwersji daty:", e)
+        return dt_str  # Zwraca oryginalną wartość w razie błędu
