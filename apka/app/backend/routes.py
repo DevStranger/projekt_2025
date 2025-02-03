@@ -1,3 +1,4 @@
+from docx import Document
 from flask import Blueprint, Flask, jsonify, render_template, current_app, request, send_from_directory, session, redirect
 import requests
 from .calendar_integration import get_calendar_events
@@ -459,7 +460,7 @@ def save_recording_route():
         screenshots_folder = os.path.join(SCREENSHOT_FOLDER, title)
         os.makedirs(screenshots_folder, exist_ok=True)
 
-        extract_screenshots_from_video(mp4_path, screenshots_folder, fps=1 / 10)  # Jedna klatka co 10 sekund
+        extract_screenshots_from_video(mp4_path, screenshots_folder, fps=1)  
 
         docx_folder = os.path.join(UPLOAD_FOLDER, 'notes')
         os.makedirs(docx_folder, exist_ok=True)
@@ -542,6 +543,42 @@ def get_note(filename):
         return send_from_directory(docx_folder, filename + ".docx", as_attachment=True)  # Pobierz plik jako załącznik
     except FileNotFoundError:
         return "File not found", 404
+
+
+@main.route('/search_docx')
+def search_in_docx(file_path, query):
+    try:
+        doc = Document(file_path)
+        has_text = False  # Flag to check if the document contains any text
+
+        for para in doc.paragraphs:
+            if para.text.strip():  # Check if the paragraph has non-whitespace text
+                has_text = True
+                if query in para.text.lower():
+                    return True
+
+        # If no text was found in the document
+        if not has_text:
+            print(f"The file '{file_path}' is empty or contains only images.")
+            return False
+
+    except Exception as e:
+        print(f"Error reading {file_path}: {e}")
+    return False
+
+def search_docx():
+    query = request.args.get('query', '').lower()
+    matching_files = []
+
+    NOTES_DIR = os.path.join(os.getcwd(), 'recordings', 'notes')
+
+    for filename in os.listdir(NOTES_DIR):
+        if filename.endswith('.docx'):
+            file_path = os.path.join(NOTES_DIR, filename)
+            if search_in_docx(file_path, query):
+                print(f"Searching for match: match found in file: {filename}")
+                matching_files.append(filename)
+    return jsonify(matching_files)
 
 
 @main.route("/my_events")

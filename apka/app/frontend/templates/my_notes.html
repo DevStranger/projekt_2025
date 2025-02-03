@@ -6,8 +6,48 @@
     <title>Moje Notatki</title>
     <link rel="icon" type="image/x-icon" href="static/logoo.png">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles2.css') }}">
+    <script>
+        function searchNotes() {
+        let input = document.getElementById('searchBox').value.toLowerCase();
+        let searchInside = document.getElementById('searchInside').checked;
+        let notes = document.getElementsByClassName('note-item');
+
+        console.log("Searching for:", input);
+        console.log("Search inside files:", searchInside);
+
+        // First, filter by filename
+        for (let note of notes) {
+            let text = note.textContent.toLowerCase();
+            note.style.display = text.includes(input) ? '' : 'none';
+        }
+
+        // If "Search inside files" is checked, fetch matching files from the server
+        if (searchInside && input) {
+            fetch(`/search_docx?query=${encodeURIComponent(input)}`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Matching files from server:", data);
+                    let matchingNotes = new Set(data);
+                    for (let note of notes) {
+                        let filename = note.textContent.trim() + '.docx'; // Add .docx extension
+                        console.log("Note filename:", filename);
+                        console.log("Matching filenames:", Array.from(matchingNotes));
+                        note.style.display = matchingNotes.has(filename) ? '' : 'none';
+                    }
+                })
+                .catch(error => {
+                    console.error("Error fetching matching files:", error);
+                });
+        }
+    }
+    </script>
 </head>
 <body>
+    <!-- Przyciski i linki w prawym górnym rogu -->
+    <div class="top-nav">
+        <a href="/" class="back-to-home">Powrót do strony głównej</a>
+    </div><!DOCTYPE html>
+
     <!-- Przyciski i linki w prawym górnym rogu -->
     <div class="top-nav">
         <a href="/" class="back-to-home">Powrót do strony głównej</a>
@@ -15,14 +55,19 @@
 
     <div class="container">
         <h1>Moje Notatki</h1>
+        <div class="search-container">
+            <input type="text" id="searchBox" onkeyup="searchNotes()" placeholder="Wyszukaj notatkę...">
+            <label>
+                <input type="checkbox" id="searchInside" onchange="searchNotes()"> Szukaj w treści notatek
+            </label>
+        </div>
         <ul class="notes-list">
             {% for note in notes %}
-            <li>
+            <li class="note-item">
                 <a href="{{ url_for('main.get_note', filename=note) }}" download>{{ note }}</a>
             </li>
             {% endfor %}
         </ul>
     </div>
-
 </body>
 </html>
