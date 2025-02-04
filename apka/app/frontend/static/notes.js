@@ -32,3 +32,4 @@ function loadNotes() {
 }
 
 document.addEventListener('DOMContentLoaded', loadNotes);
+

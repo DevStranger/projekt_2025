@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoteWriter</title>
+    <link rel="icon" type="image/x-icon" href="static/logoo.png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesEvents.css') }}">
+</head>
+<body>
+  <div class="top-nav">
+    <a href="/" class="back-to-home">Back to Home</a>
+</div>
+  <div class="container">
+    <h1>Wydarzenia w MS Calendar</h1>
+    <button id="loginMsBtn" class="btn">🔑 Zaloguj się do MS Calendar</button>
+    <button id="loadEventsBtn" class="btn">📅 Załaduj wydarzenia</button>
+    <ul id="eventsList" class="events-container"></ul>
+  </div>
+
+  <script>
+    const loginMsBtn = document.getElementById("loginMsBtn");
+    const loadEventsBtn = document.getElementById("loadEventsBtn");
+    const eventsList = document.getElementById("eventsList");
+
+    loginMsBtn.addEventListener("click", () => {
+      window.location.href = "/ms-calendar/login";
+    });
+
+    loadEventsBtn.addEventListener("click", () => {
+      fetch("/ms-calendar/events")
+        .then(res => res.json())
+        .then(data => {
+          if (data.error) {
+            alert("Błąd: " + data.error);
+            return;
+          }
+          eventsList.innerHTML = "";
+          data.forEach(evt => {
+            const li = document.createElement("li");
+            li.classList.add("event-item");
+            li.textContent = `ID: ${evt.id} | Tytuł: ${evt.subject}`;
+
+            const detailsBtn = document.createElement("button");
+            detailsBtn.textContent = "📌 Pokaż szczegóły";
+            detailsBtn.classList.add("btn", "btn-secondary");
+            detailsBtn.addEventListener("click", () => {
+              loadEventDetails(evt.id);
+            });
+
+            li.appendChild(detailsBtn);
+            eventsList.appendChild(li);
+          });
+        })
+        .catch(err => {
+          console.error(err);
+          alert("Błąd przy pobieraniu wydarzeń.");
+        });
+    });
+
+    function loadEventDetails(eventId) {
+      fetch(`/ms-calendar/event-details?eventId=${eventId}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.error) {
+            alert("Błąd: " + data.error);
+            return;
+          }
+          const attendees = data.attendees || [];
+          if (attendees.length === 0) {
+            alert("Brak uczestników");
+          } else {
+            const emails = attendees.map(a => a.emailAddress.address);
+            alert("Uczestnicy: " + emails.join(", "));
+          }
+        })
+        .catch(err => {
+          console.error(err);
+          alert("Błąd przy pobieraniu szczegółów eventu.");
+        });
+    }
+  </script>
+</body>
+</html>
