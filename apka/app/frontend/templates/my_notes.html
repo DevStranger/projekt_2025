@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moje Notatki</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles_do_my_notes.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='logoo.png') }}">
+    <script src="{{ url_for('static', filename='my_notes.js') }}"></script>
+
+</head>
+<body>
+    <div class="top-nav">
+        <a href="/" class="back-to-home">Back to Home</a>
+    </div>
+
+    <div class="main-container">
+        <!-- Sekcja Notatek -->
+        <div class="notes-section">
+            <h1>Moje Notatki</h1>
+
+            <div class="search-container">
+                <input type="text" id="noteSearchBox" onkeyup="searchItems('note')" placeholder="Wyszukaj notatkę...">
+                <div class="search-checkbox">
+                    <input type="checkbox" id="searchInContent" onchange="searchItems('note')">
+                    <label for="searchInContent">Szukaj w treści notatek</label>
+                </div>
+            </div>
+            
+
+            <div class="scrollable-list">
+                <ul class="notes-list">
+                    {% for note in notes %}
+                    <li class="list-item">
+                        <span><a href="{{ url_for('main.get_note', filename=note) }}" target="_blank">{{ note }}</a></span>
+                        <input type="radio" value="{{ note }}" name="note_checkbox">
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <!-- Sekcja E-maili -->
+        <div class="email-panel">
+            <h1>Zarządzaj e-mailami</h1>
+
+            <div class="email-actions">
+                <input type="email" id="newEmail" placeholder="Dodaj nowy adres e-mail">
+                <button class="add-email-button" onclick="addEmail()">Dodaj e-mail</button>
+            </div>
+
+            <div class="search-container">
+                <input type="text" id="emailSearchBox" onkeyup="searchItems('email')" placeholder="Wyszukaj e-mail...">
+            </div>
+
+            <div class="scrollable-list">
+                <ul class="email-list">
+                    {% for email in emails %}
+                    <li class="list-item">
+                        <span>{{ email.email }}</span>
+                        <input type="checkbox" value="{{ email.email }}" name="email_checkbox">
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <button id="deleteEmails" onclick="deleteItems('email')">Usuń</button>
+        </div>
+    </div>
+
+    <div class="send-container">
+        <button id="sendButton" onclick="sendSelected()">Wyślij</button>
+    </div>
+</body>
+</html>
