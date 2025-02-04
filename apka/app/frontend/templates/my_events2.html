@@ -2,14 +2,23 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Wydarzenia Teams</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NoteWriter</title>
+  <link rel="icon" type="image/x-icon" href="static/logoo.png">
+  <link rel="stylesheet" href="{{ url_for('static', filename='stylesEvents.css') }}">
 </head>
 <body>
-  <h1>Moje Wydarzenia Teams</h1>
-  <button id="loginTeamsBtn">Zaloguj się w Teams</button>
-  <button id="loadTeamsEventsBtn">Załaduj wydarzenia</button>
-  <ul id="teamsList"></ul>
-
+  <div class="top-nav">
+    <a href="/" class="back-to-home">Back to Home</a>
+  </div>
+  <div class="container">
+    <h1>Twoje wydarzenia Teams</h1>
+    <button id="loginTeamsBtn" class="btn">🔑 Zaloguj się w Teams</button>
+    <button id="loadTeamsEventsBtn" class="btn">📅 Załaduj wydarzenia</button>
+    <div class="events-list">
+        <ul id="teamsList"></ul>
+    </div>
+  </div>
   <script>
     const loginTeamsBtn = document.getElementById("loginTeamsBtn");
     const loadTeamsEventsBtn = document.getElementById("loadTeamsEventsBtn");
@@ -36,7 +45,6 @@
             const li = document.createElement("li");
             li.textContent = `ID: ${evt.id}, Temat: ${evt.subject}`;
 
-            // Guzik "Pokaż uczestników"
             const showAttendeesBtn = document.createElement("button");
             showAttendeesBtn.textContent = "Pokaż uczestników";
             showAttendeesBtn.addEventListener("click", () => {
