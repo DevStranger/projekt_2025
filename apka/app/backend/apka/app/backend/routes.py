@@ -51,12 +51,11 @@ from dotenv import find_dotenv
 print("Ścieżka do pliku .env:", find_dotenv())
 
 
-# Odczyt zmiennych środowiskowych
 ZOOM_CLIENT_ID = os.getenv("ZOOM_CLIENT_ID")
 ZOOM_CLIENT_SECRET = os.getenv("ZOOM_CLIENT_SECRET")
 ZOOM_REDIRECT_URI = os.getenv("ZOOM_REDIRECT_URI")
 
-# Nadpisanie (jeśli potrzebne w środowisku testowym)
+# Nadpisanie do testów
 ZOOM_CLIENT_ID = "FA1BsrIaTHyB5zmz2hukmg"
 ZOOM_CLIENT_SECRET = "dpQeeLxZBAqFFaEpevt2WmAv1J81jtmJ"
 ZOOM_REDIRECT_URI = "http://localhost:5000/zoom/callback"
@@ -77,17 +76,13 @@ os.makedirs(NOTES_FOLDER, exist_ok=True)
 main = Blueprint('main', __name__, template_folder="../frontend/templates", static_folder="../frontend/static")
 
 
-# --------------------------------------------------------------------------------
 # STRONA GŁÓWNA
-# --------------------------------------------------------------------------------
 @main.route("/")
 def index():
     return render_template("index.html")
 
 
-# --------------------------------------------------------------------------------
 # ZOOM INTEGRATION
-# --------------------------------------------------------------------------------
 def get_zoom_authorize_url():
     base_url = "https://zoom.us/oauth/authorize"
     print("ZOOM_CLIENT_ID =", ZOOM_CLIENT_ID)
@@ -206,9 +201,7 @@ def zoom_meeting_participants():
         return jsonify({"error": str(e)}), 400
 
 
-# --------------------------------------------------------------------------------
 # TEAMS INTEGRATION
-# --------------------------------------------------------------------------------
 def get_teams_authorize_url():
     base_url = f"https://login.microsoftonline.com/{TEAMS_TENANT_ID}/oauth2/v2.0/authorize"
     scope = "Calendars.Read offline_access User.Read"
@@ -268,9 +261,7 @@ def teams_event_details_route():
         return jsonify({"error": str(e)}), 400
 
 
-# --------------------------------------------------------------------------------
 # MS CALENDAR INTEGRATION
-# --------------------------------------------------------------------------------
 @main.route("/ms-calendar/login")
 def ms_calendar_login():
     auth_url = get_ms_calendar_authorize_url_ms()
@@ -319,10 +310,7 @@ def ms_calendar_event_details_route():
 def ms_calendar_page():
     return render_template("my_ms_calendar.html")
 
-
-# --------------------------------------------------------------------------------
 # GOOGLE CALENDAR INTEGRATION
-# --------------------------------------------------------------------------------
 @main.route("/google-calendar/login")
 def google_calendar_login():
     auth_url = get_google_authorize_url()
@@ -387,9 +375,7 @@ def google_calendar_page():
     return render_template("my_google_calendar.html")
 
 
-# --------------------------------------------------------------------------------
 # OBSŁUGA NAGRYWANIA
-# --------------------------------------------------------------------------------
 @main.route("/record")
 def record():
     return render_template("record.html")
@@ -466,9 +452,7 @@ def get_recording(filename):
         return "File not found", 404
 
 
-# --------------------------------------------------------------------------------
 # OBSŁUGA NOTATEK
-# --------------------------------------------------------------------------------
 @main.route('/generate_notes', methods=['POST'])
 def generate_notes():
     """Generuj transkrypcję notatek na podstawie istniejącego pliku .wav."""
@@ -500,9 +484,7 @@ def generate_notes():
         return jsonify({'error': 'Nieoczekiwany błąd.', 'details': str(e)}), 500
 
 
-# --------------------------------------------------------------------------------
-# WYSZUKIWANIE W NOTATKACH (opcjonalnie, jeżeli potrzebne)
-# --------------------------------------------------------------------------------
+# WYSZUKIWANIE W NOTATKACH
 def search_in_docx(file_path, query):
     """Sprawdza, czy dany plik .docx zawiera tekst pasujący do zapytania."""
     try:
@@ -531,9 +513,7 @@ def search_docx():
     return jsonify(matching_files)
 
 
-# --------------------------------------------------------------------------------
-# OBSŁUGA WYŚWIETLANIA WYDARZEŃ (FRONTEND)
-# --------------------------------------------------------------------------------
+# OBSŁUGA WYŚWIETLANIA WYDARZEŃ
 @main.route("/my_events")
 def events_page():
     return render_template("my_events.html")
@@ -543,9 +523,7 @@ def events_page2():
 
 
 
-# --------------------------------------------------------------------------------
-# OBSŁUGA E-MAILI I NOTATEK (Twoje zmiany)
-# --------------------------------------------------------------------------------
+# OBSŁUGA E-MAILI I NOTATEK
 @main.route("/my_notes")
 def show_notes():
     """
@@ -558,7 +536,6 @@ def show_notes():
     notes = [f for f in os.listdir(NOTES_FOLDER) if f.endswith('.docx')]
     notes = [os.path.splitext(file)[0] for file in notes]
 
-    # Pobieramy wszystkie adresy e-mail z bazy
     all_emails = Email.query.all()
     return render_template('my_notes.html', notes=notes, emails=all_emails)
 
@@ -593,7 +570,7 @@ def delete_email():
     """
     try:
         data = request.get_json()
-        email_addresses = data.get("emails", [])  # Pobranie listy e-maili do usunięcia
+        email_addresses = data.get("emails", [])  
 
         if not email_addresses:
             return jsonify({"error": "Nie wybrano żadnych e-maili do usunięcia."}), 400
@@ -603,7 +580,7 @@ def delete_email():
             if email_obj:
                 db.session.delete(email_obj)
             else:
-                print(f"E-mail {email} nie znaleziony w bazie.")  # Debug
+                print(f"E-mail {email} nie znaleziony w bazie.") 
 
         db.session.commit()
         return jsonify({"message": "E-maile zostały usunięte."}), 200
@@ -629,41 +606,33 @@ def send_notes():
     invalid_emails = [email for email in emails if not is_valid_email(email)]
     if invalid_emails:
         return jsonify({'error': f'Nieprawidłowe adresy e-mail: {invalid_emails}'}), 400
-    # Pobierz konfigurację SMTP z pliku .env
     smtp_server = os.getenv('SMTP_SERVER')
     smtp_port = os.getenv('SMTP_PORT')
     email_username = os.getenv('EMAIL_USERNAME')
     email_password = os.getenv('EMAIL_PASSWORD')
 
-    # Debugowanie konfiguracji SMTP
     print("SMTP_SERVER:", smtp_server)
     print("SMTP_PORT:", smtp_port)
     print("EMAIL_USERNAME:", email_username)
 
-    # Walidacja konfiguracji SMTP
     if not smtp_server or not smtp_port or not email_username or not email_password:
         return jsonify({'error': 'Brakuje konfiguracji SMTP w pliku .env'}), 500
 
     try:
-        smtp_port = int(smtp_port)  # Upewnij się, że port jest liczbą całkowitą
-
-        # Połączenie z serwerem SMTP
+        smtp_port = int(smtp_port)  
         with smtplib.SMTP(smtp_server, smtp_port) as server:
             server.starttls()  # Uruchom TLS
-            server.login(email_username, email_password)  # Zaloguj się na konto e-mail
+            server.login(email_username, email_password) 
 
             for email in emails:
-                # Przygotowanie wiadomości e-mail
                 msg = MIMEMultipart()
                 msg['From'] = email_username
                 msg['To'] = email
                 msg['Subject'] = "Wybrane notatki"
 
-                # Treść e-maila
                 body = "Załączam wybrane notatki jako pliki."
                 msg.attach(MIMEText(body, 'plain'))
 
-                # Dodawanie załączników
                 for note in notes:
                     file_path = os.path.join(NOTES_FOLDER, f"{note}.docx")
                     if os.path.exists(file_path):
@@ -674,7 +643,6 @@ def send_notes():
                     else:
                         print(f"Plik {file_path} nie istnieje i nie zostanie dołączony.")
 
-                # Wysłanie wiadomości
                 server.sendmail(email_username, email, msg.as_string())
 
         return jsonify({'message': 'Notatki wysłane pomyślnie!'}), 200
@@ -707,7 +675,7 @@ def send_invitations():
         return jsonify({"error": "Nie podano odbiorców"}), 400
 
     try:
-        # Przykładowa konfiguracja SMTP
+        # serwer smtp
         smtp_server = os.getenv('SMTP_SERVER')
         smtp_port = int(os.getenv('SMTP_PORT', 587))
         email_username = os.getenv('EMAIL_USERNAME')
@@ -715,14 +683,11 @@ def send_invitations():
 
         if not smtp_server or not email_username or not email_password:
             return jsonify({"error": "Brakuje konfiguracji SMTP w .env"}), 500
-
-        # Połączenie z serwerem SMTP
         with smtplib.SMTP(smtp_server, smtp_port) as server:
             server.starttls()
             server.login(email_username, email_password)
 
             for recipient in recipients:
-                # Przygotowanie wiadomości
                 message = f"Subject: {subject}\n\nZapraszamy na wydarzenie!"
                 server.sendmail(email_username, recipient, message)
 
@@ -730,10 +695,7 @@ def send_invitations():
     except Exception as e:
         return jsonify({"error": f"Błąd podczas wysyłania: {str(e)}"}), 500
 
-
-# --------------------------------------------------------------------------------
 # Debug / test
-# --------------------------------------------------------------------------------
 @main.route('/debug/recordings')
 def debug_recordings():
     return str(os.listdir(UPLOAD_FOLDER))
