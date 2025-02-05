@@ -50,11 +50,11 @@ Aby zapewnić bezpieczeństwo aplikacji i danych użytkowników, stosujemy nast�
 Jeśli masz pytania dotyczące polityki bezpieczeństwa, skontaktuj się z nami:
 
 📧 **majachlipala@student.agh.edu.pl**  
-🌐 **[Maja Chlipała via UPEL](upel.agh.edu.pl)**  
+🌐 **[Maja Chlipała via UPEL](https://upel.agh.edu.pl/my/)**  
 
 Pytania dotyczące przekazywania notatek po spotkaniach drogą mailową proszę kierować do:
 
 📧 **jfurtak03@gmail.com**  
-🌐 **[Joanna Furtak via UPEL](upel.agh.edu.pl)** 
+🌐 **[Joanna Furtak via UPEL](https://upel.agh.edu.pl/my/)** 
 
 Dziękujemy za dbanie o bezpieczeństwo naszej aplikacji! 🚀
