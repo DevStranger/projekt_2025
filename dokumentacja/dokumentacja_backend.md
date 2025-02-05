@@ -1,10 +1,10 @@
 # Dokumentacja Backendu
 
-**Wersja:** 2.0
+**Wersja:** 3.0
 
-**Data utworzenia:** 25.I.2025
+**Data utworzenia:** 2025-01-25 T09:37:24Z
 
-**Data ostatniej aktualizacji:** 05.II.2025
+**Data ostatniej aktualizacji:** 2025-02-05 T19:33:17Z
 
 ## Zastosowane technologie
 
@@ -253,3 +253,9 @@ Aplikacja zapewnia walidację plików przesyłanych przez użytkownika. Akceptow
 ### Ochrona danych wrażliwych
 W celu ochrony danych wrażliwych, aplikacja stosuje odpowiednie mechanizmy autoryzacji oraz kontroluje dostęp do zasobów. Na przykład:
    - Generowanie notatek jest możliwe tylko na podstawie przesłanych plików audio, zapewniając, że dostęp do transkrypcji i danych mają tylko uprawnieni użytkownicy
+
+## Autorzy i kontakt
+- Aleksandra Adamiak (aadamiak@student.agh.edu.pl)
+- Maja Chlipała (majachlipala@student.agh.edu.pl)
+- Joanna Furtak (joannafurtak@student.agh.edu.pl)
+- Julia Mikrut (mikrut@student.agh.edu.pl)
