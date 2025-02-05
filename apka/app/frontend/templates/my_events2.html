@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NoteWriter</title>
+  <link rel="icon" type="image/x-icon" href="static/logoo.png">
+  <link rel="stylesheet" href="{{ url_for('static', filename='stylesEvents.css') }}">
+</head>
+<body>
+  <div class="top-nav">
+    <a href="/" class="back-to-home">Powrót do strony głównej</a>
+  </div>
+
+  <div class="container">
+    <h1>Twoje wydarzenia Teams</h1>
+    <button id="loginTeamsBtn" class="btn">🔑 Zaloguj się w Teams</button>
+    <button id="loadTeamsEventsBtn" class="btn">📅 Załaduj wydarzenia</button>
+
+    <div class="events-list">
+      <ul id="teamsList"></ul>
+    </div>
+  </div>
+
+  <script>
+    const loginTeamsBtn = document.getElementById("loginTeamsBtn");
+    const loadTeamsEventsBtn = document.getElementById("loadTeamsEventsBtn");
+    const teamsList = document.getElementById("teamsList");
+
+    loginTeamsBtn.addEventListener("click", () => {
+      window.location.href = "/teams/login";
+    });
+
+    loadTeamsEventsBtn.addEventListener("click", () => {
+      fetch("/teams-events")
+        .then(res => res.json())
+        .then(data => {
+          if (data.error) {
+            alert("Błąd: " + data.error);
+            return;
+          }
+
+          teamsList.innerHTML = "";
+
+          if (!data.length) {
+            const li = document.createElement("li");
+            li.textContent = "Brak wydarzeń do wyświetlenia";
+            teamsList.appendChild(li);
+            return; 
+          }
+
+          data.forEach(evt => {
+            const li = document.createElement("li");
+
+            let startTime = evt.start && evt.start.dateTime 
+                            ? evt.start.dateTime
+                            : "Brak daty";
+
+            li.innerHTML = `<strong>${evt.subject}</strong> <br> ⏰ ${startTime}`;
+
+            const detailsBtn = document.createElement("button");
+            detailsBtn.textContent = "📌 Szczegóły";
+            detailsBtn.classList.add("details-btn");
+            detailsBtn.addEventListener("click", () => {
+              loadTeamsEventAttendees(evt.id);
+            });
+            li.appendChild(detailsBtn);
+
+            teamsList.appendChild(li);
+          });
+        })
+        .catch(err => {
+          console.error(err);
+          alert("Wystąpił błąd podczas pobierania wydarzeń.");
+        });
+    });
+
+    // C) Szczegóły uczestników
+    function loadTeamsEventAttendees(eventId) {
+      fetch(`/teams-event-details?eventId=${eventId}`)
+        .then(res => res.json())
+        .then(evtData => {
+          if (evtData.error) {
+            alert("Błąd: " + evtData.error);
+            return;
+          }
+          const attendees = evtData.attendees || [];
+          if (!attendees.length) {
+            alert("Brak zaproszonych uczestników");
+          } else {
+            const emails = attendees.map(a => a.emailAddress.address);
+            alert("Uczestnicy: " + emails.join(", "));
+
+            const sendEmailBtn = document.createElement("button");
+            sendEmailBtn.textContent = "📩 Wyślij e-mail do wszystkich";
+            sendEmailBtn.classList.add("send-email-btn");
+            sendEmailBtn.addEventListener("click", () => {
+              fetch("/send_invitations", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  recipients: emails,
+                  subject: "Zaproszenie na wydarzenie Teams"
+                })
+              })
+                .then(resp => resp.json())
+                .then(respData => {
+                  if (respData.error) {
+                    alert("Błąd: " + respData.error);
+                  } else {
+                    alert("Wiadomości wysłane pomyślnie!");
+                  }
+                })
+                .catch(mailErr => {
+                  console.error("Błąd podczas wysyłania maili:", mailErr);
+                  alert("Błąd podczas wysyłania maili.");
+                });
+            });
+
+            document.body.appendChild(sendEmailBtn);
+          }
+        })
+        .catch(err => {
+          console.error(err);
+          alert("Wystąpił błąd podczas pobierania szczegółów wydarzenia.");
+        });
+    }
+  </script>
+</body>
+</html>
