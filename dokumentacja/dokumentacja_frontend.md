@@ -1,8 +1,10 @@
 # Dokumentacja Frontendu
 
-**Wersja:** 1.0
+**Wersja:** 2.0
 
 **Data utworzenia:** 25.I.2025
+
+**Data ostatniej aktualizacji:** 05.02.2025
 
 ## Zastosowane technologie
 
@@ -61,6 +63,10 @@ Folder zawierający zasoby statyczne, takie jak obrazy, pliki CSS i JavaScript, 
 Folder zawierający pliki HTML, które są renderowane przez backend aplikacji:
 
 - `events.html` – strona z listą nadchodzących wydarzeń
+- `my_events.html` -  dedykowana strona z integracją Zoom (pokazuje spotkania, umożliwia logowanie i pobieranie listy spotkań, dodatkowo umożliwia pobieranie uczestników i wysyłkę e-maili)
+- `my_events2.html` - strona z wydarzeniami Teams, umożliwiająca logowanie do Teams, pobieranie wydarzeń oraz wyświetlanie szczegółów
+- `my_google_calendar.html` - strona dedykowana wydarzeniom z Google Calendar, umożliwiająca logowanie oraz pobieranie wydarzeń z kalendarza
+- `my_ms_calendar.html` - strona prezentująca wydarzenia z MS Calendar, gdzie użytkownik może zalogować się, pobrać wydarzenia oraz sprawdzić szczegóły
 - `index.html` – strona główna aplikacji
 - `my_notes.html` – strona z listą notatek użytkownika
 - `my_recordings.html` – strona z listą nagrań użytkownika
@@ -83,6 +89,46 @@ Strona wyświetlająca nadchodzące wydarzenia, które są pobierane z backendu 
 **Opis funkcji:**
 - lista wydarzeń z datą i tytułem
 - jeśli brak jest wydarzeń, wyświetlana jest odpowiednia informacja
+
+---
+
+### `my_events.html`
+Strona dedykowana integracji z Zoom
+
+**Opis funkcji:**
+- umożliwia logowanie do Zooma poprzez przycisk `„Zaloguj się przez Zoom”`
+- po zalogowaniu użytkownik może załadować listę spotkań klikając przycisk `„Załaduj spotkania”`
+- lista spotkań wyświetlana jest jako elementy listy z dodatkowymi przyciskami umożliwiającymi pobranie szczegółów
+- dodatkowo dostępna jest funkcjonalność wysyłania e-maili do uczestników spotkania
+
+---
+
+### `my_events2.html`
+Strona z wydarzeniami Teams
+
+**Opis funkcji:**
+- umożliwia logowanie do Microsoft Teams poprzez przycisk `„Zaloguj się w Teams”`
+- po zalogowaniu, użytkownik może kliknąć przycisk `„Załaduj wydarzenia”`, aby pobrać i wyświetlić listę wydarzeń
+- dla każdego wydarzenia dostępny jest przycisk `„Pokaż uczestników”`, który wyświetla szczegółowe informacje oraz umożliwia wysyłanie wiadomości
+
+---
+
+### `my_google_calendar.html`
+Strona integrująca wydarzenia z Google Calendar
+
+**Opis funkcji:**
+- zawiera przyciski do logowania w Google: `„Zaloguj się w Google”` oraz pobierania wydarzeń: `„Załaduj wydarzenia”`
+- wydarzenia wyświetlane są w formie listy, gdzie każdy element zawiera tytuł, datę rozpoczęcia oraz przycisk `„Szczegóły”`, umożliwiający pobranie dodatkowych informacji (w tym listy uczestników i opcję wysyłania e-maili)
+
+---
+
+### `my_ms_calendar.html`
+Strona dedykowana wydarzeniom z MS Calendar
+
+**Opis funkcji:**
+- umożliwia logowanie do MS Calendar poprzez przycisk `„Zaloguj się do MS Calendar”`
+- po zalogowaniu, użytkownik może kliknąć przycisk `„Załaduj wydarzenia”` aby wyświetlić listę wydarzeń
+- dla każdego wydarzenia dostępna jest opcja pobrania szczegółowych informacji, w tym listy uczestników, wyświetlanych po kliknięciu przycisku `„Pokaż szczegóły”`
 
 ---
 
