@@ -203,7 +203,7 @@ Po załadowaniu strony frontend wykonuje zapytanie GET do backendu, który zwrac
 Użytkownicy mogą przeglądać swoje wygenerowane transkrypcje notatek w formacie `.docx`. Backend aplikacji przechowuje te pliki w odpowiednim katalogu (`/recordings/notes`), a Flask udostępnia je użytkownikom za pomocą odpowiednich tras:
 - `/get_note/<note_id>`
 
-Strona `my_notes.html` w frontendzie prezentuje listę dostępnych notatek, a użytkownik może pobrać je, klikając na odpowiedni link. Backend obsługuje żądanie i zwraca odpowiedni plik `.docx`.
+Strona `my_notes.html` w frontendzie prezentuje listę dostępnych notatek, wraz z ich rozmiarem, a użytkownik może pobrać je, klikając na odpowiedni link oraz wysłać do wybranych przez siebie osób. Backend obsługuje żądanie i zwraca odpowiedni plik `.docx` oraz wysyła e-mail (gmail) z wybraną notatką jako załącznik.
 
 ### Nagrania (my_recordings.html)
 Użytkownicy mogą przeglądać swoje zapisane nagrania wideo i pobierać je. Pliki nagrań są przechowywane na serwerze w folderze `./recordings/` i mogą być dostępne z poziomu aplikacji webowej za pośrednictwem odpowiednich tras Flask:
