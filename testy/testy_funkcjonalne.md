@@ -104,4 +104,10 @@ https://github.com/DevStranger/NoteWriter/blob/main/testy/teams_test.js
 
 `\testy\zoom_test.js`
 
+https://github.com/DevStranger/NoteWriter/blob/main/testy/zoom_test.js
+
+![Zrzut ekranu 2025-02-05 225128](https://github.com/user-attachments/assets/651e8905-cea9-4c9d-af4f-10f662d0df5f)
+![Zrzut ekranu 2025-02-05 225211](https://github.com/user-attachments/assets/858f363b-e6ba-4de5-981a-a881dd7556a5)
+![Zrzut ekranu 2025-02-05 225311](https://github.com/user-attachments/assets/297f1943-81ee-449d-bd42-befac04ee171)
+
 
