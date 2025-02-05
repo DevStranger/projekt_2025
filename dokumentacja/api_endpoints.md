@@ -1,6 +1,6 @@
 # API endpoints
 
-**Wersja:** 1.1
+**Wersja:** 1.2
 
 **Data utworzenia:** 25.I.2025
 
@@ -273,7 +273,7 @@ Wyświetla listę wygenerowanych notatek `.docx`
 
 ### Metoda
 
-`GEt`
+`GET`
 
 #### Odpowiedzi
 
@@ -282,3 +282,5 @@ Wyświetla listę wygenerowanych notatek `.docx`
 ```
 Lista notatek w formie HTML
 ```
+
+## ``
