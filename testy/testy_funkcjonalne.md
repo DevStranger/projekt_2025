@@ -75,3 +75,17 @@ https://github.com/DevStranger/projekt_2025/blob/ac420128c920077b187d1cff3820a46
 Po stworzeniu nagrań z użyciem aplikacji:
 
 ![Zrzut ekranu 2025-01-25 164930](https://github.com/user-attachments/assets/db0a8b38-5836-4524-a925-ac1f2055fad0)
+
+### Testy integracji z kalendarzem
+
+`/testy/tests2.js`
+
+#### Google Calendar
+
+![Zrzut ekranu 2025-02-05 215428](https://github.com/user-attachments/assets/b4c84282-87d2-481e-ac12-9909461e05e4)
+![Zrzut ekranu 2025-02-05 220808](https://github.com/user-attachments/assets/c174affd-10e9-43d2-8ef4-d0ebca86fb90)
+![Zrzut ekranu 2025-02-05 221344](https://github.com/user-attachments/assets/0656e1c4-45b2-435c-899b-75dd7902c509)
+
+#### MS Calendar
+
+
