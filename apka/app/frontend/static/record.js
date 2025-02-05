@@ -163,6 +163,7 @@ async function saveRecording(blob) {
     timerDisplay.style.display = "none";
     titleInput.value = ""; 
     saveButton.disabled = true;
+    startButton.disabled = true;
 }
 
 recordBtn.addEventListener("click", selectWindow);
