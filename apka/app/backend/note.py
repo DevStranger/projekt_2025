@@ -9,7 +9,7 @@ from collections import defaultdict
 from .summary import generate_summary
 
 # Inicjalizacja modelu Whisper
-token = "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"
+token = ""
 model = load_model("base")
 
 
