@@ -159,6 +159,7 @@
 
 #### 🐝 Joanna Furtak - Koordynator ds. Integracji z Kalendarzem i Dystrybucji Notatek
 
+**Odpowiedzialna za:**
 - integrację aplikacji z kalendarzem Google i microsoft
 - integrację z aplikacjami do telekonferencji - Zoom i Teams
 - funkcjonalność rozsyłania notatek do uczestników spotkania po jego zakończeniu
@@ -168,6 +169,7 @@
 
 #### 🐝 Julia Mikrut - Koordynator ds. Sporządzania i Przetwarzania Notatek
 
+**Odpowiedzialna za:**
 - research i dostosowanie modelu przetwarzania języka naturalnego do celu sporządzania notatek na podstawie tekstu mówionego
 - funkcjonalność wstawiania zrzutów ekranu do notatek (jeśli wyświetlana jest prezentacja)
 - funkcjonalność sporządzania podsumowań notatek ze spotkania
@@ -177,6 +179,7 @@
 
 #### 🐝 Maja Chlipała - Koordynator ds. Dokumentacji Technicznej, Testów i Integracji Systemu
 
+**Odpowiedzialna za:**
 - sporządzenie dokumentacji technicznej projektu
 - przeprowadzenie testów wymagań funkcjonalnych i niefunkcjonalnych (+ sprawozdanie z ich przebiegu)
 - integrację poszczególnych części kodu
