@@ -1,6 +1,6 @@
 # API endpoints
 
-**Wersja:** 1.2
+**Wersja:** 2.0
 
 **Data utworzenia:** 25.I.2025
 
@@ -283,4 +283,210 @@ Wyświetla listę wygenerowanych notatek `.docx`
 Lista notatek w formie HTML
 ```
 
-## ``
+## `/zoom/login`
+
+### Opis
+
+Przekierowuje użytkownika do logowania w Zoom, aby uzyskać autoryzację
+
+### Metoda
+
+`GET`
+
+## `/zoom-meetings`
+
+### Opis
+
+Pobiera listę spotkań użytkownika Zoom po uzyskaniu tokena autoryzacyjnego
+
+### Metoda
+
+`GET`
+
+#### Odpowiedzi
+
+**_Sukces (200 OK)_**
+
+```
+Lista spotkań w formacie JSON
+```
+
+## `/zoom-meeting-participants`
+
+### Opis
+
+Pobiera uczestników danego spotkania Zoom
+
+### Metoda
+
+`GET`
+
+### Body (JSON)
+
+| Pole           | Typ     | Wymagane | Opis                           |
+|----------------|---------|----------|--------------------------------|
+| `meetingId`    | string  | Tak      | Identyfikator spotkania Zoom   |
+
+#### Odpowiedzi
+
+**_Sukces (200 OK)_**
+
+```
+Lista uczestników
+```
+
+## `/teams/login`
+
+### Opis
+
+Przekierowuje użytkownika do logowania w Microsoft Teams
+
+### Metoda
+
+`GET`
+
+## `/teams-events`
+
+### Opis
+
+Pobiera listę wydarzeń z kalendarza Microsoft Teams po autoryzacji
+
+### Metoda
+
+`GET`
+
+#### Odpowiedzi
+
+**_Sukces (200 OK)_**
+
+```
+Lista wydarzeń w formacie JSON
+```
+
+## `/teams-event-details`
+
+### Opis
+
+Pobiera szczegółowe informacje o wybranym wydarzeniu w Teams
+
+### Metoda
+
+`GET`
+
+### Body (JSON)
+
+| Pole           | Typ     | Wymagane | Opis                           |
+|----------------|---------|----------|--------------------------------|
+| `eventId`      | string  | Tak      | Identyfikator wydarzenia Teams |
+
+#### Odpowiedzi
+
+**_Sukces (200 OK)_**
+
+```
+Szczegółowe informacje o wydarzeniu w formacie JSON
+```
+
+## `/google-calendar/login`
+
+### Opis
+
+Generuje link do logowania w Google, aby uzyskać autoryzację do kalendarza
+
+### Metoda
+
+`GET`
+
+## `/google-calendar/events`
+
+### Opis
+
+Pobiera listę wydarzeń z Google Calendar przy użyciu autoryzowanych danych
+
+### Metoda
+
+`GET`
+
+#### Odpowiedzi
+
+**_Sukces (200 OK)_**
+
+```
+Lista wydarzeń w formacie JSON
+```
+
+## `/google-calendar/event-details`
+
+### Opis
+
+Pobiera szczegółowe informacje o wybranym wydarzeniu z Google Calendar
+
+### Metoda
+
+`GET`
+
+### Body (JSOn)
+
+| Pole           | Typ     | Wymagane | Opis                           |
+|----------------|---------|----------|--------------------------------|
+| `eventId`      | string  | Tak      | Identyfikator wydarzenia       |
+
+#### Odpowiedzi
+
+**_Sukces (200 OK)_**
+
+```
+Szczegóły wydarzenia w formacie JSON
+```
+
+## `/ms-calendar/login`
+
+### Opis
+
+Generuje link do logowania w MS Calendar
+
+### Metoda
+
+`GET`
+
+## `/ms-calendar/events`
+
+### Opis
+
+Pobiera listę wydarzeń z MS Calendar przy użyciu danych autoryzacyjnych
+
+### Metoda
+
+`GET`
+
+#### Odpowiedzi
+
+**_Sukces (200 OK)_**
+
+```
+Lista wydarzeń w formacie JSON
+```
+
+## `/ms-calendar/event-details`
+
+### Opis
+
+Pobiera szczegółowe informacje o wybranym wydarzeniu z MS Calendar, w tym listę uczestników
+
+### Metoda
+
+`GET`
+
+### Body (JSON)
+
+| Pole           | Typ     | Wymagane | Opis                           |
+|----------------|---------|----------|--------------------------------|
+| `eventId`      | string  | Tak      | Identyfikator wydarzenia       |
+
+#### Odpowiedzi
+
+**_Sukces (200 OK)_**
+
+```
+Szczegółowe informacje o wydarzeniu w formacie JSON
+```
