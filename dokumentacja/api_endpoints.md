@@ -1,10 +1,10 @@
 # API endpoints
 
-**Wersja:** 2.1
+**Wersja:** 2.2
 
 **Data utworzenia:** 2025-01-25 T09:12:31Z
 
-**Data ostatniej aktualizacji:** 2025-02-05 T19:28:28Z
+**Data ostatniej aktualizacji:** 2025-02-05 T19:49:28Z
 
 ## `/`
 
@@ -425,7 +425,7 @@ Lista wydarzeń w formacie JSON
 
 `GET`
 
-### Body (JSOn)
+### Body (JSON)
 
 | Pole           | Typ     | Wymagane | Opis                           |
 |----------------|---------|----------|--------------------------------|
