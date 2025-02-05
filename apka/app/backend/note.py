@@ -73,7 +73,6 @@ def combine_transcription_with_diarization(transcription_segments, diarization):
     speaker_durations = defaultdict(float)
     speaker_word_counts = defaultdict(int)
     current_speaker = None
-    speaker_transcriptions = defaultdict(list)
 
     for segment in transcription_segments:
         start_time, end_time, text = segment['start'], segment['end'], segment['text']
@@ -90,13 +89,19 @@ def combine_transcription_with_diarization(transcription_segments, diarization):
 
         speaker_durations[speaker] += (end_time - start_time)
         speaker_word_counts[speaker] += word_count
-        speaker_transcriptions[speaker].append(text)
 
-    for speaker, sentences in speaker_transcriptions.items():
-        diarized_text.append(f"{speaker}:\n{' '.join(sentences)}")
+        # Jeżeli zmienił się mówca, dodajemy jego identyfikator
+        if speaker != current_speaker:
+            diarized_text.append(f"\n{speaker}:")
+            current_speaker = speaker
 
+        diarized_text.append(f" {text}")
+
+    # Tworzenie końcowego tekstu
+    formatted_transcription = "".join(diarized_text)
     speaker_speeds = {spk: speaker_word_counts[spk] / speaker_durations[spk] for spk in speaker_durations}
-    return "\n".join(diarized_text), speaker_durations, speaker_speeds
+
+    return formatted_transcription, speaker_durations, speaker_speeds
 
 
 def process_audio_and_save_transcription(audio_folder, docx_folder, screenshots_folder):
