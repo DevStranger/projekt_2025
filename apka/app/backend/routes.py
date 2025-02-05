@@ -506,11 +506,17 @@ def show_notes():
     if not os.path.exists(NOTES_FOLDER):
         return render_template('my_notes.html', notes=[], emails=[])
 
-    notes = [f for f in os.listdir(NOTES_FOLDER) if f.endswith('.docx')]
-    notes = [os.path.splitext(file)[0] for file in notes]
+    notes = []
+    for file in os.listdir(NOTES_FOLDER):
+        if file.endswith('.docx'):
+            file_path = os.path.join(NOTES_FOLDER, file)
+            file_size = os.path.getsize(file_path)  # Pobieramy rozmiar pliku w bajtach
+            file_size_mb = round(file_size / (1024 * 1024), 2)  # Konwersja na MB
+            notes.append({"name": os.path.splitext(file)[0], "size": file_size_mb})
 
     all_emails = Email.query.all()
     return render_template('my_notes.html', notes=notes, emails=all_emails)
+
 
 @main.route("/add_email", methods=["POST"])
 def add_email():

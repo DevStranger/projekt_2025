@@ -32,8 +32,12 @@
                 <ul class="notes-list">
                     {% for note in notes %}
                     <li class="list-item">
-                        <span><a href="{{ url_for('main.get_note', filename=note) }}" target="_blank">{{ note }}</a></span>
-                        <input type="radio" value="{{ note }}" name="note_checkbox">
+                        <span>           
+                            <a href="{{ url_for('main.get_note', filename=note.name) }}" target="_blank">
+                            {{ note.name }} ({{ note.size }} MB)
+                        </a>
+                        </span>
+                        <input type="radio" value="{{ note.name }}" name="note_checkbox">
                     </li>
                     {% endfor %}
                 </ul>
