@@ -63,12 +63,12 @@ Plik jest poprawnie zapisany na serwerze w odpowiednim katalogu i odpowiednio ko
 
 https://github.com/DevStranger/projekt_2025/blob/ac420128c920077b187d1cff3820a46d57407100/testy/tests.js
 
-### Przebieg testów
+### Przebieg testów 
 
 ![Zrzut ekranu 2025-01-25 163754](https://github.com/user-attachments/assets/6924ec1d-0aeb-4407-8c84-aa8752cc0aae)
 ![Zrzut ekranu 2025-01-25 162753](https://github.com/user-attachments/assets/bebd74ca-7bc3-45e1-b23f-8c965b412e72)
 
-### Wyniki testów
+### Wyniki testów ✔
 
 ![Zrzut ekranu 2025-01-25 164639](https://github.com/user-attachments/assets/33eb9518-f378-42c6-a2db-072a34dfeb23)
 
@@ -78,14 +78,15 @@ Po stworzeniu nagrań z użyciem aplikacji:
 
 ### Testy integracji z kalendarzem
 
-`/testy/tests2.js`
+`/testy/google_test.js`
 
-#### Google Calendar
+#### Google Calendar - panel do logowania ✔
 
 ![Zrzut ekranu 2025-02-05 215428](https://github.com/user-attachments/assets/b4c84282-87d2-481e-ac12-9909461e05e4)
 ![Zrzut ekranu 2025-02-05 220808](https://github.com/user-attachments/assets/c174affd-10e9-43d2-8ef4-d0ebca86fb90)
+![Zrzut ekranu 2025-02-05 222203](https://github.com/user-attachments/assets/4583056e-8bd4-42a6-bf7b-a12379e5e03e)
+![Zrzut ekranu 2025-02-05 222145](https://github.com/user-attachments/assets/20a94f24-ff71-42c3-8153-77ccdb48208a)
 ![Zrzut ekranu 2025-02-05 221344](https://github.com/user-attachments/assets/0656e1c4-45b2-435c-899b-75dd7902c509)
 
-#### MS Calendar
 
 
