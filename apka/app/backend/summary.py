@@ -36,6 +36,18 @@ def generate_summary(docx_path, summary_docx_path):
         doc = Document(docx_path)
         full_text = "\n".join([para.text for para in doc.paragraphs])
 
+        full_text = "\n".join([para.text for para in doc.paragraphs])
+
+        # Usunięcie "Transkrypcja wykładu:" oraz wszystkiego po "Zrzuty ekranu:"
+        start_marker = "Transkrypcja wykładu:"
+        end_marker = "Zrzuty ekranu:"
+
+        if start_marker in full_text:
+            full_text = full_text.split(start_marker, 1)[-1]  # Pobiera wszystko po "Transkrypcja wykładu:"
+
+        if end_marker in full_text:
+            full_text = full_text.split(end_marker, 1)[0]  # Usuwa wszystko po "Zrzuty ekranu:"
+
         if len(full_text.strip()) < 50:
             print(f"Plik {docx_path} zawiera za mało treści do podsumowania.")
             return
@@ -80,6 +92,10 @@ def generate_summary(docx_path, summary_docx_path):
         summary_doc.save(summary_docx_path)
 
         print(f"Zapisano podsumowanie do: {summary_docx_path}")
+
+        if os.path.exists(docx_path):
+            os.remove(docx_path)
+            print(f"Usunięto plik tymczasowy: {docx_path}")
 
     except Exception as e:
         print(f"Błąd podczas generowania podsumowania dla {docx_path}: {e}")

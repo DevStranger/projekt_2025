@@ -46,7 +46,7 @@ from .google_calendar_integration import (
     get_google_event_details
 )
 
-load_dotenv(dotenv_path="C:/Users/Joanna/Downloads/proj_25/projekt_2025-olaaa/klucze.env")
+load_dotenv(dotenv_path="C:/Users/julka/Desktop/projekt_2025-main/FINAL/klucze.env")
 from dotenv import find_dotenv
 print("Ścieżka do pliku .env:", find_dotenv())
 
