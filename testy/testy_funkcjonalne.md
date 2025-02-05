@@ -76,11 +76,13 @@ Po stworzeniu nagrań z użyciem aplikacji:
 
 ![Zrzut ekranu 2025-01-25 164930](https://github.com/user-attachments/assets/db0a8b38-5836-4524-a925-ac1f2055fad0)
 
-### Testy integracji z kalendarzem
+### Testy integracji z kalendarzem i aplikacją do telekonferencji
+
+#### Google Calendar - panel do logowania ✔
 
 `/testy/google_test.js`
 
-#### Google Calendar - panel do logowania ✔
+https://github.com/DevStranger/NoteWriter/blob/main/testy/google_test.js
 
 ![Zrzut ekranu 2025-02-05 215428](https://github.com/user-attachments/assets/b4c84282-87d2-481e-ac12-9909461e05e4)
 ![Zrzut ekranu 2025-02-05 220808](https://github.com/user-attachments/assets/c174affd-10e9-43d2-8ef4-d0ebca86fb90)
@@ -88,5 +90,18 @@ Po stworzeniu nagrań z użyciem aplikacji:
 ![Zrzut ekranu 2025-02-05 222145](https://github.com/user-attachments/assets/20a94f24-ff71-42c3-8153-77ccdb48208a)
 ![Zrzut ekranu 2025-02-05 221344](https://github.com/user-attachments/assets/0656e1c4-45b2-435c-899b-75dd7902c509)
 
+#### Teams ✔
+
+`\testy\teams_test.js`
+
+https://github.com/DevStranger/NoteWriter/blob/main/testy/teams_test.js
+
+![Zrzut ekranu 2025-02-05 223229](https://github.com/user-attachments/assets/3c590c61-8951-4c0a-9488-30aa62f79268)
+![Zrzut ekranu 2025-02-05 223614](https://github.com/user-attachments/assets/4d78196d-fb11-4318-b878-09429c10ad60)
+![Zrzut ekranu 2025-02-05 223758](https://github.com/user-attachments/assets/5b0a96ba-f92f-4c18-a2b4-c88101f5b158)
+
+#### Zoom
+
+`\testy\zoom_test.js`
 
 
