@@ -110,4 +110,10 @@ https://github.com/DevStranger/NoteWriter/blob/main/testy/zoom_test.js
 ![Zrzut ekranu 2025-02-05 225211](https://github.com/user-attachments/assets/858f363b-e6ba-4de5-981a-a881dd7556a5)
 ![Zrzut ekranu 2025-02-05 225311](https://github.com/user-attachments/assets/297f1943-81ee-449d-bd42-befac04ee171)
 
+### Test funkcjonalności wysyłania notatek do wybranych użytkowników
 
+`\testy\send_nudes.js`
+
+
+
+![Zrzut ekranu 2025-02-05 225825](https://github.com/user-attachments/assets/6e37ea45-f7d7-44cb-a508-7b90fad0ae73)
