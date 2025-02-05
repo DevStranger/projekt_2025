@@ -143,6 +143,48 @@
 
 ---
 
+## Organizacja pracy
+
+#### 👑 Aleksandra Adamiak - Project Manager, UI Visionary
+
+**Odpowiedzialna za:**
+- organizację pracy zespołu
+- koordynację działań członków zespołu
+- wizję interfejsu użytkownika
+- dokumentowanie postępów na kanale na Slack-u
+- funkcjonalność nagrywania ekranu
+- integrację poszczególnych części kodu
+- frontend i backend
+- i inne elementy projektu ...
+
+#### 🐝 Joanna Furtak - Koordynator ds. Integracji z Kalendarzem i Dystrybucji Notatek
+
+- integrację aplikacji z kalendarzem Google i microsoft
+- integrację z aplikacjami do telekonferencji - Zoom i Teams
+- funkcjonalność rozsyłania notatek do uczestników spotkania po jego zakończeniu
+- integrację poszczególnych części kodu
+- frontend i backend
+- i inne elementy projektu ...
+
+#### 🐝 Julia Mikrut - Koordynator ds. Sporządzania i Przetwarzania Notatek
+
+- research i dostosowanie modelu przetwarzania języka naturalnego do celu sporządzania notatek na podstawie tekstu mówionego
+- funkcjonalność wstawiania zrzutów ekranu do notatek (jeśli wyświetlana jest prezentacja)
+- funkcjonalność sporządzania podsumowań notatek ze spotkania
+- integrację poszczególnych części kodu
+- frontend i backend
+- i inne elementy projektu ...
+
+#### 🐝 Maja Chlipała - Koordynator ds. Dokumentacji Technicznej, Testów i Integracji Systemu
+
+- sporządzenie dokumentacji technicznej projektu
+- przeprowadzenie testów wymagań funkcjonalnych i niefunkcjonalnych (+ sprawozdanie z ich przebiegu)
+- integrację poszczególnych części kodu
+- frontend i backend
+- i inne elementy projektu ...
+
+---
+
 ## Autorzy i kontakt
 - Aleksandra Adamiak (aadamiak@student.agh.edu.pl)
 - Maja Chlipała (majachlipala@student.agh.edu.pl)
