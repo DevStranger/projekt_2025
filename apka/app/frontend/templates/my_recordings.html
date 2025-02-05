@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Recordings</title>
+    <link rel="icon" type="image/x-icon" href="static/logoo.png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles2.css') }}">
+</head>
+<body>
+    <!-- Przyciski i linki w prawym górnym rogu -->
+    <div class="top-nav">
+        <a href="/" class="back-to-home">Powrót do strony głównej</a>
+    </div>
+
+    <div class="container">
+        <h1>Moje Nagrania</h1>
+        <ul class="recording-list">
+            {% for recording in recordings %}
+            <li>
+                <a href="javascript:void(0);" onclick="openVideoModal('{{ recording }}')">{{ recording }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+        
+    </div>
+    <div id="videoModal" class="fullscreen-modal" style="display: none;">
+        <div class="modal-content">
+            <video id="videoPlayer" controls>
+                <source id="videoSource" src="" type="video/mp4">
+                Twoja przeglądarka nie obsługuje wideo w tym formacie.
+            </video>
+            <div class="video-navigation">
+                <button id="closeModal" class="close-button" onclick="closeVideoModal()">×</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+let recordings = [];
+
+// Funkcja do otwierania modala
+function openVideoModal(videoFilename, index) {
+
+    const modal = document.getElementById('videoModal');
+    const videoSource = document.getElementById('videoSource');
+    const videoPlayer = document.getElementById('videoPlayer');
+
+    // Zakładamy, że wszystkie pliki są już MP4
+    const mp4Url = `/../recordings/${videoFilename}`; // Ścieżka do katalogu z MP4
+    videoSource.src = mp4Url;
+
+    // Wczytanie wideo
+    videoPlayer.load();
+
+    // Wyświetlenie modala
+    modal.style.display = 'flex';
+}
+
+function closeVideoModal() {
+    const modal = document.getElementById('videoModal');
+    const videoPlayer = document.getElementById('videoPlayer');
+
+    modal.style.display = 'none'; // Ukrycie modala
+    videoPlayer.pause(); // Zatrzymanie wideo
+}
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoteWriter</title>
+    <link rel="icon" type="image/x-icon" href="static/logoo.png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesEvents.css') }}">
+</head>
+<body>
+    <div class="top-nav">
+        <a href="/" class="back-to-home">Powrót do strony głównej</a>
+    </div>
+    <div class="container">
+        <h1>Twoje wydarzenia Google Calendar</h1>
+        <button id="loginGoogleBtn" class="btn">🔑 Zaloguj się w Google</button>
+        <button id="loadEventsBtn" class="btn">📅 Załaduj wydarzenia</button>
+
+        <div class="events-list">
+            <ul id="eventsList"></ul>
+        </div>
+    </div>
+
+    <script>
+        const loginGoogleBtn = document.getElementById("loginGoogleBtn");
+        const loadEventsBtn = document.getElementById("loadEventsBtn");
+        const eventsList = document.getElementById("eventsList");
+
+        // 1) Logowanie do Google
+        loginGoogleBtn.addEventListener("click", () => {
+            window.location.href = "/google-calendar/login";
+        });
+
+        // 2) Pobieranie wydarzeń
+        loadEventsBtn.addEventListener("click", () => {
+            fetch("/google-calendar/events")
+                .then(res => res.json())
+                .then(data => {
+                    if (data.error) {
+                        alert("Błąd: " + data.error);
+                        return;
+                    }
+                    eventsList.innerHTML = ""; // Czyszczenie listy
+
+                    data.forEach(evt => {
+                        const li = document.createElement("li");
+                        li.innerHTML = `<strong>${evt.summary}</strong> <br> ⏰ ${evt.start}`;
+
+                        // Guzik: szczegóły wydarzenia
+                        const detailsBtn = document.createElement("button");
+                        detailsBtn.textContent = "📌 Szczegóły";
+                        detailsBtn.classList.add("details-btn");
+
+                        detailsBtn.addEventListener("click", () => {
+                            loadEventDetails(evt.id);
+                        });
+
+                        li.appendChild(detailsBtn);
+                        eventsList.appendChild(li);
+                    });
+                })
+                .catch(err => console.error(err));
+        });
+
+        // 3) Szczegóły eventu + wysyłanie e-maili
+        function loadEventDetails(eventId) {
+            fetch(`/google-calendar/event-details?eventId=${eventId}`)
+                .then(res => res.json())
+                .then(evt => {
+                    if (evt.error) {
+                        alert("Błąd: " + evt.error);
+                        return;
+                    }
+
+                    const attendees = evt.attendees || [];
+                    if (attendees.length === 0) {
+                        alert("Brak zaproszonych uczestników");
+                    } else {
+                        const emails = attendees.map(a => a.email);
+                        alert("Uczestnicy: " + emails.join(", "));
+
+                        // Guzik: Wyślij e-mail
+                        const sendEmailBtn = document.createElement("button");
+                        sendEmailBtn.textContent = "📩 Wyślij e-mail do wszystkich";
+                        sendEmailBtn.classList.add("send-email-btn");
+
+                        sendEmailBtn.addEventListener("click", () => {
+                            fetch("/send_invitations", {
+                                method: "POST",
+                                headers: { "Content-Type": "application/json" },
+                                body: JSON.stringify({
+                                    recipients: emails,
+                                    subject: "Zaproszenie na wydarzenie"
+                                })
+                            })
+                            .then(resp => resp.json())
+                            .then(respData => {
+                                if (respData.error) {
+                                    alert("Błąd: " + respData.error);
+                                } else {
+                                    alert("Wiadomości wysłane pomyślnie!");
+                                }
+                            })
+                            .catch(err => {
+                                console.error("Błąd podczas wysyłania maili:", err);
+                                alert("Błąd podczas wysyłania maili.");
+                            });
+                        });
+
+                        document.body.appendChild(sendEmailBtn);
+                    }
+                })
+                .catch(err => console.error(err));
+        }
+    </script>
+</body>
+</html>
