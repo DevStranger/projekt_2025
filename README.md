@@ -1,4 +1,5 @@
-# Aplikacja do Sporządzania Notatek ze Spotkań
+# ![logoo](https://github.com/user-attachments/assets/77f90a59-717a-4f1c-99b4-b49435647273) Aplikacja do Sporządzania Notatek ze Spotkań
+
 
 Aplikacja umożliwia nagrywanie spotkań, tworzenie z nich notatek oraz informowanie nieobecnych uczestników o ich przebiegu.
 
