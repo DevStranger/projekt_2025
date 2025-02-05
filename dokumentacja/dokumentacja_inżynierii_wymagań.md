@@ -1,4 +1,4 @@
-# Aplikacja do Sporządzania Notatek ze Spotkań
+# ![logoo](https://github.com/user-attachments/assets/ea83b9b5-852f-429a-9611-ffe853084701) Aplikacja do Sporządzania Notatek ze Spotkań 
 
 **Data utworzenia repozytorium:** 2024-12-03
 

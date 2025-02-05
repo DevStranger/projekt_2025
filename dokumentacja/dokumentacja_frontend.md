@@ -1,10 +1,12 @@
 # Dokumentacja Frontendu
 
-**Wersja:** 3.1
+**Wersja:** 3.2
 
 **Data utworzenia:** 2025-01-25 T10:07:14Z
 
-**Data ostatniej aktualizacji:** 2025-02-05 T19:46:27Z
+**Data ostatniej aktualizacji:** 2025-02-05 T23:07:31Z
+
+![Zrzut ekranu 2025-02-06 000141](https://github.com/user-attachments/assets/a6c08192-536b-4e25-a12b-458e16bc3b91)
 
 ## Zastosowane technologie
 
@@ -40,7 +42,6 @@
 
 - jest wykorzystywane do nagrywania obrazu i dźwięku z ekranu użytkownika, co pozwala na tworzenie nagrań wideo
 - w pliku `record.js` nagrywanie ekranu i dźwięku jest realizowane przez obiekt MediaRecorder, który zapisuje dane wideo w czasie rzeczywistym --> gdy użytkownik zatrzymuje nagrywanie, plik jest zapisywany jako blob i przekazywany do funkcji saveRecording w celu zapisania na serwerze
-
 
 ## Struktura folderów i plików
 
@@ -83,15 +84,6 @@ Folder zawierający pliki HTML, które są renderowane przez backend aplikacji:
 
 ---
 
-### `events.html`
-- strona wyświetlająca nadchodzące wydarzenia, które są pobierane z backendu (w zmiennej `events`)
-
-**Opis funkcji:**
-- lista wydarzeń z datą i tytułem
-- jeśli brak jest wydarzeń, wyświetlana jest odpowiednia informacja
-
----
-
 ### `my_events.html`
 - strona dedykowana integracji z Zoom
 
@@ -100,6 +92,8 @@ Folder zawierający pliki HTML, które są renderowane przez backend aplikacji:
 - po zalogowaniu użytkownik może załadować listę spotkań klikając przycisk `„Załaduj spotkania”`
 - lista spotkań wyświetlana jest jako elementy listy z dodatkowymi przyciskami umożliwiającymi pobranie szczegółów
 - dodatkowo dostępna jest funkcjonalność wysyłania e-maili do uczestników spotkania
+  
+![Zrzut ekranu 2025-02-06 000238](https://github.com/user-attachments/assets/92609ca4-af6e-406c-b2c4-152d5febba9b)
 
 ---
 
@@ -111,6 +105,8 @@ Folder zawierający pliki HTML, które są renderowane przez backend aplikacji:
 - po zalogowaniu, użytkownik może kliknąć przycisk `„Załaduj wydarzenia”`, aby pobrać i wyświetlić listę wydarzeń
 - dla każdego wydarzenia dostępny jest przycisk `„Pokaż uczestników”`, który wyświetla szczegółowe informacje oraz umożliwia wysyłanie wiadomości
 
+![Zrzut ekranu 2025-02-06 000451](https://github.com/user-attachments/assets/8228dd61-3a61-4e5b-98e6-c25968fb8c1e)
+
 ---
 
 ### `my_google_calendar.html`
@@ -119,6 +115,8 @@ Folder zawierający pliki HTML, które są renderowane przez backend aplikacji:
 **Opis funkcji:**
 - zawiera przyciski do logowania w Google: `„Zaloguj się w Google”` oraz pobierania wydarzeń: `„Załaduj wydarzenia”`
 - wydarzenia wyświetlane są w formie listy, gdzie każdy element zawiera tytuł, datę rozpoczęcia oraz przycisk `„Szczegóły”`, umożliwiający pobranie dodatkowych informacji (w tym listy uczestników i opcję wysyłania e-maili)
+
+![Zrzut ekranu 2025-02-06 000535](https://github.com/user-attachments/assets/853609e6-d905-4df5-94a4-805548fe0d18)
 
 ---
 
@@ -130,6 +128,8 @@ Folder zawierający pliki HTML, które są renderowane przez backend aplikacji:
 - po zalogowaniu, użytkownik może kliknąć przycisk `„Załaduj wydarzenia”` aby wyświetlić listę wydarzeń
 - dla każdego wydarzenia dostępna jest opcja pobrania szczegółowych informacji, w tym listy uczestników, wyświetlanych po kliknięciu przycisku `„Pokaż szczegóły”`
 
+![Zrzut ekranu 2025-02-06 000555](https://github.com/user-attachments/assets/89ed587b-8c9b-460c-8da9-2d7bfd2b1dd0)
+
 ---
 
 ### `my_notes.html`
@@ -138,7 +138,9 @@ Folder zawierający pliki HTML, które są renderowane przez backend aplikacji:
 **Opis funkcji:**
 - dynamiczne ładowanie notatek użytkownika z backendu
 - notatki są wyświetlane w formie linków, umożliwiających ich pobranie
-- zastosowanie pętli Jinja (`{% for note in notes %}`) do generowania listy notatek na podstawie danych przesłanych z backendu.
+- zastosowanie pętli Jinja (`{% for note in notes %}`) do generowania listy notatek na podstawie danych przesłanych z backendu
+
+![Zrzut ekranu 2025-02-06 000621](https://github.com/user-attachments/assets/3e419e7a-84c7-493c-8bb1-ad3b0cbe8aa8)
 
 ---
 
@@ -148,6 +150,8 @@ Folder zawierający pliki HTML, które są renderowane przez backend aplikacji:
 **Opis funkcji:**
 - lista nagrań użytkownika, z możliwością odtwarzania nagrań bezpośrednio w przeglądarce
 - modal z odtwarzaczem wideo do wyświetlania wybranego nagrania
+
+![Zrzut ekranu 2025-02-06 000644](https://github.com/user-attachments/assets/4d2ae2a4-b0c5-45b9-987d-a9973d185854)
 
 ---
 
@@ -159,6 +163,10 @@ Folder zawierający pliki HTML, które są renderowane przez backend aplikacji:
 - możliwość rozpoczęcia i zatrzymania nagrywania przy pomocy przycisków
 - wprowadzenie tytułu nagrania przed jego zapisaniem
 - wyświetlanie timera nagrywania (czas trwania nagrania)
+
+![Zrzut ekranu 2025-02-06 000712](https://github.com/user-attachments/assets/984d475f-5784-46c6-b0f2-e053ea28331e)
+
+---
 
 ## JavaScript
 
