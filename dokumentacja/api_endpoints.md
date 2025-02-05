@@ -1,15 +1,15 @@
 # API endpoints
 
-**Wersja:** 2.0
+**Wersja:** 2.1
 
-**Data utworzenia:** 25.I.2025
+**Data utworzenia:** 2025-01-25 T09:12:31Z
 
-**Data ostatniej aktualizacji:** 05.02.2025
+**Data ostatniej aktualizacji:** 2025-02-05 T19:28:28Z
 
 ## `/`
 
 ### Opis
-Renderuje stronę główną
+- renderuje stronę główną
 
 ### Metoda
 
@@ -18,7 +18,7 @@ Renderuje stronę główną
 ## `/record`
 
 ### Opis
-Renderuje podstronę do nagrywania
+- renderuje podstronę do nagrywania
 
 ### Metoda
 
@@ -27,7 +27,7 @@ Renderuje podstronę do nagrywania
 ## `/record/record_window`
 
 ### Opis
-Rozpoczyna nagrywanie wybranego okna aplikacji w osobnym wątku
+- rozpoczyna nagrywanie wybranego okna w osobnym wątku
 
 ### Metoda
 `POST`
@@ -70,7 +70,7 @@ Jeśli nie podano `window_title`:
 ## `/record/stop_recording`
 
 ### Opis
-Zatrzymuje aktualnie trwające nagrywanie
+- zatrzymuje aktualnie trwające nagrywanie
 
 ### Metoda
 `POST`
@@ -104,7 +104,7 @@ W przypadku nieoczekiwanego błędu:
 ## `/record/save`
 
 ### Opis
-Zapisuje nagranie przesłane jako plik i konwertuje je na format `mp4` - dodatkowo wyzwala generowanie transkrypcji w formacie `.docx`
+- zapisuje nagranie przesłane jako plik i konwertuje je na format `mp4` - dodatkowo wyzwala generowanie transkrypcji w formacie `.docx`
 
 ### Metoda
 
@@ -153,7 +153,7 @@ W przypadku błędu konwersji:
 
 ### Opis
 
-Zwraca listę zapisanych nagrań `mp4`
+- zwraca listę zapisanych nagrań `mp4`
 
 ### Metoda
 
@@ -179,7 +179,7 @@ Strona HTML z listą nagrań wideo.
 
 ### Opis
 
-Pobiera wydarzenia z Google Calendar
+- pobiera wydarzenia z Google Calendar
 
 ### Metoda
 
@@ -201,7 +201,7 @@ Lista wydarzeń
 
 ### Opis
 
-Zwraca listę nazw wszystkich otwartych okien
+- zwraca listę nazw wszystkich otwartych okien
 
 ### Metoda
 
@@ -219,7 +219,7 @@ Lista tytułów okien
 
 ### Opis
 
-Generuje transkrypcję tekstową z istniejącego pliku `.wav`
+- generuje transkrypcję tekstową z istniejącego pliku `.wav`
 
 ### Metoda
 
@@ -269,7 +269,7 @@ Jeśli plik `.wav` nie istnieje:
 
 ### Opis
 
-Wyświetla listę wygenerowanych notatek `.docx`
+- wyświetla listę wygenerowanych notatek `.docx`
 
 ### Metoda
 
@@ -287,7 +287,7 @@ Lista notatek w formie HTML
 
 ### Opis
 
-Przekierowuje użytkownika do logowania w Zoom, aby uzyskać autoryzację
+- przekierowuje użytkownika do logowania w Zoom, aby uzyskać autoryzację
 
 ### Metoda
 
@@ -297,7 +297,7 @@ Przekierowuje użytkownika do logowania w Zoom, aby uzyskać autoryzację
 
 ### Opis
 
-Pobiera listę spotkań użytkownika Zoom po uzyskaniu tokena autoryzacyjnego
+- pobiera listę spotkań użytkownika Zoom po uzyskaniu tokena autoryzacyjnego
 
 ### Metoda
 
@@ -315,7 +315,7 @@ Lista spotkań w formacie JSON
 
 ### Opis
 
-Pobiera uczestników danego spotkania Zoom
+- pobiera uczestników danego spotkania Zoom
 
 ### Metoda
 
@@ -339,7 +339,7 @@ Lista uczestników
 
 ### Opis
 
-Przekierowuje użytkownika do logowania w Microsoft Teams
+- przekierowuje użytkownika do logowania w Microsoft Teams
 
 ### Metoda
 
@@ -349,7 +349,7 @@ Przekierowuje użytkownika do logowania w Microsoft Teams
 
 ### Opis
 
-Pobiera listę wydarzeń z kalendarza Microsoft Teams po autoryzacji
+- pobiera listę wydarzeń z kalendarza Microsoft Teams po autoryzacji
 
 ### Metoda
 
@@ -367,7 +367,7 @@ Lista wydarzeń w formacie JSON
 
 ### Opis
 
-Pobiera szczegółowe informacje o wybranym wydarzeniu w Teams
+- pobiera szczegółowe informacje o wybranym wydarzeniu w Teams
 
 ### Metoda
 
@@ -391,7 +391,7 @@ Szczegółowe informacje o wydarzeniu w formacie JSON
 
 ### Opis
 
-Generuje link do logowania w Google, aby uzyskać autoryzację do kalendarza
+- generuje link do logowania w Google, aby uzyskać autoryzację do kalendarza
 
 ### Metoda
 
@@ -401,7 +401,7 @@ Generuje link do logowania w Google, aby uzyskać autoryzację do kalendarza
 
 ### Opis
 
-Pobiera listę wydarzeń z Google Calendar przy użyciu autoryzowanych danych
+- pobiera listę wydarzeń z Google Calendar przy użyciu autoryzowanych danych
 
 ### Metoda
 
@@ -419,7 +419,7 @@ Lista wydarzeń w formacie JSON
 
 ### Opis
 
-Pobiera szczegółowe informacje o wybranym wydarzeniu z Google Calendar
+- pobiera szczegółowe informacje o wybranym wydarzeniu z Google Calendar
 
 ### Metoda
 
@@ -443,7 +443,7 @@ Szczegóły wydarzenia w formacie JSON
 
 ### Opis
 
-Generuje link do logowania w MS Calendar
+- generuje link do logowania w MS Calendar
 
 ### Metoda
 
@@ -453,7 +453,7 @@ Generuje link do logowania w MS Calendar
 
 ### Opis
 
-Pobiera listę wydarzeń z MS Calendar przy użyciu danych autoryzacyjnych
+- pobiera listę wydarzeń z MS Calendar przy użyciu danych autoryzacyjnych
 
 ### Metoda
 
@@ -471,7 +471,7 @@ Lista wydarzeń w formacie JSON
 
 ### Opis
 
-Pobiera szczegółowe informacje o wybranym wydarzeniu z MS Calendar, w tym listę uczestników
+-pobiera szczegółowe informacje o wybranym wydarzeniu z MS Calendar, w tym listę uczestników
 
 ### Metoda
 
