@@ -140,7 +140,8 @@ Folder zawierający pliki HTML, które są renderowane przez backend aplikacji:
 - notatki są wyświetlane w formie linków, umożliwiających ich pobranie
 - zastosowanie pętli Jinja (`{% for note in notes %}`) do generowania listy notatek na podstawie danych przesłanych z backendu
 
-![Zrzut ekranu 2025-02-06 000621](https://github.com/user-attachments/assets/3e419e7a-84c7-493c-8bb1-ad3b0cbe8aa8)
+![image](https://github.com/user-attachments/assets/aa074f9f-d1a7-4e51-9392-c6a7f84278c6)
+
 
 ---
 
