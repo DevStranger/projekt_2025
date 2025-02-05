@@ -1,5 +1,11 @@
 # API endpoints
 
+**Wersja:** 1.1
+
+**Data utworzenia:** 25.I.2025
+
+**Data ostatniej aktualizacji:** 05.02.2025
+
 ## `/`
 
 ### Opis
