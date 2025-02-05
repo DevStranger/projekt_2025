@@ -1,10 +1,10 @@
 # Dokumentacja Frontendu
 
-**Wersja:** 3.0
+**Wersja:** 3.1
 
 **Data utworzenia:** 2025-01-25 T10:07:14Z
 
-**Data ostatniej aktualizacji:** 2025-02-05 T19:44:27Z
+**Data ostatniej aktualizacji:** 2025-02-05 T19:46:27Z
 
 ## Zastosowane technologie
 
@@ -75,7 +75,7 @@ Folder zawierający pliki HTML, które są renderowane przez backend aplikacji:
 ## Strony
 
 ### `index.html`
-Strona główna aplikacji, zawierająca przyciski umożliwiające przejście do innych sekcji aplikacji: wydarzeń, nagrywania, notatek oraz nagrań
+- strona główna aplikacji, zawierająca przyciski umożliwiające przejście do innych sekcji aplikacji: wydarzeń, nagrywania, notatek oraz nagrań
 
 **Opis funkcji:**
 - przyciski prowadzące do poszczególnych sekcji aplikacji
@@ -84,7 +84,7 @@ Strona główna aplikacji, zawierająca przyciski umożliwiające przejście do 
 ---
 
 ### `events.html`
-Strona wyświetlająca nadchodzące wydarzenia, które są pobierane z backendu (w zmiennej `events`)
+- strona wyświetlająca nadchodzące wydarzenia, które są pobierane z backendu (w zmiennej `events`)
 
 **Opis funkcji:**
 - lista wydarzeń z datą i tytułem
@@ -93,7 +93,7 @@ Strona wyświetlająca nadchodzące wydarzenia, które są pobierane z backendu 
 ---
 
 ### `my_events.html`
-Strona dedykowana integracji z Zoom
+- strona dedykowana integracji z Zoom
 
 **Opis funkcji:**
 - umożliwia logowanie do Zooma poprzez przycisk `„Zaloguj się przez Zoom”`
@@ -104,7 +104,7 @@ Strona dedykowana integracji z Zoom
 ---
 
 ### `my_events2.html`
-Strona z wydarzeniami Teams
+- strona z wydarzeniami Teams
 
 **Opis funkcji:**
 - umożliwia logowanie do Microsoft Teams poprzez przycisk `„Zaloguj się w Teams”`
@@ -114,7 +114,7 @@ Strona z wydarzeniami Teams
 ---
 
 ### `my_google_calendar.html`
-Strona integrująca wydarzenia z Google Calendar
+- strona integrująca wydarzenia z Google Calendar
 
 **Opis funkcji:**
 - zawiera przyciski do logowania w Google: `„Zaloguj się w Google”` oraz pobierania wydarzeń: `„Załaduj wydarzenia”`
@@ -123,7 +123,7 @@ Strona integrująca wydarzenia z Google Calendar
 ---
 
 ### `my_ms_calendar.html`
-Strona dedykowana wydarzeniom z MS Calendar
+- strona dedykowana wydarzeniom z MS Calendar
 
 **Opis funkcji:**
 - umożliwia logowanie do MS Calendar poprzez przycisk `„Zaloguj się do MS Calendar”`
@@ -133,7 +133,7 @@ Strona dedykowana wydarzeniom z MS Calendar
 ---
 
 ### `my_notes.html`
-Strona prezentująca listę notatek użytkownika (notatki są wyświetlane jako linki do pobrania)
+- strona prezentująca listę notatek użytkownika (notatki są wyświetlane jako linki do pobrania)
 
 **Opis funkcji:**
 - dynamiczne ładowanie notatek użytkownika z backendu
@@ -143,7 +143,7 @@ Strona prezentująca listę notatek użytkownika (notatki są wyświetlane jako 
 ---
 
 ### `my_recordings.html`
-Strona wyświetlająca listę nagrań użytkownika (nagrania są wyświetlane jako linki, a kliknięcie na nie powoduje otwarcie modala z odtwarzaczem wideo)
+- strona wyświetlająca listę nagrań użytkownika (nagrania są wyświetlane jako linki, a kliknięcie na nie powoduje otwarcie modala z odtwarzaczem wideo)
 
 **Opis funkcji:**
 - lista nagrań użytkownika, z możliwością odtwarzania nagrań bezpośrednio w przeglądarce
@@ -152,7 +152,7 @@ Strona wyświetlająca listę nagrań użytkownika (nagrania są wyświetlane ja
 ---
 
 ### `record.html`
-Strona umożliwiająca nagrywanie spotkań z wybranego okna - umożliwia użytkownikowi rozpoczęcie nagrywania, zatrzymanie nagrywania oraz zapisanie nagrania
+- strona umożliwiająca nagrywanie spotkań z wybranego okna - umożliwia użytkownikowi rozpoczęcie nagrywania, zatrzymanie nagrywania oraz zapisanie nagrania
 
 **Opis funkcji:**
 - wybór okna do nagrywania za pomocą przycisku „Wybierz okno do nagrywania” (może być też cały ekran)
@@ -163,7 +163,7 @@ Strona umożliwiająca nagrywanie spotkań z wybranego okna - umożliwia użytko
 ## JavaScript
 
 ### `notes.js`
-Skrypt odpowiedzialny za załadowanie i wyświetlanie listy notatek użytkownika
+- skrypt odpowiedzialny za załadowanie i wyświetlanie listy notatek użytkownika
 
 **Opis działania:**
 1. po załadowaniu strony (`DOMContentLoaded`) skrypt wykonuje zapytanie do backendu (`/my_notes`), aby pobrać listę dostępnych notatek w formacie JSON
@@ -172,7 +172,7 @@ Skrypt odpowiedzialny za załadowanie i wyświetlanie listy notatek użytkownika
 ---
 
 ### `record.js`
-Skrypt odpowiedzialny za obsługę nagrywania spotkań
+- skrypt odpowiedzialny za obsługę nagrywania spotkań
 
 **Opis działania:**
 1. umożliwia użytkownikowi wybranie okna do nagrywania za pomocą `navigator.mediaDevices.getDisplayMedia`
@@ -183,22 +183,22 @@ Skrypt odpowiedzialny za obsługę nagrywania spotkań
 ## Style i formatowanie CSS
 
 ### `styles.css`
-Główne style aplikacji, zawierające ogólne zasady dotyczące układu, kolorów, fontów oraz responsywności
+- główne style aplikacji, zawierające ogólne zasady dotyczące układu, kolorów, fontów oraz responsywności
 
 ---
 
 ### `styles2.css`
-Dodatkowy plik stylów, który jest używany na stronach „My Notes” i „My Recordings” i zawiera specyficzne style dla tych widoków
+- dodatkowy plik stylów, który jest używany na stronach „My Notes” i „My Recordings” i zawiera specyficzne style dla tych widoków
 
 ---
 
 ### `stylesEvents.css`
-Plik stylów dla strony „Events”, odpowiadający za wygląd listy nadchodzących wydarzeń
+- plik stylów dla strony „Events”, odpowiadający za wygląd listy nadchodzących wydarzeń
 
 ---
 
 ### `stylesRecord.css`
-Plik stylów dla strony „Record”, dostosowujący wygląd interfejsu użytkownika do funkcji nagrywania
+- plik stylów dla strony „Record”, dostosowujący wygląd interfejsu użytkownika do funkcji nagrywania
 
 ## Autorzy i kontakt
 - Aleksandra Adamiak (aadamiak@student.agh.edu.pl)
