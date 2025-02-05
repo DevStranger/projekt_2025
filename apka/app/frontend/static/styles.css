@@ -61,7 +61,7 @@ button:disabled {
     background-color: gray;
 }
 
-#events-btn, #recordings-btn, #notes-btn, #record-btn{
+#recordings-btn, #notes-btn, #record-btn{
     background-color: rgb(226, 199, 218);
     margin-top: 10px;
     color: black;
@@ -71,12 +71,92 @@ button:disabled {
     transition: background-color 0.3s, transform 0.3s;
 }
 
-#record-btn:hover, #events-btn:hover, #notes-btn:hover,#recordings-btn:hover {
+#record-btn:hover, #notes-btn:hover,#recordings-btn:hover {
     background-color: #ea72c8;
     transform: scale(1.2); 
 }
 
 
-#record-btn:active, #events-btn:active, #notes-btn:active, #recordings-btn:active {
+#record-btn:active, #notes-btn:active, #recordings-btn:active {
     background-color: #9e4f8a; 
 }
+
+#zoom-btn {
+    background-color: rgb(226, 178, 212);
+    margin-top: 10px;
+    color: black;
+    padding: 10px 20px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+#teams-btn {
+    background-color: rgb(226, 178, 212);
+    margin-top: 10px;
+    color: black;
+    padding: 10px 20px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+#cal-btn {
+    background-color: rgb(226, 178, 212);
+    margin-top: 10px;
+    color: black;
+    padding: 10px 20px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+#google-btn {
+    background-color: rgb(226, 178, 212);
+    margin-top: 10px;
+    color: black;
+    padding: 10px 20px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+#zoom-btn:hover {
+    background-color: #ea72c8;
+    transform: scale(1.2); 
+}
+
+#teams-btn:hover {
+    background-color: #ea72c8;
+    transform: scale(1.2); 
+}
+#cal-btn:hover {
+    background-color: #ea72c8;
+    transform: scale(1.2); 
+}
+
+#google-btn:hover {
+    background-color: #ea72c8;
+    transform: scale(1.2); 
+}
+#zoom-btn:active {
+    background-color: #9e4f8a; 
+}
+
+#teams-btn:active {
+    background-color: #9e4f8a; 
+}
+
+#cal-btn:active {
+    background-color: #9e4f8a; 
+}
+
+#google-btn:active {
+    background-color: #9e4f8a; 
+}
+input[type="text"] {
+    padding: 10px;
+    margin: 10px;
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }

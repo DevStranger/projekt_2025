@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoteWriter</title>
+    <link rel="icon" type="image/x-icon" href="static/logoo.png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesEvents.css') }}">
+</head>
+<body>
+    <div class="top-nav">
+        <a href="/" class="back-to-home">Powrót do strony głównej</a>
+    </div>
+    <div class="container">
+        <h1>Twoje spotkania Zoom</h1>
+        <button id="zoomLoginBtn" class="btn">🔑 Zaloguj się przez Zoom</button>
+        <button id="loadZoomMeetingsBtn" class="btn">📅 Załaduj spotkania</button>
+
+        <div class="events-list">
+            <ul id="meetingsList"></ul>
+        </div>
+    </div>
+
+    <script>
+        const zoomLoginBtn = document.getElementById("zoomLoginBtn");
+        const loadZoomMeetingsBtn = document.getElementById("loadZoomMeetingsBtn");
+        const meetingsList = document.getElementById("meetingsList");
+
+        // 1) Logowanie do Zooma
+        zoomLoginBtn.addEventListener("click", () => {
+            window.location.href = "/zoom/login";
+        });
+
+        // 2) Pobieranie spotkań
+        loadZoomMeetingsBtn.addEventListener("click", () => {
+            fetch("/zoom-meetings")
+                .then(res => res.json())
+                .then(data => {
+                    if (data.error) {
+                        alert("Błąd: " + data.error);
+                        return;
+                    }
+                    meetingsList.innerHTML = ""; // Czyszczenie listy
+
+                    data.forEach(meeting => {
+                        const li = document.createElement("li");
+                        li.innerHTML = `<strong>${meeting.topic}</strong> <br> 📆 ID: ${meeting.id}`;
+
+                        // Guzik: Pokaż uczestników
+                        const detailsBtn = document.createElement("button");
+                        detailsBtn.textContent = "📌 Pokaż uczestników";
+                        detailsBtn.classList.add("details-btn");
+
+                        detailsBtn.addEventListener("click", () => {
+                            loadZoomParticipants(meeting.id);
+                        });
+
+                        li.appendChild(detailsBtn);
+                        meetingsList.appendChild(li);
+                    });
+                })
+                .catch(err => console.error(err));
+        });
+
+        // 3) Pobieranie uczestników spotkania
+        function loadZoomParticipants(meetingId) {
+            fetch(`/zoom-meeting-participants?meetingId=${meetingId}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.error) {
+                        alert("Błąd: " + data.error);
+                        return;
+                    }
+
+                    if (data.length === 0) {
+                        alert("Brak zaproszonych uczestników.");
+                        return;
+                    }
+
+                    const emails = data.map(p => p.user_email);
+                    alert("Uczestnicy: " + emails.join(", "));
+
+                    // Guzik: Wyślij e-mail
+                    const sendEmailBtn = document.createElement("button");
+                    sendEmailBtn.textContent = "📩 Wyślij e-mail do wszystkich";
+                    sendEmailBtn.classList.add("send-email-btn");
+
+                    sendEmailBtn.addEventListener("click", () => {
+                        fetch("/send_invitations", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({
+                                recipients: emails,
+                                subject: "Zaproszenie na spotkanie Zoom"
+                            })
+                        })
+                        .then(resp => resp.json())
+                        .then(respData => {
+                            if (respData.error) {
+                                alert("Błąd: " + respData.error);
+                            } else {
+                                alert("Wiadomości wysłane pomyślnie!");
+                            }
+                        })
+                        .catch(err => {
+                            console.error("Błąd podczas wysyłania maili:", err);
+                            alert("Błąd podczas wysyłania maili.");
+                        });
+                    });
+
+                    document.body.appendChild(sendEmailBtn);
+                })
+                .catch(err => console.error(err));
+        }
+    </script>
+</body>
+</html>

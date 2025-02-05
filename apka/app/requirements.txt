@@ -23,6 +23,7 @@ einops==0.8.0
 ffmpeg-python==0.2.0
 filelock==3.16.1
 Flask==3.1.0
+Flask-SQLAlchemy==3.1.1
 fonttools==4.55.3
 frozenlist==1.5.0
 fsspec==2024.10.0
@@ -137,6 +138,7 @@ torch-audiomentations==0.11.1
 torch_pitch_shift==1.2.5
 torchaudio==2.5.1
 torchmetrics==1.6.1
+transformers
 tqdm==4.67.1
 typer==0.15.1
 typing_extensions==4.12.2
