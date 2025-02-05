@@ -1,8 +1,10 @@
 # Dokumentacja Backendu
 
-**Wersja:** 1.0
+**Wersja:** 2.0
 
 **Data utworzenia:** 25.I.2025
+
+**Data ostatniej aktualizacji:** 05.II.2025
 
 ## Zastosowane technologie
 
@@ -82,6 +84,18 @@
 - **`test_routes.py`**  
   Plik zawierający testy jednostkowe do sprawdzania poprawności działania endpointów backendu - służy do zapewnienia jakości aplikacji, testując, czy odpowiedzi API są zgodne z oczekiwaniami
 
+- **`screenshot.py`**
+  Służy do generowania zrzutów ekranu z nagrań oraz wykrywania unikalnych klatek (tj. różnych slajdó), które dodawne są do notatek ze spotkania. Dzięki analizie obrazów obsługuje przycinanie obrazów do obszaru samej prezentacji i usuwanie duplikatów
+
+- **`summary.py`**
+  Ten plik odpowiada za automatyczne generowanie podsumowań treści plików w formacie `.docx`. Wykorzystuje model podsumowywania dostępny w bibliotece Transformers, aby przekształcić długie treści w skrócone wersje, zachowując istotne informacje
+
+- **`teams_integration.py`**
+  Plik, który umożliwia integrację z Microsoft Teams, co pozwala na pobieranie danych dotyczących wydarzeń kalendarza. Używa mechanizmu OAuth 2.0 do autoryzacji i wymiany kodu autoryzacyjnego na token dostępu
+
+- **`zoom_integration.py`**
+  Ten plik zapewnia integrację z platformą Zoom, umożliwiającą dostęp do danych o spotkaniach, szczegółach spotkań oraz uczestnikach. Podobnie jak w przypadku integracji z innymi platformami, wykorzystywany jest mechanizm OAuth 2.0.
+
 - **`token.json`**  
   Plik zawierający tokeny uwierzytelniające, które pozwalają na autoryzację aplikacji do uzyskania dostępu do Google Calendar API
 
@@ -125,6 +139,30 @@ Wszystkie pliki (audio, wideo) oraz transkrypcje są przechowywane w folderze `r
 #### Automatyczne przetwarzanie wszystkich nagrań
 
 Funkcja `process_audio_and_save_transcription` przetwarza wszystkie pliki audio znajdujące się w folderze `recordings`, generując odpowiednie notatki dla każdego pliku
+
+#### Dodawanie zrzutów ekranu z prezentacją
+Po zakończeniu nagrywania, proces generowania notatek przechodzi do automatycznego pobierania zrzutów ekranu z nagrania wideo:
+
+1. **Ekstrakcja zrzutów ekranu**
+    Funkcja `extract_screenshots_from_video` wykorzystuje narzędzie FFmpeg do wyodrębnienia zrzutów ekranu z pliku wideo w regularnych odstępach czasu (domyślnie 10 klatek na sekundę)
+
+2. **Wykrywanie obszaru prezentacji**
+    Po wygenerowaniu zrzutów ekranowych, funkcja `detect_presentation_area` analizuje każdy obraz, wykrywając największy kontur charakteryzujący się jasnym tłem (często występującym przy prezentacjach). Obszar ten zostaje przycięty, co poprawia jakość prezentowanych zrzutów i nie zajmują one niepotrzebnie nadmiarowo dużo miejsca w notatkach
+
+3. **Eliminacja duplikatów**
+    Aby uniknąć przechowywania wielu identycznych klatek, funkcja `is_duplicate_image` porównuje kolejne zrzuty ekranu (na podstawie `perceptual hash`) i usuwa duplikaty. Dzięki temu w folderze docelowym pozostają tylko unikalne zrzuty, które najlepiej reprezentują przebieg prezentacji
+
+#### Tworzenie podsumowań treści
+Moduł `summary.py` odpowiada za generowanie streszczeń z treści wygenerowanych notatek (plików `.docx` z transkrypcjami). Proces tworzenia podsumowań przebiega według następujących kroków:
+
+1. **Podział tekstu na segmenty**
+    Funkcja `split_text` dzieli długi tekst na mniejsze fragmenty (segmenty), co jest niezbędne dla efektywnego przetwarzania przez model podsumowujący. Dzięki temu model nie jest przeciążony nadmierną ilością danych na raz
+
+2. **Generowanie podsumowania segmentów**
+    Dla każdego segmentu tekstu wykorzystywany jest model podsumowujący, który generuje skróconą wersję treści. W przypadku błędów lub pustych segmentów, system odpowiednio je pomija
+
+3. **Łączenie segmentów**
+    Wygenerowane fragmenty podsumowania są łączone w jeden spójny dokument. Efekt końcowy zapisywany jest w pliku `.docx`, który stanowi zbiorcze podsumowanie treści transkrypcji
 
 #### Przechowywanie plików z notatkami
 
@@ -172,6 +210,34 @@ Użytkownicy mogą przeglądać swoje zapisane nagrania wideo i pobierać je. Pl
 - `/get_recording/<recording_id>`
 
 Frontend (strona `my_recordings.html`) prezentuje listę dostępnych nagrań, które są powiązane z użytkownikiem. Kliknięcie na nazwę pliku powoduje uruchmienie odtwarzacza nagrania.
+
+### Zrzuty ekranu (screenshots.py)
+
+#### Obliczanie hashy obrazów:
+
+- `calculate_image_hash(image_path)` – oblicza perceptual hash (średnia wartość hash) dla obrazu, co umożliwia porównywanie podobieństwa pomiędzy obrazami
+
+#### Detekcja duplikatów:
+
+- `is_duplicate_image(new_image_path, last_image_path)` – porównuje hash dwóch obrazów, aby ustalić, czy nowy zrzut ekranu jest duplikatem poprzedniego
+
+#### Wykrywanie obszaru prezentacji:
+
+- `detect_presentation_area(image_path)` – analizuje obraz w celu wykrycia obszaru, który najczęściej charakteryzuje się jasnym tłem (np. prezentacja) i przycina obraz do tego obszaru
+
+#### Generowanie zrzutów ekranu z wideo:
+
+- `extract_screenshots_from_video(video_path, output_folder, fps=10)` – wykorzystuje FFmpeg do wyodrębniania zrzutów ekranu z nagrania wideo w regularnych odstępach czasu, a następnie usuwa duplikaty uzyskane na podstawie porównania hashy obrazów
+
+### Podsumowanie notatek (summary.py)
+
+#### Podział tekstu na segmenty:
+
+- `split_text(text, max_length=1000)` – dzieli długi tekst na mniejsze fragmenty, dzięki czemu model podsumowujący może efektywniej przetworzyć całość treści
+
+#### Generowanie podsumowania:
+
+- `generate_summary(docx_path, summary_docx_path)` – wczytuje treść z pliku DOCX, ekstraktuje fragmenty (np. wyodrębniając tekst znajdujący się pomiędzy znacznikami „Transkrypcja wykładu:” a „Zrzuty ekranu:” jeśli występują), dzieli tekst na segmenty, przetwarza je modelem podsumowującym, a następnie zapisuje wynik do pliku `.docx`
 
 ## Bezpieczeństwo
 
