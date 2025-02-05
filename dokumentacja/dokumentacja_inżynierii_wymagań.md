@@ -145,7 +145,7 @@
 
 ## Organizacja pracy
 
-#### 👑 Aleksandra Adamiak - Project Manager, UI Visionary
+### 👑 Aleksandra Adamiak - Project Manager, UI Visionary
 
 **Odpowiedzialna za:**
 - organizację pracy zespołu
@@ -157,7 +157,7 @@
 - frontend i backend
 - i inne elementy projektu ...
 
-#### 🐝 Joanna Furtak - Koordynator ds. Integracji z Kalendarzem i Dystrybucji Notatek
+### 🐝 Joanna Furtak - Koordynator ds. Integracji z Kalendarzem i Dystrybucji Notatek
 
 **Odpowiedzialna za:**
 - integrację aplikacji z kalendarzem Google i microsoft
@@ -167,7 +167,7 @@
 - frontend i backend
 - i inne elementy projektu ...
 
-#### 🐝 Julia Mikrut - Koordynator ds. Sporządzania i Przetwarzania Notatek
+### 🐝 Julia Mikrut - Koordynator ds. Sporządzania i Przetwarzania Notatek
 
 **Odpowiedzialna za:**
 - research i dostosowanie modelu przetwarzania języka naturalnego do celu sporządzania notatek na podstawie tekstu mówionego
@@ -177,7 +177,7 @@
 - frontend i backend
 - i inne elementy projektu ...
 
-#### 🐝 Maja Chlipała - Koordynator ds. Dokumentacji Technicznej, Testów i Integracji Systemu
+### 🐝 Maja Chlipała - Koordynator ds. Dokumentacji Technicznej, Testów i Integracji Systemu
 
 **Odpowiedzialna za:**
 - sporządzenie dokumentacji technicznej projektu
