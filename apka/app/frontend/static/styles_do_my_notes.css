@@ -43,7 +43,7 @@ body {
 .email-panel {
     flex: 1;
     padding: 20px;
-    background-color: rgba(135, 206, 250, 0.8);
+    background-color: rgba(135, 171, 250, 0.694);
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     height: 65vh;
@@ -54,10 +54,24 @@ body {
 }
 
 /* Nagłówki */
-.notes-section h1, .email-panel h1 {
+.email-panel h1 {
     text-align: center;
     color: white;
     margin-bottom: 15px;
+}
+
+.notes-section h1{
+    text-align: center;
+    color: white;
+    margin-bottom: 0px;
+}
+
+h3{
+    text-align: center;
+    color: rgba(255, 255, 255, 0.715);
+    margin-bottom: 15px;
+    font-size: 13px;
+    font-weight: normal;
 }
 
 /* Styl przewijanego okna (notatki i e-maile) */
@@ -123,6 +137,7 @@ body {
 .list-item input[type="radio"]:checked {
     background-color: #572468;
     box-shadow: 0 0 4px #572468;
+    border-radius: 70%;
 }
 
 /* Styl linków */
@@ -169,6 +184,7 @@ body {
 }
 .search-checkbox input[type="checkbox"] {
     margin: 0;
+    border-radius: 50%;
     transform: scale(1.2);
 }
 
@@ -190,8 +206,9 @@ body {
 }
 
 .add-email-button {
-    color: blue;
-    background-color: pink;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    background-color: rgb(251, 213, 253);
 }
 
 .email-actions input {
@@ -203,8 +220,8 @@ body {
 }
 
 .email-actions input:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+    background-color: rgb(195, 108, 200);
+    box-shadow: 0 0 8px rgba(228, 119, 234, 0.5);
 }
 
 /* Styl przycisków */
@@ -214,12 +231,13 @@ button {
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    transition: background 0.2s ease-in-out;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
 button:hover {
-    background-color: #0056b3;
-    color: white;
+    background-color: rgb(227, 112, 233);
+    color: rgb(0, 0, 0);
+    transform: scale(1.1); 
 }
 
 /* Przyciski nawigacji */
@@ -272,3 +290,4 @@ button:hover {
     background-color: #7f4598;
     transform: scale(1.2);
 }
+

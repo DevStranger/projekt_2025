@@ -565,6 +565,7 @@ def delete_email():
 def is_valid_email(email):
     email_regex = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
     return re.match(email_regex, email)
+
 @main.route('/send_notes', methods=['POST'])
 def send_notes():
     data = request.json
@@ -638,6 +639,7 @@ def get_note(filename):
         return send_from_directory(NOTES_FOLDER, filename + ".docx", as_attachment=True)
     except FileNotFoundError:
         return "File not found", 404
+    
 @main.route("/send_invitations", methods=["POST"])
 def send_invitations():
     data = request.json
