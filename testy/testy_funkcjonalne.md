@@ -18,9 +18,7 @@ Testy te weryfikują, czy aplikacja:
 
 **Narzędzie:** framework `unittest` w języku Python
 
-`\testy\test_routes.py`
-
-https://github.com/DevStranger/projekt_2025/blob/cebadf649cadffb94e4f25582b5b6d69349d9bbf/testy/test_routes.py
+[`\testy\test_routes.py`](https://github.com/DevStranger/projekt_2025/blob/cebadf649cadffb94e4f25582b5b6d69349d9bbf/testy/test_routes.py)
 
 Testy te zakończyły się powodzeniem ✔
 
@@ -59,9 +57,7 @@ Plik jest poprawnie zapisany na serwerze w odpowiednim katalogu i odpowiednio ko
 
 ### Przeprowadzane testy
 
-`\testy\testcafe\tests.js`
-
-https://github.com/DevStranger/NoteWriter/blob/main/testy/testcafe/tests.js
+[`\testy\testcafe\tests.js`](https://github.com/DevStranger/NoteWriter/blob/main/testy/testcafe/tests.js)
 
 ### Przebieg testów 
 
@@ -80,9 +76,7 @@ Po stworzeniu nagrań z użyciem aplikacji:
 
 #### Google Calendar - panel do logowania ✔
 
-`\testy\testcafe\google_test.js`
-
-https://github.com/DevStranger/NoteWriter/blob/main/testy/testcafe/google_test.js
+[`\testy\testcafe\google_test.js`](https://github.com/DevStranger/NoteWriter/blob/main/testy/testcafe/google_test.js)
 
 ![Zrzut ekranu 2025-02-05 215428](https://github.com/user-attachments/assets/b4c84282-87d2-481e-ac12-9909461e05e4)
 ![Zrzut ekranu 2025-02-05 220808](https://github.com/user-attachments/assets/c174affd-10e9-43d2-8ef4-d0ebca86fb90)
@@ -92,9 +86,7 @@ https://github.com/DevStranger/NoteWriter/blob/main/testy/testcafe/google_test.j
 
 #### Teams ✔
 
-`\testy\testcafe\teams_test.js`
-
-https://github.com/DevStranger/NoteWriter/blob/main/testy/testcafe/teams_test.js
+[`\testy\testcafe\teams_test.js`](https://github.com/DevStranger/NoteWriter/blob/main/testy/testcafe/teams_test.js)
 
 ![Zrzut ekranu 2025-02-05 223229](https://github.com/user-attachments/assets/3c590c61-8951-4c0a-9488-30aa62f79268)
 ![Zrzut ekranu 2025-02-05 223614](https://github.com/user-attachments/assets/4d78196d-fb11-4318-b878-09429c10ad60)
@@ -102,9 +94,7 @@ https://github.com/DevStranger/NoteWriter/blob/main/testy/testcafe/teams_test.js
 
 #### Zoom ✔
 
-`\testy\testcafe\zoom_test.js`
-
-https://github.com/DevStranger/NoteWriter/blob/main/testy/testcafe/zoom_test.js
+[`\testy\testcafe\zoom_test.js`](https://github.com/DevStranger/NoteWriter/blob/main/testy/testcafe/zoom_test.js)
 
 ![Zrzut ekranu 2025-02-05 225128](https://github.com/user-attachments/assets/651e8905-cea9-4c9d-af4f-10f662d0df5f)
 ![Zrzut ekranu 2025-02-05 225211](https://github.com/user-attachments/assets/858f363b-e6ba-4de5-981a-a881dd7556a5)
@@ -112,9 +102,7 @@ https://github.com/DevStranger/NoteWriter/blob/main/testy/testcafe/zoom_test.js
 
 ### Test funkcjonalności wysyłania notatek do wybranych użytkowników 
 
-`\testy\testcafe\send_notes.js`
-
-https://github.com/DevStranger/NoteWriter/blob/main/testy/testcafe/send_notes.js
+[`\testy\testcafe\send_notes.js`](https://github.com/DevStranger/NoteWriter/blob/main/testy/testcafe/send_notes.js)
 
 #### Wybór danej notatki na podstawie wyszukiwań ✔
 
