@@ -112,8 +112,17 @@ https://github.com/DevStranger/NoteWriter/blob/main/testy/zoom_test.js
 
 ### Test funkcjonalności wysyłania notatek do wybranych użytkowników
 
-`\testy\send_nudes.js`
+`\testy\send_notes.js`
 
+https://github.com/DevStranger/NoteWriter/blob/main/testy/send_notes.js
 
+#### Wybór danej notatki na podstawie wyszukiwań
 
 ![Zrzut ekranu 2025-02-05 225825](https://github.com/user-attachments/assets/6e37ea45-f7d7-44cb-a508-7b90fad0ae73)
+
+#### Dodawanie nowego adresu e-mail i wysyłanie notatek
+
+![Zrzut ekranu 2025-02-05 233731](https://github.com/user-attachments/assets/a855805f-67e0-4c78-8d31-51889e0800f1)
+![Zrzut ekranu 2025-02-05 233319](https://github.com/user-attachments/assets/76bb0f19-d514-4fae-9802-14a1e39574f3)
+![Zrzut ekranu 2025-02-05 234026](https://github.com/user-attachments/assets/7f33867d-439b-4eb8-91a1-4975f0467fe8)
+
