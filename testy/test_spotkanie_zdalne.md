@@ -18,3 +18,8 @@ Przykładowe strony notatki:
 ![image](https://github.com/user-attachments/assets/98cd4c4d-3a9c-4277-aee6-fe4f509f2740)
 
 Test został przeprowadzony przed wprowadzeniem wszystkich planowanych zmian, w celu sprawdzenia, czy aplikacja podoła zadaniu sporządzenia notatki i obsłuży nagrywanie spotkania trwającego minimum godzinę (nagranie zajęć).
+
+---
+
+| ![logoo](https://github.com/user-attachments/assets/4b34cc5f-8992-45bb-b354-4a69a66a5189) | **Zespół NoteWriter Girls Inc.** | **👑 Ola 🐝 Maja 🐝 Asia 🐝 Julka** |
+|:--:|:--:|:--:|
