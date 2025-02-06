@@ -120,18 +120,6 @@ Folder zawierający pliki HTML, które są renderowane przez backend aplikacji:
 
 ---
 
-### `my_ms_calendar.html`
-- strona dedykowana wydarzeniom z MS Calendar
-
-**Opis funkcji:**
-- umożliwia logowanie do MS Calendar poprzez przycisk `„Zaloguj się do MS Calendar”`
-- po zalogowaniu, użytkownik może kliknąć przycisk `„Załaduj wydarzenia”` aby wyświetlić listę wydarzeń
-- dla każdego wydarzenia dostępna jest opcja pobrania szczegółowych informacji, w tym listy uczestników, wyświetlanych po kliknięciu przycisku `„Pokaż szczegóły”`
-
-![Zrzut ekranu 2025-02-06 000555](https://github.com/user-attachments/assets/89ed587b-8c9b-460c-8da9-2d7bfd2b1dd0)
-
----
-
 ### `my_notes.html`
 - strona prezentująca listę notatek użytkownika (notatki są wyświetlane jako linki do pobrania)
 
@@ -141,7 +129,6 @@ Folder zawierający pliki HTML, które są renderowane przez backend aplikacji:
 - zastosowanie pętli Jinja (`{% for note in notes %}`) do generowania listy notatek na podstawie danych przesłanych z backendu
 
 ![image](https://github.com/user-attachments/assets/aa074f9f-d1a7-4e51-9392-c6a7f84278c6)
-
 
 ---
 
