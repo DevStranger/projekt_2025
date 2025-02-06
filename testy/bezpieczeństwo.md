@@ -87,3 +87,20 @@ W naszym projekcie użyłyśmy narzędzia `Bandit` do analizy kodu Python pod k�
 - **Medium**: 9
 - **High**: 8 (realne problemy)
 
+### Główne problemy
+
+#### Hardcodowane dane wrażliwe (B105: hardcoded_password_string)
+
+- kilka fragmentów kodu zawiera twardo wpisane dane, takie jak klucze, hasła, tajne wartości czy adresy URL (np. `app.secret_key`, `GOOGLE_CLIENT_SECRET`, `CLIENT_SECRET`, `ZOOM_CLIENT_SECRET`, itd.)
+- dane wrażliwe są bezpośrednio osadzone w kodzie źródłowym, co naraża je na przypadkowe ujawnienie
+
+#### Brak timeoutów przy wywołaniach HTTP (B113: request_without_timeout)
+
+- kilka wywołań funkcji `requests.get()` i `requests.post()` nie określa parametru `timeout`
+- brak ustawienia limitu czasu na połączenia HTTP powoduje, że w przypadku problemów sieciowych lub opóźnień serwera aplikacja może nieoczekiwanie zawiesić się, czekając na odpowiedź
+
+#### Problemy związane z użyciem modułu subprocess (B404, B607, B603)
+
+- import modułu `subprocess` oraz wywołania funkcji `subprocess.run()` z niepełnymi ścieżkami do wykonywalnych programów (partial executable path)
+- użycie `subprocess.run()` bez odpowiedniego sprawdzania danych wejściowych, co może prowadzić do wykonania nieautoryzowanego kodu
+- brak odpowiedniej walidacji oraz pełnej ścieżki do wykonywanych programów zwiększa ryzyko uruchomienia złośliwego kodu lub niezamierzonych operacji systemowych
