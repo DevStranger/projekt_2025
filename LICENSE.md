@@ -82,3 +82,6 @@ In no event shall any Contributor be liable to You for damages, including any di
 You may offer and charge a fee for acceptance of support, warranty, indemnity, or other liability obligations, but only on Your sole responsibility.
 
 ---
+
+| ![logoo](https://github.com/user-attachments/assets/4b34cc5f-8992-45bb-b354-4a69a66a5189) | **Zespół NoteWriter Girls Inc.** | **👑 Ola 🐝 Maja 🐝 Asia 🐝 Julka** |
+|:--:|:--:|:--:|
