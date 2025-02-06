@@ -32,7 +32,7 @@ Testy te zakończyły się powodzeniem ✔
 
 Kliknięcie przycisku „Moje notatki” przekierowuje użytkownika do strony z listą notatek. Podobnie dla „Moje nagrania”. 
 
-### 2. Test integracji frontendu z backendem (ładowanie danych)
+### 2. Test integracji frontendu z backendem (ładowanie danych) ✔
 
 **Cel:** sprawdzenie czy frontend poprawnie otrzymuje dane z backendu i je wyświetla
 
@@ -40,7 +40,7 @@ Kliknięcie przycisku „Moje notatki” przekierowuje użytkownika do strony z 
 
 Na stronie "Moje notatki" frontend wysyła zapytanie do backendu o listę dostępnych notatek, a backend zwraca odpowiednią listę. Na stronie "Moje nagrania" frontend wysyła zapytanie o nagrania, a backend zwraca odpowiednie dane.
 
-### 3. Test integracji z systemem plików
+### 3. Test integracji z systemem plików ✔
 
 **Cel:** sprawdzenie czy pliki notatek i nagrań są poprawnie przechowywane i dostępne na serwerze
 **Narzędzie:** - (manualnie)
