@@ -58,3 +58,7 @@ Pytania dotyczące przekazywania notatek po spotkaniach drogą mailową proszę 
 🌐 **[Joanna Furtak via UPEL](https://upel.agh.edu.pl/my/)** 
 
 Dziękujemy za dbanie o bezpieczeństwo naszej aplikacji! 🚀
+
+
+| ![logoo](https://github.com/user-attachments/assets/4b34cc5f-8992-45bb-b354-4a69a66a5189) | **Zespół NoteWriter Girls Inc.** | **👑 Ola 🐝 Maja 🐝 Asia 🐝 Julka** |
+|:--:|:--:|:--:|
