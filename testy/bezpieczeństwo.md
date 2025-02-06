@@ -104,3 +104,8 @@ W naszym projekcie użyłyśmy narzędzia `Bandit` do analizy kodu Python pod k�
 - import modułu `subprocess` oraz wywołania funkcji `subprocess.run()` z niepełnymi ścieżkami do wykonywalnych programów (partial executable path)
 - użycie `subprocess.run()` bez odpowiedniego sprawdzania danych wejściowych, co może prowadzić do wykonania nieautoryzowanego kodu
 - brak odpowiedniej walidacji oraz pełnej ścieżki do wykonywanych programów zwiększa ryzyko uruchomienia złośliwego kodu lub niezamierzonych operacji systemowych
+
+---
+
+| ![logoo](https://github.com/user-attachments/assets/4b34cc5f-8992-45bb-b354-4a69a66a5189) | **Zespół NoteWriter Girls Inc.** | **👑 Ola 🐝 Maja 🐝 Asia 🐝 Julka** |
+|:--:|:--:|:--:|
