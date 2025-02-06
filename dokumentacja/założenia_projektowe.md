@@ -62,3 +62,9 @@
 ## Etapy pracy
 
 Planowanie --> Implementacja --> Testy --> Wdrożenie
+
+---
+
+| ![logoo](https://github.com/user-attachments/assets/4b34cc5f-8992-45bb-b354-4a69a66a5189) | **Zespół NoteWriter Girls Inc.** | **👑 Ola 🐝 Maja 🐝 Asia 🐝 Julka** |
+|:--:|:--:|:--:|
+
