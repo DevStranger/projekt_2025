@@ -286,3 +286,9 @@ Wysłanie zapytania HTTP do serwera, powoduje chwilowe wystąpienie błędów
 ### Opera ✔
 
 ![Zrzut ekranu 2025-01-25 160928](https://github.com/user-attachments/assets/f861874c-9f3d-4e7e-a378-0be38a8ce400)
+
+---
+
+| ![logoo](https://github.com/user-attachments/assets/4b34cc5f-8992-45bb-b354-4a69a66a5189) | **Zespół NoteWriter Girls Inc.** | **👑 Ola 🐝 Maja 🐝 Asia 🐝 Julka** |
+|:--:|:--:|:--:|
+
